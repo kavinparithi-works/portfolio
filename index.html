@@ -3,694 +3,478 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-<title>Kavin Parithi Sivasamy — Data Engineer</title>
+<title>Kavin Parithi — Data Engineer</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet"/>
 <script src="https://platform.linkedin.com/badges/js/profile.js" async defer></script>
 <style>
+/* ── TOKENS ── */
 :root{
-  --bg:#F5F4F0;
-  --ink:#0A0A0A;
-  --ink2:#3A3A3A;
-  --ink3:#767676;
-  --accent:#1A56DB;
-  --line:#E0DDD5;
-  --pill-bg:#ECEAE3;
-  --card-bg:#EDEAE2;
-  --white:#FFFFFF;
+  --bg:       #F6F4EF;
+  --white:    #FFFFFF;
+  --ink:      #111111;
+  --ink2:     #444444;
+  --ink3:     #888888;
+  --accent:   #1B50D9;
+  --rule:     #E4E0D8;
+  --tag-bg:   #EDEBE4;
+  --card:     #FFFFFF;
+  --radius:   14px;
+  --max:      1080px;
+  --gap:      80px;
 }
 
+/* ── RESET ── */
 *{margin:0;padding:0;box-sizing:border-box;}
-html{scroll-behavior:smooth;font-size:16px;}
+html{scroll-behavior:smooth;}
 body{
   font-family:'Inter',sans-serif;
   background:var(--bg);
   color:var(--ink);
-  overflow-x:hidden;
   -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
 }
+a{color:inherit;text-decoration:none;}
+img{display:block;}
 
-/* ── UTILS ── */
-.container{max-width:1180px;margin:0 auto;padding:0 40px;}
-.rule{width:100%;height:1px;background:var(--line);}
-.tag{
-  display:inline-block;
-  font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;
-  padding:5px 13px;border-radius:30px;
-  background:var(--pill-bg);color:var(--ink2);
-  border:1px solid var(--line);
-}
-.tag.accent{background:var(--accent);color:#fff;border-color:var(--accent);}
+/* ── LAYOUT ── */
+.wrap{max-width:var(--max);margin:0 auto;padding:0 48px;}
+@media(max-width:700px){.wrap{padding:0 22px;}}
+.rule{height:1px;background:var(--rule);width:100%;}
 
-/* ── REVEAL ── */
-.r{opacity:0;transform:translateY(24px);transition:opacity .65s ease,transform .65s ease;}
-.r.in{opacity:1;transform:translateY(0);}
-.r.d1{transition-delay:.08s;}
-.r.d2{transition-delay:.16s;}
-.r.d3{transition-delay:.24s;}
-.r.d4{transition-delay:.32s;}
+/* ── SCROLL REVEAL ── */
+.sr{opacity:0;transform:translateY(22px);transition:opacity .6s ease,transform .6s ease;}
+.sr.show{opacity:1;transform:none;}
+.sr.d1{transition-delay:.07s;}
+.sr.d2{transition-delay:.14s;}
+.sr.d3{transition-delay:.21s;}
+.sr.d4{transition-delay:.28s;}
 
-/* ══════════════════════════ NAV ══════════════════════════ */
-#nav{
+/* ══════════ NAV ══════════ */
+nav{
   position:fixed;top:0;left:0;right:0;z-index:100;
-  background:rgba(245,244,240,.88);
-  backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);
-  border-bottom:1px solid var(--line);
-  transition:background .3s;
+  background:rgba(246,244,239,.9);
+  backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  border-bottom:1px solid transparent;
+  transition:border-color .3s;
 }
-.nav-inner{
-  max-width:1180px;margin:0 auto;padding:0 40px;
-  height:64px;display:flex;align-items:center;justify-content:space-between;
+nav.scrolled{border-color:var(--rule);}
+.nav-row{
+  max-width:var(--max);margin:0 auto;padding:0 48px;
+  height:60px;display:flex;align-items:center;justify-content:space-between;
 }
-.nav-logo{font-size:14px;font-weight:800;letter-spacing:.5px;color:var(--ink);text-decoration:none;}
-.nav-links{display:flex;align-items:center;gap:36px;}
-.nav-links a{
-  font-size:13px;font-weight:500;color:var(--ink2);text-decoration:none;
-  transition:color .2s;
-}
+@media(max-width:700px){.nav-row{padding:0 22px;}}
+.nav-logo{font-size:13px;font-weight:800;letter-spacing:.3px;color:var(--ink);}
+.nav-links{display:flex;gap:32px;}
+.nav-links a{font-size:13px;font-weight:500;color:var(--ink2);transition:color .2s;}
 .nav-links a:hover{color:var(--ink);}
-.nav-cta{
-  font-size:13px;font-weight:600;color:var(--ink);
-  border:1.5px solid var(--ink);padding:7px 18px;border-radius:6px;
-  text-decoration:none;transition:all .2s;
+@media(max-width:600px){.nav-links{display:none;}}
+.nav-hire{
+  font-size:12px;font-weight:700;letter-spacing:.3px;
+  color:var(--ink);border:1.5px solid var(--ink);
+  padding:7px 16px;border-radius:7px;
+  transition:all .2s;
 }
-.nav-cta:hover{background:var(--ink);color:var(--white);}
+.nav-hire:hover{background:var(--ink);color:#fff;}
 
-/* ══════════════════════════ HERO ══════════════════════════ */
-.hero{
-  padding:148px 0 96px;
-  border-bottom:1px solid var(--line);
+/* ══════════ HERO ══════════ */
+.hero{padding:120px 0 var(--gap);}
+.hero-grid{
+  display:grid;
+  grid-template-columns:200px 1fr;
+  gap:56px;
+  align-items:start;
 }
-.hero-eyebrow{
-  display:flex;align-items:center;gap:10px;
-  font-size:12px;font-weight:600;letter-spacing:2px;text-transform:uppercase;
-  color:var(--ink3);margin-bottom:36px;
-}
-.hero-eyebrow span{width:32px;height:1px;background:var(--ink3);display:block;}
-.hero-headline{
-  font-size:clamp(48px,7vw,92px);
-  font-weight:900;
-  line-height:1.0;
-  letter-spacing:-2.5px;
-  color:var(--ink);
-  margin-bottom:40px;
-  max-width:900px;
-}
-.hero-headline em{font-style:italic;font-weight:300;}
-.hero-sub{
-  font-size:17px;line-height:1.75;color:var(--ink2);
-  max-width:560px;margin-bottom:48px;
-}
-.hero-meta{
-  display:flex;flex-wrap:wrap;gap:12px;
-  margin-bottom:48px;
-}
-.meta-pill{
-  display:flex;align-items:center;gap:8px;
-  background:var(--white);border:1px solid var(--line);
-  padding:8px 16px;border-radius:40px;
-  font-size:13px;color:var(--ink2);font-weight:500;
-}
-.meta-pill strong{color:var(--ink);font-weight:700;}
-.meta-pill .dot{width:7px;height:7px;border-radius:50%;background:#22c55e;}
-.hero-ctas{display:flex;flex-wrap:wrap;gap:14px;align-items:center;}
-.btn-primary{
-  font-size:15px;font-weight:700;color:var(--white);
-  background:var(--ink);padding:13px 28px;border-radius:8px;
-  text-decoration:none;transition:all .25s;display:inline-flex;align-items:center;gap:8px;
-}
-.btn-primary:hover{background:#222;transform:translateY(-2px);box-shadow:0 8px 20px rgba(0,0,0,.18);}
-.btn-outline{
-  font-size:15px;font-weight:600;color:var(--ink);
-  border:1.5px solid var(--ink);padding:13px 28px;border-radius:8px;
-  text-decoration:none;transition:all .25s;display:inline-flex;align-items:center;gap:8px;
-}
-.btn-outline:hover{background:var(--ink);color:var(--white);transform:translateY(-2px);}
+@media(max-width:700px){.hero-grid{grid-template-columns:1fr;gap:36px;}}
 
-/* photo strip */
+/* photo */
 .hero-photo{
-  margin-top:72px;
-  display:flex;align-items:flex-end;gap:20px;
+  position:relative;width:200px;height:240px;
+  border-radius:16px;overflow:hidden;
+  border:1px solid var(--rule);
+  flex-shrink:0;
 }
-.photo-frame{
-  width:200px;height:230px;border-radius:16px;overflow:hidden;
-  border:1px solid var(--line);flex-shrink:0;
-}
-.photo-frame img{width:100%;height:100%;object-fit:cover;object-position:top center;}
-.hero-quote{
-  background:var(--white);border:1px solid var(--line);
-  border-radius:16px;padding:28px 32px;max-width:440px;
-  font-size:15px;line-height:1.7;color:var(--ink2);
-  font-style:italic;
-}
-.hero-quote cite{
-  display:block;font-style:normal;font-size:12px;font-weight:700;
-  letter-spacing:1.5px;text-transform:uppercase;color:var(--ink3);margin-top:16px;
+.hero-photo img{width:100%;height:100%;object-fit:cover;object-position:top center;}
+.hero-photo-badge{
+  position:absolute;bottom:10px;left:50%;transform:translateX(-50%);
+  background:rgba(255,255,255,.9);
+  backdrop-filter:blur(8px);
+  border:1px solid var(--rule);
+  border-radius:30px;
+  padding:5px 12px;
+  font-size:11px;font-weight:700;letter-spacing:.5px;
+  color:var(--ink2);white-space:nowrap;
 }
 
-/* ══════════════════════════ WHAT I DO ══════════════════════════ */
-.what{padding:96px 0;border-bottom:1px solid var(--line);}
-.section-label{
-  font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;
-  color:var(--ink3);display:flex;align-items:center;gap:10px;margin-bottom:64px;
-}
-.section-label span{width:32px;height:1px;background:var(--ink3);display:block;}
-.what-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;border:1px solid var(--line);}
-.what-item{
-  padding:48px 36px;border-right:1px solid var(--line);
-  background:var(--white);transition:background .2s;
-}
-.what-item:last-child{border-right:none;}
-.what-item:hover{background:#F0EEE6;}
-.what-num{
-  font-size:11px;font-weight:700;letter-spacing:2px;color:var(--ink3);
-  font-family:'Fira Code',monospace;margin-bottom:28px;
-}
-.what-title{
-  font-size:22px;font-weight:800;color:var(--ink);
-  margin-bottom:16px;line-height:1.2;
-}
-.what-desc{font-size:14px;line-height:1.75;color:var(--ink2);margin-bottom:24px;}
-.what-keyword{
+/* text side */
+.hero-right{}
+.hero-tag{
+  display:inline-flex;align-items:center;gap:7px;
   font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;
-  color:var(--accent);border-bottom:1.5px solid var(--accent);
-  display:inline-block;padding-bottom:2px;
+  color:var(--ink3);margin-bottom:20px;
+}
+.hero-tag span{width:24px;height:1px;background:var(--ink3);display:block;}
+.hero-name{
+  font-size:clamp(40px,6vw,72px);
+  font-weight:900;
+  letter-spacing:-2px;
+  line-height:1.02;
+  color:var(--ink);
+  margin-bottom:6px;
+}
+.hero-name em{
+  font-style:italic;
+  font-weight:300;
+  color:var(--ink2);
+}
+.hero-role{
+  font-size:14px;font-weight:500;color:var(--ink3);
+  margin-bottom:24px;letter-spacing:.2px;
+}
+.hero-intro{
+  font-size:16px;line-height:1.75;color:var(--ink2);
+  max-width:480px;margin-bottom:32px;
+}
+.hero-pills{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:36px;}
+.pill{
+  display:inline-flex;align-items:center;gap:5px;
+  background:var(--white);border:1px solid var(--rule);
+  padding:6px 13px;border-radius:30px;
+  font-size:12px;font-weight:600;color:var(--ink2);
+  transition:all .2s;
+}
+.pill:hover{border-color:var(--accent);color:var(--accent);}
+.hero-ctas{display:flex;flex-wrap:wrap;gap:12px;}
+.btn{
+  display:inline-flex;align-items:center;gap:7px;
+  font-size:14px;font-weight:700;
+  padding:12px 24px;border-radius:9px;
+  transition:all .25s;
+}
+.btn-dark{background:var(--ink);color:#fff;}
+.btn-dark:hover{background:#222;transform:translateY(-2px);box-shadow:0 8px 20px rgba(0,0,0,.15);}
+.btn-ghost{border:1.5px solid var(--rule);color:var(--ink2);}
+.btn-ghost:hover{border-color:var(--ink);color:var(--ink);}
+
+/* ══════════ SECTION WRAPPER ══════════ */
+.section{padding:var(--gap) 0;}
+.sec-head{display:flex;align-items:baseline;gap:14px;margin-bottom:48px;}
+.sec-num{font-size:11px;font-weight:700;letter-spacing:2px;color:var(--ink3);font-family:'Fira Code',monospace;}
+.sec-title{font-size:clamp(26px,3.5vw,38px);font-weight:900;letter-spacing:-1px;color:var(--ink);}
+.sec-title em{font-style:italic;font-weight:300;color:var(--ink2);}
+
+/* ══════════ WHAT I DO ══════════ */
+.what-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  border:1px solid var(--rule);
+  border-radius:var(--radius);
+  overflow:hidden;
+}
+@media(max-width:720px){.what-grid{grid-template-columns:1fr;}}
+.what-cell{
+  padding:36px 30px;
+  border-right:1px solid var(--rule);
+  background:var(--white);
+  transition:background .2s;
+}
+.what-cell:last-child{border-right:none;}
+.what-cell:hover{background:#F5F2EA;}
+.wc-n{font-family:'Fira Code',monospace;font-size:11px;color:var(--ink3);margin-bottom:16px;}
+.wc-title{font-size:17px;font-weight:800;color:var(--ink);margin-bottom:10px;}
+.wc-desc{font-size:13px;line-height:1.7;color:var(--ink2);margin-bottom:18px;}
+.wc-kw{font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--accent);border-bottom:1.5px solid var(--accent);display:inline-block;padding-bottom:1px;}
+
+/* ══════════ EXPERIENCE CARDS ══════════ */
+.exp-list{display:flex;flex-direction:column;gap:2px;}
+.exp-card{
+  background:var(--white);border:1px solid var(--rule);
+  padding:32px 36px;transition:all .25s;
+  position:relative;overflow:hidden;
+}
+.exp-card:first-child{border-radius:var(--radius) var(--radius) 0 0;}
+.exp-card:last-child{border-radius:0 0 var(--radius) var(--radius);}
+.exp-card::before{
+  content:'';position:absolute;left:0;top:0;bottom:0;width:3px;
+  background:linear-gradient(180deg,var(--accent),#06b6d4);
+  opacity:0;transition:opacity .25s;
+}
+.exp-card:hover{background:#FAFAF7;border-color:#C8C4BC;}
+.exp-card:hover::before{opacity:1;}
+.exp-top{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;margin-bottom:14px;flex-wrap:wrap;}
+.exp-sector{font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--ink3);font-family:'Fira Code',monospace;margin-bottom:6px;}
+.exp-title{font-size:20px;font-weight:800;letter-spacing:-.4px;color:var(--ink);line-height:1.2;}
+.exp-tag-row{display:flex;flex-wrap:wrap;gap:6px;}
+.etag{
+  font-size:11px;font-weight:600;letter-spacing:.3px;
+  padding:4px 11px;border-radius:20px;
+  background:var(--tag-bg);color:var(--ink2);
+  border:1px solid var(--rule);
+}
+.exp-desc{font-size:13.5px;line-height:1.75;color:var(--ink2);margin:14px 0 18px;max-width:680px;}
+.exp-stack{display:flex;flex-wrap:wrap;gap:6px;}
+.stag{
+  font-size:11.5px;font-weight:600;
+  padding:4px 11px;border-radius:20px;
+  background:#EEF2FF;color:#3730A3;
+  border:1px solid #C7D2FE;
 }
 
-/* ══════════════════════════ WORK ══════════════════════════ */
-.work{padding:96px 0;border-bottom:1px solid var(--line);}
-.work-header{
-  display:flex;align-items:flex-end;justify-content:space-between;
-  margin-bottom:64px;gap:24px;flex-wrap:wrap;
+/* ══════════ SKILLS ══════════ */
+.skills-grid{
+  display:grid;grid-template-columns:repeat(2,1fr);
+  border:1px solid var(--rule);border-radius:var(--radius);overflow:hidden;
 }
-.work-headline{
-  font-size:clamp(36px,5vw,56px);font-weight:900;
-  letter-spacing:-1.5px;line-height:1.1;color:var(--ink);
-}
-.work-intro{font-size:15px;line-height:1.7;color:var(--ink2);max-width:380px;}
-
-.work-list{display:flex;flex-direction:column;gap:2px;}
-.work-card{
-  background:var(--white);border:1px solid var(--line);
-  border-radius:0;padding:0;overflow:hidden;
-  transition:all .3s;cursor:default;
-}
-.work-card:first-child{border-radius:16px 16px 0 0;}
-.work-card:last-child{border-radius:0 0 16px 16px;}
-.work-card-inner{
-  padding:40px 48px;
-  display:grid;grid-template-columns:1fr auto;gap:32px;align-items:start;
-}
-.work-card:hover{background:#F7F5EE;border-color:var(--ink2);}
-.work-industry{
-  font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;
-  color:var(--ink3);font-family:'Fira Code',monospace;margin-bottom:12px;
-}
-.work-title{
-  font-size:28px;font-weight:800;letter-spacing:-.5px;
-  color:var(--ink);line-height:1.15;margin-bottom:18px;
-}
-.work-meta{
-  display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-bottom:18px;
-}
-.work-meta-item{
-  font-size:12px;font-weight:600;color:var(--ink3);
-  display:flex;align-items:center;gap:6px;
-}
-.work-meta-item::after{content:'·';margin-left:8px;color:var(--line);}
-.work-meta-item:last-child::after{display:none;}
-.work-desc{font-size:14px;line-height:1.75;color:var(--ink2);margin-bottom:24px;max-width:600px;}
-.work-tags{display:flex;flex-wrap:wrap;gap:8px;}
-.work-right{display:flex;flex-direction:column;align-items:flex-end;gap:16px;padding-top:4px;}
-.work-icon{
-  width:56px;height:56px;border-radius:14px;
-  display:flex;align-items:center;justify-content:center;
-  font-size:24px;border:1px solid var(--line);background:var(--bg);
-}
-
-/* ══════════════════════════ SKILLS ══════════════════════════ */
-.skills{padding:96px 0;border-bottom:1px solid var(--line);}
-.skills-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:2px;margin-top:48px;}
-.skill-group{
-  background:var(--white);border:1px solid var(--line);
-  padding:40px 44px;transition:background .2s;
-}
-.skill-group:hover{background:#F7F5EE;}
-.skill-group:nth-child(1){border-radius:16px 0 0 0;}
-.skill-group:nth-child(2){border-radius:0 16px 0 0;}
-.skill-group:nth-child(3){border-radius:0 0 0 16px;}
-.skill-group:nth-child(4){border-radius:0 0 16px 0;}
-.skill-group-label{
-  font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;
-  color:var(--ink3);font-family:'Fira Code',monospace;margin-bottom:20px;
-}
-.skill-group-title{font-size:20px;font-weight:800;color:var(--ink);margin-bottom:16px;}
-.skill-list{font-size:14px;line-height:2;color:var(--ink2);}
-
-/* ══════════════════════════ CERT ══════════════════════════ */
-.cert{padding:96px 0;border-bottom:1px solid var(--line);}
-.cert-card{
-  background:var(--white);border:1px solid var(--line);border-radius:16px;
-  padding:56px 60px;
-  display:grid;grid-template-columns:auto 1fr;gap:40px;align-items:center;
-  max-width:800px;
-}
-.cert-badge-icon{
-  width:80px;height:80px;border-radius:20px;
-  background:linear-gradient(135deg,#FEF3C7,#FDE68A);
-  border:2px solid #FCD34D;
-  display:flex;align-items:center;justify-content:center;
-  font-size:36px;flex-shrink:0;
-}
-.cert-name{font-size:24px;font-weight:900;color:var(--ink);margin-bottom:8px;line-height:1.2;}
-.cert-issuer{font-size:14px;color:var(--ink3);font-weight:500;margin-bottom:14px;}
-.cert-note{font-size:13px;color:var(--ink2);line-height:1.65;}
-
-/* ══════════════════════════ BEYOND ══════════════════════════ */
-.beyond{padding:96px 0;border-bottom:1px solid var(--line);}
-.beyond-grid{
-  display:grid;grid-template-columns:repeat(4,1fr);gap:2px;
-  margin-top:48px;border:1px solid var(--line);
-}
-.beyond-item{
-  padding:40px 32px;border-right:1px solid var(--line);
+@media(max-width:640px){.skills-grid{grid-template-columns:1fr;}}
+.skill-cell{
+  padding:32px 34px;border-right:1px solid var(--rule);border-bottom:1px solid var(--rule);
   background:var(--white);transition:background .2s;
 }
-.beyond-item:last-child{border-right:none;}
-.beyond-item:hover{background:#F0EEE6;}
-.beyond-icon{font-size:28px;margin-bottom:18px;}
-.beyond-title{font-size:16px;font-weight:800;color:var(--ink);margin-bottom:10px;}
-.beyond-desc{font-size:13px;line-height:1.65;color:var(--ink2);}
+.skill-cell:nth-child(2n){border-right:none;}
+.skill-cell:nth-last-child(-n+2){border-bottom:none;}
+.skill-cell:hover{background:#F8F6EF;}
+@media(max-width:640px){.skill-cell{border-right:none;}}
+.sk-label{font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--ink3);font-family:'Fira Code',monospace;margin-bottom:8px;}
+.sk-name{font-size:16px;font-weight:800;color:var(--ink);margin-bottom:12px;}
+.sk-list{font-size:13px;line-height:2;color:var(--ink2);}
 
-/* ══════════════════════════ CONTACT ══════════════════════════ */
-.contact{padding:120px 0 80px;}
+/* ══════════ CERT ══════════ */
+.cert-card{
+  background:var(--white);border:1px solid var(--rule);border-radius:var(--radius);
+  padding:36px 40px;display:flex;align-items:center;gap:32px;
+  transition:all .25s;
+}
+.cert-card:hover{border-color:#D4A017;box-shadow:0 6px 24px rgba(212,160,23,.08);}
+@media(max-width:600px){.cert-card{flex-direction:column;align-items:flex-start;gap:20px;}}
+.cert-icon{
+  width:68px;height:68px;border-radius:16px;flex-shrink:0;
+  background:linear-gradient(135deg,#FEFCE8,#FEF3C7);
+  border:1.5px solid #FCD34D;
+  display:flex;align-items:center;justify-content:center;font-size:30px;
+}
+.cert-name{font-size:19px;font-weight:800;color:var(--ink);margin-bottom:5px;}
+.cert-meta{font-size:13px;color:var(--ink3);margin-bottom:10px;}
+.cert-note{font-size:13px;line-height:1.65;color:var(--ink2);}
+
+/* ══════════ BEYOND ══════════ */
+.beyond-grid{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  border:1px solid var(--rule);border-radius:var(--radius);overflow:hidden;
+}
+@media(max-width:800px){.beyond-grid{grid-template-columns:repeat(2,1fr);}}
+@media(max-width:480px){.beyond-grid{grid-template-columns:1fr;}}
+.bc{
+  padding:28px 24px;border-right:1px solid var(--rule);
+  background:var(--white);transition:background .2s;
+}
+.bc:last-child{border-right:none;}
+.bc:hover{background:#F8F6EF;}
+.bc-icon{font-size:24px;margin-bottom:12px;}
+.bc-title{font-size:14px;font-weight:800;color:var(--ink);margin-bottom:7px;}
+.bc-desc{font-size:12.5px;line-height:1.6;color:var(--ink2);}
+@media(max-width:800px){
+  .bc:nth-child(2){border-right:none;}
+  .bc:nth-child(1),.bc:nth-child(2){border-bottom:1px solid var(--rule);}
+}
+
+/* ══════════ CONTACT ══════════ */
+.contact{padding:var(--gap) 0 100px;}
 .contact-headline{
-  font-size:clamp(44px,7vw,88px);font-weight:900;
-  letter-spacing:-2.5px;line-height:1.0;
-  color:var(--ink);margin-bottom:20px;
-  max-width:800px;
+  font-size:clamp(38px,6vw,72px);font-weight:900;
+  letter-spacing:-2px;line-height:1.0;color:var(--ink);
+  margin-bottom:18px;max-width:700px;
 }
-.contact-headline em{font-style:italic;font-weight:300;}
-.contact-sub{font-size:17px;color:var(--ink2);line-height:1.7;max-width:520px;margin-bottom:56px;}
-.contact-row{
-  display:grid;grid-template-columns:1fr 1fr 1fr;
-  gap:2px;border:1px solid var(--line);border-radius:16px;overflow:hidden;
-  margin-bottom:56px;
+.contact-headline em{font-style:italic;font-weight:300;color:var(--ink2);}
+.contact-sub{font-size:15px;line-height:1.7;color:var(--ink2);max-width:460px;margin-bottom:44px;}
+.contact-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  border:1px solid var(--rule);border-radius:var(--radius);overflow:hidden;
+  margin-bottom:44px;
 }
-.contact-cell{
-  background:var(--white);padding:36px 32px;
-  border-right:1px solid var(--line);transition:background .2s;
+@media(max-width:700px){.contact-grid{grid-template-columns:1fr;}}
+.cc{
+  padding:28px 28px;border-right:1px solid var(--rule);
+  background:var(--white);transition:background .2s;
 }
-.contact-cell:last-child{border-right:none;}
-.contact-cell:hover{background:#F7F5EE;}
-.contact-cell-label{
-  font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;
-  color:var(--ink3);font-family:'Fira Code',monospace;margin-bottom:12px;
-}
-.contact-cell-value{font-size:15px;font-weight:600;color:var(--ink);line-height:1.5;}
-.contact-cell-value a{color:inherit;text-decoration:none;border-bottom:1.5px solid var(--line);transition:border-color .2s;}
-.contact-cell-value a:hover{border-color:var(--ink);}
-.contact-ctas{display:flex;flex-wrap:wrap;gap:14px;margin-bottom:48px;}
-.linkedin-wrap{border:1px solid var(--line);border-radius:12px;overflow:hidden;display:inline-block;}
+.cc:last-child{border-right:none;}
+.cc:hover{background:#F8F6EF;}
+@media(max-width:700px){.cc{border-right:none;border-bottom:1px solid var(--rule);}.cc:last-child{border-bottom:none;}}
+.cc-label{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--ink3);font-family:'Fira Code',monospace;margin-bottom:10px;}
+.cc-val{font-size:14px;font-weight:600;color:var(--ink);line-height:1.55;}
+.cc-val a{border-bottom:1px solid var(--rule);transition:border-color .2s;}
+.cc-val a:hover{border-color:var(--ink);}
+.contact-ctas{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:40px;}
 
-/* ══════════════════════════ FOOTER ══════════════════════════ */
-footer{
-  border-top:1px solid var(--line);
-  padding:28px 0;
+/* LinkedIn badge wrap */
+.li-wrap{
+  display:inline-block;
+  border:1px solid var(--rule);border-radius:10px;overflow:hidden;
 }
-.footer-inner{
-  max-width:1180px;margin:0 auto;padding:0 40px;
-  display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;
-}
-.footer-name{font-size:13px;font-weight:700;color:var(--ink);}
-.footer-mono{font-family:'Fira Code',monospace;font-size:12px;color:var(--ink3);}
-.footer-right{font-size:12px;color:var(--ink3);}
 
-/* ══════════════════════════ RESPONSIVE ══════════════════════════ */
-@media(max-width:900px){
-  .container{padding:0 24px;}
-  .nav-inner{padding:0 24px;}
-  .what-grid{grid-template-columns:1fr;}
-  .what-item{border-right:none;border-bottom:1px solid var(--line);}
-  .what-item:last-child{border-bottom:none;}
-  .work-card-inner{grid-template-columns:1fr;}
-  .work-right{flex-direction:row;align-items:center;}
-  .skills-grid{grid-template-columns:1fr;}
-  .skill-group{border-radius:0 !important;}
-  .skill-group:first-child{border-radius:16px 16px 0 0 !important;}
-  .skill-group:last-child{border-radius:0 0 16px 16px !important;}
-  .beyond-grid{grid-template-columns:1fr 1fr;}
-  .contact-row{grid-template-columns:1fr;}
-  .contact-cell{border-right:none;border-bottom:1px solid var(--line);}
-  .contact-cell:last-child{border-bottom:none;}
-  .cert-card{grid-template-columns:1fr;padding:36px 32px;}
-  .hero-photo{flex-direction:column;}
-  .nav-links{display:none;}
-  .footer-inner{flex-direction:column;text-align:center;}
+/* ══════════ FOOTER ══════════ */
+footer{border-top:1px solid var(--rule);padding:24px 0;}
+.ft{
+  max-width:var(--max);margin:0 auto;padding:0 48px;
+  display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;
 }
-@media(max-width:640px){
-  .beyond-grid{grid-template-columns:1fr;}
-  .work-header{flex-direction:column;align-items:flex-start;}
-}
+@media(max-width:700px){.ft{padding:0 22px;flex-direction:column;text-align:center;}}
+.ft-name{font-size:13px;font-weight:800;color:var(--ink);}
+.ft-mono{font-family:'Fira Code',monospace;font-size:11px;color:var(--ink3);}
+.ft-copy{font-size:12px;color:var(--ink3);}
 </style>
 </head>
 <body>
 
-<!-- ════════════════════════════ NAV ════════════════════════════ -->
+<!-- ══════════ NAV ══════════ -->
 <nav id="nav">
-  <div class="nav-inner">
-    <a href="#home" class="nav-logo">KAVIN PARITHI</a>
+  <div class="nav-row">
+    <a href="#" class="nav-logo">KAVIN PARITHI</a>
     <div class="nav-links">
       <a href="#work">Work</a>
       <a href="#skills">Skills</a>
-      <a href="#about">About</a>
       <a href="#contact">Contact</a>
     </div>
-    <a href="mailto:kavinandhiswork@gmail.com" class="nav-cta">Get in touch ↗</a>
+    <a href="mailto:kavinandhiswork@gmail.com" class="nav-hire">Hire me ↗</a>
   </div>
 </nav>
 
-<!-- ════════════════════════════ HERO ════════════════════════════ -->
-<section id="home" style="padding-top:0;">
-  <div class="container">
+<!-- ══════════ HERO ══════════ -->
+<section>
+  <div class="wrap">
     <div class="hero">
+      <div class="hero-grid">
 
-      <div class="hero-eyebrow r">
-        <span></span>
-        Data Engineer &nbsp;·&nbsp; Databricks Certified Professional
-      </div>
-
-      <h1 class="hero-headline r d1">
-        I build data<br/>
-        systems that <em>scale</em><br/>
-        for tomorrow.
-      </h1>
-
-      <p class="hero-sub r d2">
-        Most data pipelines fail not because of bad code, but because they were designed for yesterday's data volume. I architect Lakehouse platforms on Databricks and Azure that are built for what comes next.
-      </p>
-
-      <div class="hero-meta r d2">
-        <div class="meta-pill"><div class="dot"></div><strong>Open to</strong> Senior Data Engineering roles</div>
-        <div class="meta-pill">📍 <strong>Based in</strong> Greater Chennai Area</div>
-        <div class="meta-pill">🏆 <strong>Certified</strong> Databricks Professional</div>
-      </div>
-
-      <div class="hero-ctas r d3">
-        <a href="#work" class="btn-primary">View my work ↓</a>
-        <a href="mailto:kavinandhiswork@gmail.com" class="btn-outline">kavinandhiswork@gmail.com ↗</a>
-      </div>
-
-      <div class="hero-photo r d4">
-        <div class="photo-frame">
-          <img src="assets/images/kavin.png" alt="Kavin Parithi Sivasamy"/>
-        </div>
-        <div class="hero-quote">
-          "I approach data engineering problems architecturally first and technically second — because the right design eliminates entire categories of downstream problems before the first line of code is written."
-          <cite>— Kavin Parithi Sivasamy</cite>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- ════════════════════════════ WHAT I DO ════════════════════════════ -->
-<section id="about">
-  <div class="container">
-    <div class="what">
-      <div class="section-label r"><span></span> Across the data lifecycle</div>
-      <div class="what-grid">
-        <div class="what-item r">
-          <div class="what-num">01</div>
-          <div class="what-title">Design</div>
-          <p class="what-desc">I design Medallion Lakehouse architectures that separate ingestion, transformation, and serving cleanly. The architecture decisions made here determine whether the system is maintainable at year three or becomes technical debt at month six.</p>
-          <span class="what-keyword">Architecture</span>
-        </div>
-        <div class="what-item r d1">
-          <div class="what-num">02</div>
-          <div class="what-title">Build</div>
-          <p class="what-desc">Production-grade DLT pipelines, Spark workload optimization, ingestion frameworks, and multi-environment deployments using DABs. I build for scale, not for demos. Every pipeline I ship is one I can maintain in production.</p>
-          <span class="what-keyword">Engineering</span>
-        </div>
-        <div class="what-item r d2">
-          <div class="what-num">03</div>
-          <div class="what-title">Trust</div>
-          <p class="what-desc">Data quality pipelines, row-level SQL alerts, observability layers, and freshness checks that run even when the pipeline shows green. Good data is not an assumption — it is something I engineer explicitly into every system.</p>
-          <span class="what-keyword">Reliability</span>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ════════════════════════════ WORK ════════════════════════════ -->
-<section id="work">
-  <div class="container">
-    <div class="work">
-
-      <div class="work-header r">
-        <h2 class="work-headline">Where I made<br/>data <em>work.</em></h2>
-        <p class="work-intro">Three industries. Three different data challenges. One consistent outcome: pipelines that the business can trust and grow on.</p>
-      </div>
-
-      <div class="work-list">
-
-        <!-- Finance -->
-        <div class="work-card r">
-          <div class="work-card-inner">
-            <div>
-              <div class="work-industry">Finance Sector &nbsp;·&nbsp; zeb</div>
-              <div class="work-title">Legacy Stack to<br/>Full Databricks Migration</div>
-              <div class="work-meta">
-                <span class="work-meta-item">Data Engineer</span>
-                <span class="work-meta-item">Legacy Modernization</span>
-                <span class="work-meta-item">Full Migration</span>
-              </div>
-              <p class="work-desc">
-                Migrated an entire finance company's data infrastructure from SSIS, SSRS, SSMS, JAMS, and PowerShell scripts into a single unified Databricks environment. Delivered every business metric accurately with zero data loss and zero compromise on correctness. The kind of migration that usually goes wrong — this one did not.
-              </p>
-              <div class="work-tags">
-                <span class="tag">Databricks</span>
-                <span class="tag">SSIS Migration</span>
-                <span class="tag">SSRS</span>
-                <span class="tag">Legacy Modernization</span>
-                <span class="tag">PowerShell</span>
-              </div>
-            </div>
-            <div class="work-right">
-              <div class="work-icon">🏦</div>
-              <span class="tag accent">Completed</span>
-            </div>
+        <!-- Photo -->
+        <div class="sr">
+          <div class="hero-photo">
+            <img src="assets/images/kavin.png" alt="Kavin Parithi Sivasamy"/>
+            <div class="hero-photo-badge">🏆 Databricks Certified</div>
           </div>
         </div>
 
-        <!-- Insurance -->
-        <div class="work-card r d1">
-          <div class="work-card-inner">
-            <div>
-              <div class="work-industry">Insurance Agent Management &nbsp;·&nbsp; zeb</div>
-              <div class="work-title">Unstructured Backend Data<br/>to Agent Intelligence</div>
-              <div class="work-meta">
-                <span class="work-meta-item">Data Engineer</span>
-                <span class="work-meta-item">Unstructured JSON</span>
-                <span class="work-meta-item">Analytics Platform</span>
-              </div>
-              <p class="work-desc">
-                Built Databricks pipelines to parse raw unstructured JSON from Firestore and Elastic Search — agent call logs, campaign data, medical records, insurance plan mappings, and agent-to-client relationships across multiple product applications. Transformed raw backend scraps into structured analytics tables that enabled the business to identify top-performing agents and their most effective products. Directly contributed to increased agent and user subscription growth.
-              </p>
-              <div class="work-tags">
-                <span class="tag">Firestore</span>
-                <span class="tag">Elastic Search</span>
-                <span class="tag">Databricks</span>
-                <span class="tag">JSON Parsing</span>
-                <span class="tag">Business Analytics</span>
-              </div>
-            </div>
-            <div class="work-right">
-              <div class="work-icon">🛡️</div>
-              <span class="tag accent">Completed</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Chemical -->
-        <div class="work-card r d2">
-          <div class="work-card-inner">
-            <div>
-              <div class="work-industry">Chemical Manufacturing — Enterprise &nbsp;·&nbsp; zeb</div>
-              <div class="work-title">SAP ECC to Enterprise<br/>Lakehouse Platform</div>
-              <div class="work-meta">
-                <span class="work-meta-item">Data Engineer</span>
-                <span class="work-meta-item">Enterprise Lakehouse</span>
-                <span class="work-meta-item">SAP + Databricks</span>
-              </div>
-              <p class="work-desc">
-                Architected a full enterprise Lakehouse ingesting SAP ECC data through Datasphere into Databricks Volumes. Domains: procurement, raw materials, plant operations, delivery, SPEND, AP, CP, daily orders, supply chain, legal compliance, and chemical details. Built Gold and Platinum transformation layers for cross-functional analytics. Implemented DLT pipelines for real-time orders and deliveries, customer chemical usage tracking for predictive replenishment, row-level SQL alerts for silent failures, dedicated Data Quality pipelines, and multi-environment deployments with DABs.
-              </p>
-              <div class="work-tags">
-                <span class="tag">SAP ECC</span>
-                <span class="tag">Datasphere</span>
-                <span class="tag">DLT</span>
-                <span class="tag">Medallion Architecture</span>
-                <span class="tag">SQL Alerts</span>
-                <span class="tag">DABs</span>
-                <span class="tag">Data Quality</span>
-              </div>
-            </div>
-            <div class="work-right">
-              <div class="work-icon">🧪</div>
-              <span class="tag accent">Completed</span>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ════════════════════════════ SKILLS ════════════════════════════ -->
-<section id="skills">
-  <div class="container">
-    <div class="skills">
-      <div class="section-label r"><span></span> Technical toolkit</div>
-      <h2 style="font-size:clamp(32px,4vw,48px);font-weight:900;letter-spacing:-1px;color:var(--ink);max-width:600px;" class="r d1">
-        The stack behind<br/>the architecture.
-      </h2>
-
-      <div class="skills-grid">
-        <div class="skill-group r">
-          <div class="skill-group-label">01 — Core Platform</div>
-          <div class="skill-group-title">Databricks Ecosystem</div>
-          <div class="skill-list">Databricks &nbsp;·&nbsp; Azure Databricks &nbsp;·&nbsp; Delta Lake &nbsp;·&nbsp; Delta Live Tables &nbsp;·&nbsp; Databricks Asset Bundles &nbsp;·&nbsp; SQL Warehouses &nbsp;·&nbsp; Workflows</div>
-        </div>
-        <div class="skill-group r d1">
-          <div class="skill-group-label">02 — Processing Engine</div>
-          <div class="skill-group-title">Apache Spark</div>
-          <div class="skill-list">PySpark &nbsp;·&nbsp; Spark SQL &nbsp;·&nbsp; Structured Streaming &nbsp;·&nbsp; Spark Optimization &nbsp;·&nbsp; AQE &nbsp;·&nbsp; Broadcast Joins &nbsp;·&nbsp; Partition Tuning</div>
-        </div>
-        <div class="skill-group r">
-          <div class="skill-group-label">03 — Design Patterns</div>
-          <div class="skill-group-title">Architecture</div>
-          <div class="skill-list">Medallion Architecture &nbsp;·&nbsp; ETL / ELT &nbsp;·&nbsp; Lakehouse Design &nbsp;·&nbsp; Bronze / Silver / Gold / Platinum Layers &nbsp;·&nbsp; Pipeline Engineering</div>
-        </div>
-        <div class="skill-group r d1">
-          <div class="skill-group-label">04 — Quality and Reliability</div>
-          <div class="skill-group-title">Data Quality and Observability</div>
-          <div class="skill-list">DLT Expectations &nbsp;·&nbsp; DQ Pipelines &nbsp;·&nbsp; SQL Alerts &nbsp;·&nbsp; Row-level Validation &nbsp;·&nbsp; Pipeline Observability &nbsp;·&nbsp; Freshness Checks &nbsp;·&nbsp; SAP ECC &nbsp;·&nbsp; Datasphere &nbsp;·&nbsp; Firestore &nbsp;·&nbsp; Elastic Search &nbsp;·&nbsp; Azure &nbsp;·&nbsp; SQL &nbsp;·&nbsp; Python</div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ════════════════════════════ CERTIFICATION ════════════════════════════ -->
-<section>
-  <div class="container">
-    <div class="cert">
-      <div class="section-label r"><span></span> Certification</div>
-      <div class="cert-card r d1">
-        <div class="cert-badge-icon">🏆</div>
+        <!-- Text -->
         <div>
-          <div class="cert-name">Databricks Certified Data Engineer Professional</div>
-          <div class="cert-issuer">Databricks &nbsp;·&nbsp; Professional Level &nbsp;·&nbsp; Highest Tier</div>
-          <p class="cert-note">Validates expertise in production-grade Delta Lake design, DLT pipeline architecture, Spark workload optimization, and enterprise Lakehouse implementation. The professional certification — not the associate. It tests real production knowledge.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ════════════════════════════ BEYOND ENGINEERING ════════════════════════════ -->
-<section>
-  <div class="container">
-    <div class="beyond">
-      <div class="section-label r"><span></span> Beyond engineering</div>
-      <h2 style="font-size:clamp(28px,3.5vw,42px);font-weight:900;letter-spacing:-.8px;color:var(--ink);margin-bottom:8px;" class="r d1">
-        The human behind the pipeline.
-      </h2>
-      <div class="beyond-grid r d2">
-        <div class="beyond-item">
-          <div class="beyond-icon">🎤</div>
-          <div class="beyond-title">Speaking</div>
-          <p class="beyond-desc">Sharing production learnings on Databricks, Spark optimization, and real-world data engineering challenges at community events.</p>
-        </div>
-        <div class="beyond-item">
-          <div class="beyond-icon">🤝</div>
-          <div class="beyond-title">Community</div>
-          <p class="beyond-desc">Organizing events and building communities around data engineering — because the field grows faster when knowledge is shared openly.</p>
-        </div>
-        <div class="beyond-item">
-          <div class="beyond-icon">✍️</div>
-          <div class="beyond-title">Writing</div>
-          <p class="beyond-desc">Technical writing on production data challenges. And poetries on the side — because not all pipelines are made of data.</p>
-        </div>
-        <div class="beyond-item">
-          <div class="beyond-icon">📚</div>
-          <div class="beyond-title">Learning</div>
-          <p class="beyond-desc">Growth is not about knowing everything. It is about staying curious enough to keep learning — every single day, without exception.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ════════════════════════════ CONTACT ════════════════════════════ -->
-<section id="contact">
-  <div class="container">
-    <div class="contact">
-
-      <div class="section-label r"><span></span> Let's work together</div>
-      <h2 class="contact-headline r d1">
-        Bring me the<br/><em>hard problem.</em>
-      </h2>
-      <p class="contact-sub r d2">
-        Lakehouse migration. Spark performance. Pipelines from scratch. Complex SAP ingestion. Data quality nobody can explain. If the data problem is hard, that's exactly where I want to be.
-      </p>
-
-      <div class="contact-row r d2">
-        <div class="contact-cell">
-          <div class="contact-cell-label">Available for</div>
-          <div class="contact-cell-value">Senior Data Engineering roles &nbsp;·&nbsp; Databricks projects &nbsp;·&nbsp; Azure Lakehouse architecture</div>
-        </div>
-        <div class="contact-cell">
-          <div class="contact-cell-label">Response time</div>
-          <div class="contact-cell-value">I respond to every serious inquiry within 24 hours. No ghosting.</div>
-        </div>
-        <div class="contact-cell">
-          <div class="contact-cell-label">Reach me</div>
-          <div class="contact-cell-value">
-            <a href="mailto:kavinandhiswork@gmail.com">kavinandhiswork@gmail.com</a><br/>
-            <span style="font-size:12px;color:var(--ink3);">Greater Chennai Area, India</span>
+          <div class="hero-tag sr"><span></span>Data Engineer · Greater Chennai Area</div>
+          <h1 class="hero-name sr d1">
+            Kavin<br/>Parithi <em>Sivasamy</em>
+          </h1>
+          <p class="hero-role sr d2">Data Engineer at zeb &nbsp;·&nbsp; Databricks Certified Professional</p>
+          <p class="hero-intro sr d2">
+            I build Lakehouse architectures that scale for tomorrow's data volume, not just today's. End-to-end pipelines from raw ingestion to analytics-ready Gold layers — reliable, observable, and maintainable in production.
+          </p>
+          <div class="hero-pills sr d3">
+            <span class="pill">Databricks</span>
+            <span class="pill">Apache Spark</span>
+            <span class="pill">Delta Lake</span>
+            <span class="pill">Azure</span>
+            <span class="pill">PySpark</span>
+            <span class="pill">DLT</span>
+          </div>
+          <div class="hero-ctas sr d4">
+            <a href="#work" class="btn btn-dark">View work ↓</a>
+            <a href="mailto:kavinandhiswork@gmail.com" class="btn btn-ghost">kavinandhiswork@gmail.com</a>
           </div>
         </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="wrap"><div class="rule"></div></div>
+
+<!-- ══════════ WHAT I DO ══════════ -->
+<section class="section" id="about">
+  <div class="wrap">
+    <div class="sec-head sr">
+      <span class="sec-num">01</span>
+      <h2 class="sec-title">What I <em>do</em></h2>
+    </div>
+    <div class="what-grid">
+      <div class="what-cell sr">
+        <div class="wc-n">01 — Design</div>
+        <div class="wc-title">Architect first.</div>
+        <p class="wc-desc">Medallion Lakehouse platforms designed for long-term maintainability. The right architecture eliminates entire categories of problems before code is written.</p>
+        <span class="wc-kw">Architecture</span>
+      </div>
+      <div class="what-cell sr d1">
+        <div class="wc-n">02 — Build</div>
+        <div class="wc-title">Ship production grade.</div>
+        <p class="wc-desc">DLT pipelines, Spark optimization, ingestion frameworks, multi-environment deployments. Every pipeline I ship is one I can maintain in production at month twelve.</p>
+        <span class="wc-kw">Engineering</span>
+      </div>
+      <div class="what-cell sr d2">
+        <div class="wc-n">03 — Trust</div>
+        <div class="wc-title">Data you can rely on.</div>
+        <p class="wc-desc">DQ pipelines, row-level SQL alerts, observability layers. Good data is not an assumption — it is something I engineer explicitly into every system I build.</p>
+        <span class="wc-kw">Reliability</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="wrap"><div class="rule"></div></div>
+
+<!-- ══════════ EXPERIENCE ══════════ -->
+<section class="section" id="work">
+  <div class="wrap">
+    <div class="sec-head sr">
+      <span class="sec-num">02</span>
+      <h2 class="sec-title">Where I made <em>data work</em></h2>
+    </div>
+    <div class="exp-list">
+
+      <!-- Finance -->
+      <div class="exp-card sr">
+        <div class="exp-top">
+          <div>
+            <div class="exp-sector">Finance &nbsp;·&nbsp; zeb</div>
+            <div class="exp-title">Legacy Stack to Full Databricks Migration</div>
+          </div>
+          <div class="exp-tag-row">
+            <span class="etag">Legacy Modernization</span>
+            <span class="etag">Completed</span>
+          </div>
+        </div>
+        <p class="exp-desc">Migrated an entire finance company's data infrastructure from SSIS, SSRS, SSMS, JAMS, and PowerShell scripts into a single unified Databricks environment. Every business metric delivered accurately with zero data loss.</p>
+        <div class="exp-stack">
+          <span class="stag">Databricks</span><span class="stag">SSIS</span><span class="stag">SSRS</span><span class="stag">SSMS</span><span class="stag">PowerShell</span>
+        </div>
       </div>
 
-      <div class="contact-ctas r d3">
-        <a href="mailto:kavinandhiswork@gmail.com" class="btn-primary">
-          Send me a message ↗
-        </a>
-        <a href="https://linkedin.com/in/kavinparithi" target="_blank" class="btn-outline">
-          LinkedIn ↗
-        </a>
+      <!-- Insurance -->
+      <div class="exp-card sr d1">
+        <div class="exp-top">
+          <div>
+            <div class="exp-sector">Insurance Agent Management &nbsp;·&nbsp; zeb</div>
+            <div class="exp-title">Unstructured Backend Data to Agent Intelligence</div>
+          </div>
+          <div class="exp-tag-row">
+            <span class="etag">Unstructured JSON</span>
+            <span class="etag">Analytics Platform</span>
+          </div>
+        </div>
+        <p class="exp-desc">Built Databricks pipelines to parse raw JSON from Firestore and Elastic Search — agent calls, campaigns, medical records, insurance plan mappings. Transformed backend scraps into structured analytics that identified top agents and drove subscription growth.</p>
+        <div class="exp-stack">
+          <span class="stag">Databricks</span><span class="stag">Firestore</span><span class="stag">Elastic Search</span><span class="stag">JSON Parsing</span><span class="stag">PySpark</span>
+        </div>
       </div>
 
-      <!-- Official LinkedIn Badge -->
-      <div class="r d4" style="margin-top:16px;">
-        <div class="badge-base LI-profile-badge"
-             data-locale="en_US"
-             data-size="medium"
-             data-theme="light"
-             data-type="VERTICAL"
-             data-vanity="kavinparithi"
-             data-version="v1"
-             style="border:1px solid var(--line);border-radius:12px;overflow:hidden;display:inline-block;">
-          <a class="badge-base__link LI-simple-link"
-             href="https://in.linkedin.com/in/kavinparithi?trk=profile-badge"
-             target="_blank" style="color:var(--ink);text-decoration:none;">
-            KAVIN PARITHI SIVASAMY
-          </a>
+      <!-- Chemical -->
+      <div class="exp-card sr d2">
+        <div class="exp-top">
+          <div>
+            <div class="exp-sector">Chemical Manufacturing — Enterprise &nbsp;·&nbsp; zeb</div>
+            <div class="exp-title">SAP ECC to Enterprise Lakehouse Platform</div>
+          </div>
+          <div class="exp-tag-row">
+            <span class="etag">SAP + Databricks</span>
+            <span class="etag">Enterprise Scale</span>
+          </div>
+        </div>
+        <p class="exp-desc">Ingested SAP ECC data through Datasphere into Databricks Volumes. Built Gold and Platinum layers for procurement, supply chain, plant ops, SPEND, and chemical compliance. DLT for real-time orders, predictive replenishment tracking, row-level SQL alerts, DQ pipelines, and multi-env DAB deployments. Gave the client full trust in their data.</p>
+        <div class="exp-stack">
+          <span class="stag">SAP ECC</span><span class="stag">Datasphere</span><span class="stag">DLT</span><span class="stag">Medallion</span><span class="stag">SQL Alerts</span><span class="stag">DABs</span><span class="stag">Data Quality</span>
         </div>
       </div>
 
@@ -698,40 +482,174 @@ footer{
   </div>
 </section>
 
-<!-- ════════════════════════════ FOOTER ════════════════════════════ -->
+<div class="wrap"><div class="rule"></div></div>
+
+<!-- ══════════ SKILLS ══════════ -->
+<section class="section" id="skills">
+  <div class="wrap">
+    <div class="sec-head sr">
+      <span class="sec-num">03</span>
+      <h2 class="sec-title">The <em>stack</em></h2>
+    </div>
+    <div class="skills-grid">
+      <div class="skill-cell sr">
+        <div class="sk-label">Core Platform</div>
+        <div class="sk-name">Databricks Ecosystem</div>
+        <div class="sk-list">Databricks &nbsp;·&nbsp; Azure Databricks &nbsp;·&nbsp; Delta Lake &nbsp;·&nbsp; Delta Live Tables &nbsp;·&nbsp; DABs &nbsp;·&nbsp; SQL Warehouses</div>
+      </div>
+      <div class="skill-cell sr d1">
+        <div class="sk-label">Processing Engine</div>
+        <div class="sk-name">Apache Spark</div>
+        <div class="sk-list">PySpark &nbsp;·&nbsp; Spark SQL &nbsp;·&nbsp; Structured Streaming &nbsp;·&nbsp; Workload Optimization &nbsp;·&nbsp; AQE &nbsp;·&nbsp; Partition Tuning</div>
+      </div>
+      <div class="skill-cell sr">
+        <div class="sk-label">Architecture</div>
+        <div class="sk-name">Patterns and Design</div>
+        <div class="sk-list">Medallion Architecture &nbsp;·&nbsp; ETL / ELT &nbsp;·&nbsp; Lakehouse Design &nbsp;·&nbsp; Bronze / Silver / Gold / Platinum Layers</div>
+      </div>
+      <div class="skill-cell sr d1">
+        <div class="sk-label">Quality and Cloud</div>
+        <div class="sk-name">Reliability and Integrations</div>
+        <div class="sk-list">DQ Pipelines &nbsp;·&nbsp; SQL Alerts &nbsp;·&nbsp; Observability &nbsp;·&nbsp; Azure &nbsp;·&nbsp; SAP ECC &nbsp;·&nbsp; Datasphere &nbsp;·&nbsp; Firestore &nbsp;·&nbsp; Elastic Search &nbsp;·&nbsp; SQL &nbsp;·&nbsp; Python</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="wrap"><div class="rule"></div></div>
+
+<!-- ══════════ CERTIFICATION ══════════ -->
+<section class="section">
+  <div class="wrap">
+    <div class="sec-head sr">
+      <span class="sec-num">04</span>
+      <h2 class="sec-title">Certification</h2>
+    </div>
+    <div class="cert-card sr d1">
+      <div class="cert-icon">🏆</div>
+      <div>
+        <div class="cert-name">Databricks Certified Data Engineer Professional</div>
+        <div class="cert-meta">Databricks &nbsp;·&nbsp; Professional Level &nbsp;·&nbsp; Highest Tier</div>
+        <p class="cert-note">Validates production-grade Delta Lake design, DLT architecture, Spark optimization, and enterprise Lakehouse implementation. The professional tier — not the associate.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="wrap"><div class="rule"></div></div>
+
+<!-- ══════════ BEYOND ══════════ -->
+<section class="section">
+  <div class="wrap">
+    <div class="sec-head sr">
+      <span class="sec-num">05</span>
+      <h2 class="sec-title">Beyond <em>engineering</em></h2>
+    </div>
+    <div class="beyond-grid sr d1">
+      <div class="bc">
+        <div class="bc-icon">🎤</div>
+        <div class="bc-title">Speaking</div>
+        <p class="bc-desc">Sharing production learnings on Databricks, Spark, and real-world data engineering at community events.</p>
+      </div>
+      <div class="bc">
+        <div class="bc-icon">🤝</div>
+        <div class="bc-title">Community</div>
+        <p class="bc-desc">Organizing events and building communities where data engineering knowledge flows openly.</p>
+      </div>
+      <div class="bc">
+        <div class="bc-icon">✍️</div>
+        <div class="bc-title">Writing</div>
+        <p class="bc-desc">Technical writing on production data challenges. And poetries on the side.</p>
+      </div>
+      <div class="bc">
+        <div class="bc-icon">📚</div>
+        <div class="bc-title">Learning</div>
+        <p class="bc-desc">Growth is not about knowing everything. It is about staying curious enough to keep learning.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="wrap"><div class="rule"></div></div>
+
+<!-- ══════════ CONTACT ══════════ -->
+<section class="contact" id="contact">
+  <div class="wrap">
+    <div class="sec-head sr">
+      <span class="sec-num">06</span>
+      <h2 class="sec-title">Get in <em>touch</em></h2>
+    </div>
+    <h2 class="contact-headline sr d1">
+      Bring me the<br/><em>hard problem.</em>
+    </h2>
+    <p class="contact-sub sr d2">
+      Lakehouse migration. Spark performance. Pipelines from scratch. If the data problem is hard, that is exactly where I want to be.
+    </p>
+    <div class="contact-grid sr d2">
+      <div class="cc">
+        <div class="cc-label">Available for</div>
+        <div class="cc-val">Senior Data Engineering roles &nbsp;·&nbsp; Databricks projects &nbsp;·&nbsp; Lakehouse architecture</div>
+      </div>
+      <div class="cc">
+        <div class="cc-label">Response</div>
+        <div class="cc-val">Every serious inquiry gets a reply within 24 hours.</div>
+      </div>
+      <div class="cc">
+        <div class="cc-label">Reach me</div>
+        <div class="cc-val">
+          <a href="mailto:kavinandhiswork@gmail.com">kavinandhiswork@gmail.com</a><br/>
+          <span style="font-size:12px;color:var(--ink3);">Greater Chennai Area, India</span>
+        </div>
+      </div>
+    </div>
+    <div class="contact-ctas sr d3">
+      <a href="mailto:kavinandhiswork@gmail.com" class="btn btn-dark">Send a message ↗</a>
+      <a href="https://linkedin.com/in/kavinparithi" target="_blank" class="btn btn-ghost">LinkedIn ↗</a>
+    </div>
+    <!-- LinkedIn Official Badge -->
+    <div class="sr d4">
+      <div class="li-wrap badge-base LI-profile-badge"
+           data-locale="en_US" data-size="medium" data-theme="light"
+           data-type="VERTICAL" data-vanity="kavinparithi" data-version="v1">
+        <a class="badge-base__link LI-simple-link"
+           href="https://in.linkedin.com/in/kavinparithi?trk=profile-badge"
+           target="_blank">KAVIN PARITHI SIVASAMY</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ FOOTER ══════════ -->
 <footer>
-  <div class="footer-inner">
-    <span class="footer-name">Kavin Parithi Sivasamy</span>
-    <span class="footer-mono">Design. Develop. Debug.</span>
-    <span class="footer-right">Data Engineer &nbsp;·&nbsp; Databricks Certified</span>
+  <div class="ft">
+    <span class="ft-name">Kavin Parithi Sivasamy</span>
+    <span class="ft-mono">Design. Develop. Debug.</span>
+    <span class="ft-copy">Data Engineer · Databricks Certified Professional</span>
   </div>
 </footer>
 
 <script>
 // Scroll reveal
 const ro = new IntersectionObserver(entries => {
-  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); ro.unobserve(e.target); } });
+  entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('show'); ro.unobserve(e.target); } });
 }, { threshold: 0.08 });
-document.querySelectorAll('.r').forEach(el => ro.observe(el));
+document.querySelectorAll('.sr').forEach(el => ro.observe(el));
 
-// Nav scroll effect
+// Nav border on scroll
 const nav = document.getElementById('nav');
 window.addEventListener('scroll', () => {
-  nav.style.borderBottomColor = scrollY > 40 ? '#D5D2CA' : 'transparent';
-});
-
-// Active nav links
-const secs = document.querySelectorAll('section[id]');
-const nls  = document.querySelectorAll('.nav-links a');
-window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', scrollY > 30);
+  // active nav links
   let cur = '';
-  secs.forEach(s => { if (scrollY >= s.offsetTop - 120) cur = s.id; });
-  nls.forEach(a => {
-    const href = a.getAttribute('href').replace('#','');
-    a.style.color = href === cur ? 'var(--ink)' : '';
-    a.style.fontWeight = href === cur ? '700' : '';
+  document.querySelectorAll('section[id]').forEach(s => {
+    if(scrollY >= s.offsetTop - 100) cur = s.id;
   });
-});
+  document.querySelectorAll('.nav-links a').forEach(a => {
+    const match = a.getAttribute('href') === '#' + cur;
+    a.style.color = match ? 'var(--ink)' : '';
+    a.style.fontWeight = match ? '700' : '';
+  });
+}, { passive: true });
 </script>
 </body>
 </html>
