@@ -1,27 +1,33 @@
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { Reveal } from '../../layout'
 import { site } from '../../../data/site'
 
-/** Lens radius (px) of the cartoon reveal while hovering. */
+/** Lens radius (px) of the cartoon reveal while hovering (desktop). */
 const LENS_RADIUS = 80
 /** Radius large enough to cover the whole card once revealed. */
 const FULL_RADIUS = 420
 
 /**
  * Portrait card in the left hero column.
- *  - Hover: the cartoon shows only inside a circular lens that follows the
- *    cursor (like a magnifier over the real photo).
- *  - Click: the cartoon expands to fill the whole card with a smooth
- *    transition. Clicking again reverts to the photo.
+ *  - Desktop (fine pointer): the cartoon shows inside a circular lens that
+ *    follows the cursor; clicking expands it to fully reveal.
+ *  - Mobile (coarse pointer): no lens. Tapping expands the cartoon from the
+ *    tap point to fully cover; tapping again collapses it back toward the new
+ *    tap point, reverting to the photo.
  *
- * The lens position is written straight to the cartoon node's clip-path via a
- * ref so pointer movement never triggers a React re-render (no lag).
+ * The clip-path is written straight to the node via a ref so pointer movement
+ * never triggers a React re-render (no lag).
  */
 export function HeroPhoto() {
   const base = import.meta.env.BASE_URL
   const wrapRef = useRef(null)
   const cartoonRef = useRef(null)
   const [revealed, setRevealed] = useState(false)
+  const [isTouch, setIsTouch] = useState(false)
+
+  useEffect(() => {
+    setIsTouch(window.matchMedia('(pointer: coarse)').matches)
+  }, [])
 
   // Imperatively paint the clip-path; avoids per-move re-renders.
   const paint = (radius, x, y, smooth) => {
@@ -33,26 +39,34 @@ export function HeroPhoto() {
     node.style.clipPath = `circle(${radius}px at ${x}% ${y}%)`
   }
 
-  const handleMove = (e) => {
-    if (revealed) return
+  const pointPercent = (e) => {
     const rect = wrapRef.current?.getBoundingClientRect()
-    if (!rect) return
-    const x = ((e.clientX - rect.left) / rect.width) * 100
-    const y = ((e.clientY - rect.top) / rect.height) * 100
+    if (!rect) return { x: 50, y: 50 }
+    return {
+      x: ((e.clientX - rect.left) / rect.width) * 100,
+      y: ((e.clientY - rect.top) / rect.height) * 100,
+    }
+  }
+
+  // Desktop only: lens follows the cursor.
+  const handleMove = (e) => {
+    if (isTouch || revealed) return
+    const { x, y } = pointPercent(e)
     paint(LENS_RADIUS, x, y, false)
   }
 
   const handleLeave = () => {
-    if (!revealed) paint(0, 50, 50, false)
+    if (!isTouch && !revealed) paint(0, 50, 50, false)
   }
 
   const handleClick = (e) => {
-    const rect = wrapRef.current?.getBoundingClientRect()
-    const x = rect ? ((e.clientX - rect.left) / rect.width) * 100 : 50
-    const y = rect ? ((e.clientY - rect.top) / rect.height) * 100 : 50
+    const { x, y } = pointPercent(e)
     setRevealed((wasRevealed) => {
       const next = !wasRevealed
-      paint(next ? FULL_RADIUS : LENS_RADIUS, x, y, true)
+      // Touch reverts fully to the photo (radius 0) collapsing toward the tap;
+      // desktop reverts to the hover lens since the cursor is still there.
+      const revertRadius = isTouch ? 0 : LENS_RADIUS
+      paint(next ? FULL_RADIUS : revertRadius, x, y, true)
       return next
     })
   }
