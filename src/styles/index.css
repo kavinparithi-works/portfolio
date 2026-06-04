@@ -55,3 +55,20 @@ body {
     @apply text-hero-hover;
   }
 }
+
+/* Contact links pulse white when the nav "Contact" button is clicked, so
+   visitors notice where to reach out. Three fills, then back to default. */
+@keyframes contact-pulse {
+  0%,
+  100% {
+    background-color: transparent;
+    color: rgba(255, 255, 255, 0.45);
+  }
+  50% {
+    background-color: #ffffff;
+    color: #1a1a1a;
+  }
+}
+.contact-pulse {
+  animation: contact-pulse 0.7s ease-in-out 3;
+}
