@@ -31,6 +31,7 @@ export function ContactInfo() {
         <br />
         <a
           href={`mailto:${site.email}`}
+          data-cursor="ignore"
           className="border-b border-white/25 text-white/90 transition-colors duration-200 hover:border-white/70"
         >
           {site.email}
