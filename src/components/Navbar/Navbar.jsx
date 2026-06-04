@@ -1,11 +1,36 @@
-import React from 'react'
+import React, { useEffect, useRef } from 'react'
 import { site } from '../../data/site'
 
 /**
  * Fixed top navigation. The `on` class (toggled by useNavScrolled) reveals the
- * bottom border once the page scrolls.
+ * bottom border once the page scrolls. The logo spins on load and on click,
+ * and clicking it scrolls back to the top (home).
  */
 export function Navbar() {
+  const logoRef = useRef(null)
+
+  // Spin once on initial mount.
+  useEffect(() => {
+    const el = logoRef.current
+    if (!el) return
+    el.classList.add('logo-spin')
+    const onEnd = () => el.classList.remove('logo-spin')
+    el.addEventListener('animationend', onEnd)
+    return () => el.removeEventListener('animationend', onEnd)
+  }, [])
+
+  const handleLogoClick = () => {
+    // Replay the spin (force reflow so the animation restarts).
+    const el = logoRef.current
+    if (el) {
+      el.classList.remove('logo-spin')
+      void el.offsetWidth
+      el.classList.add('logo-spin')
+    }
+    // Smooth-scroll to the top / landing page.
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }
+
   return (
     <nav
       id="N"
@@ -13,10 +38,21 @@ export function Navbar() {
     >
       <div className="mx-auto flex h-[60px] max-w-site items-center justify-between px-[64px] max-[680px]:px-[22px]">
         <div className="flex items-center gap-[10px] font-barlow text-[18px] font-extrabold uppercase tracking-[.5px] text-ink">
-          <div className="flex h-[30px] w-[30px] flex-shrink-0 items-center justify-center rounded-full bg-ink text-[13px] font-black text-white">
+          <button
+            ref={logoRef}
+            type="button"
+            onClick={handleLogoClick}
+            aria-label="Back to top"
+            className="flex h-[30px] w-[30px] flex-shrink-0 items-center justify-center rounded-full bg-ink text-[13px] font-black text-white"
+          >
             {site.initial}
-          </div>
-          <span className="max-[420px]:hidden">{site.name}</span>
+          </button>
+          {/* Name shortens with the viewport instead of disappearing. */}
+          <span data-cursor="ignore">
+            <span className="hidden min-[641px]:inline">KAVIN PARITHI SIVASAMY</span>
+            <span className="hidden min-[421px]:inline min-[641px]:hidden">KAVIN PARITHI</span>
+            <span className="inline min-[421px]:hidden">KAVIN</span>
+          </span>
         </div>
         <div className="flex items-center gap-[8px]">
           <a

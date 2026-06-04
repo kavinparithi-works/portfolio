@@ -56,19 +56,15 @@ body {
   }
 }
 
-/* Contact links pulse white when the nav "Contact" button is clicked, so
-   visitors notice where to reach out. Three fills, then back to default. */
-@keyframes contact-pulse {
-  0%,
-  100% {
-    background-color: transparent;
-    color: rgba(255, 255, 255, 0.45);
+/* Logo "K" spins once on page load and on every click. */
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
   }
-  50% {
-    background-color: #ffffff;
-    color: #1a1a1a;
+  to {
+    transform: rotate(360deg);
   }
 }
-.contact-pulse {
-  animation: contact-pulse 0.7s ease-in-out 3;
+.logo-spin {
+  animation: logo-spin 0.6s ease-in-out;
 }
