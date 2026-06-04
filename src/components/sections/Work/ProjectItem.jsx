@@ -1,31 +1,39 @@
 import React from 'react'
+import { cn } from '../../../lib/cn'
 import { Reveal } from '../../layout'
+import { useTapActive } from '../../../hooks/useTapActive'
 
 /**
  * A single "Selected Works" card: sector + icon header, title, description,
- * tech tags, and status. Styled as a rectangular card to match the
- * "Ways I Contribute" section.
+ * tech tags, and status. Inverts to dark on hover (desktop) or tap (touch).
  */
 export function ProjectItem({ sector, title, desc, tags, icon, status, index }) {
+  const { ref, active } = useTapActive()
+
   return (
     <Reveal
+      ref={ref}
       delay={index}
-      className="group flex flex-col rounded-[18px] border border-rule bg-card p-[36px_30px] transition-[transform,background-color,border-color] duration-[250ms] hover:translate-y-[-4px] hover:border-dark hover:bg-dark"
+      className={cn(
+        'group flex flex-col rounded-[18px] border border-rule bg-card p-[36px_30px] transition-[transform,background-color,border-color] duration-[250ms]',
+        'hover:translate-y-[-4px] hover:border-dark hover:bg-dark',
+        active && 'tapped translate-y-[-4px] border-dark bg-dark'
+      )}
     >
       <div className="mb-4 flex items-start justify-between gap-4">
         <p className="text-[11px] font-medium uppercase tracking-[2px] text-orange">
           {sector}
         </p>
-        <div className="flex h-[52px] w-[52px] flex-shrink-0 items-center justify-center rounded-xl border border-rule bg-white text-[24px] transition-colors duration-[250ms] group-hover:border-white/20">
+        <div className="flex h-[52px] w-[52px] flex-shrink-0 items-center justify-center rounded-xl border border-rule bg-white text-[24px] transition-colors duration-[250ms] group-hover:border-white/20 group-[.tapped]:border-white/20">
           {icon}
         </div>
       </div>
 
-      <h3 className="mb-4 font-barlow text-worktitle font-extrabold uppercase text-ink transition-colors duration-[250ms] group-hover:text-white">
+      <h3 className="mb-4 font-barlow text-worktitle font-extrabold uppercase text-ink transition-colors duration-[250ms] group-hover:text-white group-[.tapped]:text-white">
         {title}
       </h3>
 
-      <p className="mb-6 max-w-[720px] text-[14px] leading-[1.72] text-body transition-colors duration-[250ms] group-hover:text-white/70">
+      <p className="mb-6 max-w-[720px] text-[14px] leading-[1.72] text-body transition-colors duration-[250ms] group-hover:text-white/70 group-[.tapped]:text-white/70">
         {desc}
       </p>
 
@@ -33,14 +41,14 @@ export function ProjectItem({ sector, title, desc, tags, icon, status, index }) 
         {tags.map((tag) => (
           <span
             key={tag}
-            className="rounded-full border border-orange/40 px-[13px] py-1 text-[11.5px] font-medium text-orange transition-colors duration-[250ms] group-hover:border-white/30 group-hover:text-white/80"
+            className="rounded-full border border-orange/40 px-[13px] py-1 text-[11.5px] font-medium text-orange transition-colors duration-[250ms] group-hover:border-white/30 group-hover:text-white/80 group-[.tapped]:border-white/30 group-[.tapped]:text-white/80"
           >
             {tag}
           </span>
         ))}
       </div>
 
-      <span className="text-[10px] font-semibold uppercase tracking-[1.2px] text-muted transition-colors duration-[250ms] group-hover:text-white/50">
+      <span className="text-[10px] font-semibold uppercase tracking-[1.2px] text-muted transition-colors duration-[250ms] group-hover:text-white/50 group-[.tapped]:text-white/50">
         {status}
       </span>
     </Reveal>
