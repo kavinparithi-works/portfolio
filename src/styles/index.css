@@ -17,15 +17,10 @@ body {
 /* Hide the native cursor on mouse devices; the custom dot replaces it.
    Coarse/touch pointers keep their default behaviour. */
 @media (pointer: fine) {
-  body,
-  a,
-  button,
-  [role='button'],
-  input,
-  textarea,
-  select,
-  label {
-    cursor: none;
+  *,
+  *::before,
+  *::after {
+    cursor: none !important;
   }
 }
 
@@ -54,7 +49,7 @@ body {
 
   /* Headline grows +2px on hover (matches the original clamp bump) */
   .hero-hl {
-    @apply cursor-default text-hero transition-[font-size] duration-[250ms] ease-out;
+    @apply text-hero transition-[font-size] duration-[250ms] ease-out;
   }
   .hero-hl:hover {
     @apply text-hero-hover;

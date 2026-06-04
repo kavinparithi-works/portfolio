@@ -12,16 +12,19 @@ const ROTATING_WORDS = ['PROBLEM.', 'QUESTION.', 'CHALLENGE.', 'PUZZLE.']
  * The final word of the headline rotates on a 2s interval.
  */
 export function Contact() {
-  const word = useRotatingWord(ROTATING_WORDS, 2000)
+  const word = useRotatingWord(ROTATING_WORDS, 1200)
 
   return (
     <Section
       id="contact"
-      data-cursor="dark"
       className="bg-dark px-[64px] pt-[100px] max-[680px]:px-[22px]"
     >
       <div className="mx-auto max-w-site">
-        <Reveal as="h2" className="mb-[72px] font-barlow text-contact font-black uppercase text-white">
+        <Reveal
+          as="h2"
+          data-cursor="magnify"
+          className="mb-[72px] font-barlow text-contact font-black uppercase text-white"
+        >
           NOW. BRING ME<br />THE HARD
           <span className="block italic text-orange"> {word}</span>
         </Reveal>

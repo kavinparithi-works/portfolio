@@ -3,7 +3,7 @@ import { Reveal } from '../../layout'
 import { site } from '../../../data/site'
 
 const footerLinkClass =
-  'border-b border-transparent text-[12px] font-bold uppercase tracking-[1.5px] text-white/[.45] transition-colors duration-200 hover:border-white/50 hover:text-white'
+  'inline-flex items-center rounded-full px-4 py-2 text-[12px] font-bold uppercase tracking-[1.5px] text-white/[.45] transition-colors duration-200 hover:text-white'
 
 /**
  * Bottom footer row inside the dark contact band: email/linkedin + signature.

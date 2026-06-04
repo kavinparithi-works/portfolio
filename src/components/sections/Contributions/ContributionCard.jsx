@@ -37,6 +37,7 @@ export function ContributionCard({ num, title, body, tag, variant, index }) {
         {body}
       </p>
       <span
+        data-cursor="snap"
         className={cn(
           'inline-flex w-fit items-center rounded-full px-[18px] py-2 text-[12px] font-bold uppercase tracking-[.8px] transition-all duration-200 hover:border-ink hover:bg-ink hover:text-white',
           isFirst ? 'bg-white text-ink' : 'border-[1.5px] border-rule text-ink'

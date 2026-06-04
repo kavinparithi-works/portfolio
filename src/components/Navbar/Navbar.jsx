@@ -20,12 +20,6 @@ export function Navbar() {
         </div>
         <div className="flex items-center gap-[8px]">
           <a
-            href="#work"
-            className="rounded px-4 py-2 text-[14px] font-normal text-body transition-colors duration-200 hover:text-ink max-[580px]:hidden"
-          >
-            Selected Works
-          </a>
-          <a
             href="#contact"
             className="inline-flex items-center gap-[6px] rounded-full bg-dark px-[22px] py-[9px] text-[14px] font-bold text-white transition-[background,transform] duration-200 hover:translate-y-[-1px] hover:bg-[#333]"
           >

@@ -11,11 +11,11 @@ const ROTATING_WORDS = ['DATA.', 'DATABRICKS.', 'PROBLEMS.', 'SOLUTIONS.']
  * styles/index.css.
  */
 export function HeroHeadline() {
-  const word = useRotatingWord(ROTATING_WORDS, 1000)
+  const word = useRotatingWord(ROTATING_WORDS, 1200)
 
   return (
     <Reveal className="relative mb-10">
-      <h3 className="hero-hl font-barlow font-black uppercase text-ink">
+      <h3 data-cursor="magnify" className="hero-hl font-barlow font-black uppercase text-ink">
         <div>
           I BUILD <span className="italic text-orange">PIPELINES.</span>
         </div>
