@@ -1,5 +1,6 @@
 import React from 'react'
 import { Reveal } from '../../layout'
+import { Icon } from '../../icons/Icon'
 
 /**
  * A single "Selected Works" card: sector + icon header, title, description,
@@ -15,8 +16,8 @@ export function ProjectItem({ sector, title, desc, tags, icon, status, index }) 
         <p className="text-[11px] font-medium uppercase tracking-[2px] text-orange">
           {sector}
         </p>
-        <div className="flex h-[52px] w-[52px] flex-shrink-0 items-center justify-center rounded-xl border border-rule bg-white text-[24px] transition-colors duration-[250ms] group-hover:border-white/20">
-          {icon}
+        <div className="flex h-[52px] w-[52px] flex-shrink-0 items-center justify-center rounded-xl border border-rule bg-white text-ink transition-colors duration-[250ms] group-hover:border-white/20 group-hover:text-orange">
+          <Icon name={icon} size={24} className="emoji-shake" />
         </div>
       </div>
 

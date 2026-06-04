@@ -2,7 +2,7 @@ import React from 'react'
 import { Navbar } from './components/Navbar'
 import { Cursor } from './components/Cursor'
 import { Divider } from './components/layout'
-import { Hero, Contributions, Work, Credentials, Contact } from './components/sections'
+import { Hero, Contributions, Work, Credentials, Beyond, Contact } from './components/sections'
 import { useScrollReveal } from './hooks/useScrollReveal'
 import { useNavScrolled } from './hooks/useNavScrolled'
 
@@ -25,6 +25,8 @@ export default function App() {
       <Work />
       <Divider />
       <Credentials />
+      <Divider />
+      <Beyond />
       <Contact />
     </div>
   )

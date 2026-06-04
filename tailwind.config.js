@@ -16,6 +16,7 @@ export default {
       fontFamily: {
         barlow: ['"Barlow Condensed"', 'sans-serif'],
         inter: ['Inter', 'sans-serif'],
+        body: ['"Google Sans"', 'sans-serif'],
       },
       maxWidth: {
         site: '1200px',

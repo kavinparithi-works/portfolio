@@ -7,7 +7,8 @@ html {
   scroll-behavior: smooth;
 }
 body {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Google Sans', sans-serif;
+  font-weight: 600;
   background: #edeae4;
   color: #111111;
   -webkit-font-smoothing: antialiased;
@@ -67,4 +68,28 @@ body {
 }
 .logo-spin {
   animation: logo-spin 0.6s ease-in-out;
+}
+
+/* A quick wiggle for icons on hover / when the section reveals. */
+@keyframes emoji-shake {
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+  20% {
+    transform: rotate(-12deg);
+  }
+  40% {
+    transform: rotate(10deg);
+  }
+  60% {
+    transform: rotate(-7deg);
+  }
+  80% {
+    transform: rotate(5deg);
+  }
+}
+.group:hover .emoji-shake,
+.rv.in .emoji-shake {
+  animation: emoji-shake 0.5s ease-in-out;
 }
