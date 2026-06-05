@@ -3,18 +3,14 @@ import { Reveal } from '../../layout'
 import { Icon } from '../../icons/Icon'
 
 /**
- * A single credential card (certification or education). The whole card links
- * to the credential/source and inverts to dark on hover.
+ * A single credential card (certification or education). Inverts to dark on
+ * hover and carries a dedicated "View" button that links to the source.
  */
 export function CredentialCard({ label, icon, name, sub, body, href, index }) {
   return (
     <Reveal
-      as="a"
-      href={href}
-      target="_blank"
-      rel="noreferrer"
       delay={index > 0 ? 'd1' : undefined}
-      className="group block rounded-[18px] border border-rule bg-card p-[36px_32px] transition-[transform,background-color,border-color] duration-[250ms] hover:translate-y-[-3px] hover:border-dark hover:bg-dark"
+      className="group flex flex-col rounded-[18px] border border-rule bg-card p-[36px_32px] transition-[transform,background-color,border-color] duration-[250ms] hover:translate-y-[-3px] hover:border-dark hover:bg-dark"
     >
       <p className="mb-4 text-[10px] font-semibold uppercase tracking-[2px] text-muted transition-colors duration-[250ms] group-hover:text-white/50">
         {label}
@@ -28,9 +24,18 @@ export function CredentialCard({ label, icon, name, sub, body, href, index }) {
       <p className="mb-3 text-[12px] tracking-[.3px] text-muted transition-colors duration-[250ms] group-hover:text-white/50">
         {sub}
       </p>
-      <p className="text-[13px] leading-[1.65] text-body transition-colors duration-[250ms] group-hover:text-white/70">
+      <p className="mb-6 text-[13px] leading-[1.65] text-body transition-colors duration-[250ms] group-hover:text-white/70">
         {body}
       </p>
+
+      <a
+        href={href}
+        target="_blank"
+        rel="noreferrer"
+        className="mt-auto inline-flex w-fit items-center gap-[6px] rounded-full border-[1.5px] border-ink px-[20px] py-[9px] text-[12px] font-bold uppercase tracking-[.8px] text-ink transition-colors duration-[250ms] hover:bg-ink hover:text-white group-hover:border-white group-hover:text-white group-hover:hover:bg-white group-hover:hover:text-ink"
+      >
+        View ↗
+      </a>
     </Reveal>
   )
 }
