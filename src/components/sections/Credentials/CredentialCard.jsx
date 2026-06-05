@@ -1,4 +1,4 @@
-import React from 'react'
+import { memo } from 'react'
 import { Reveal } from '../../layout'
 import { Icon } from '../../icons/Icon'
 
@@ -6,7 +6,7 @@ import { Icon } from '../../icons/Icon'
  * A single credential card (certification or education). Inverts to dark on
  * hover and carries a dedicated "View" button that links to the source.
  */
-export function CredentialCard({ label, icon, name, sub, body, href, index }) {
+export const CredentialCard = memo(function CredentialCard({ label, icon, name, sub, body, href, index }) {
   return (
     <Reveal
       delay={index > 0 ? 'd1' : undefined}
@@ -39,3 +39,4 @@ export function CredentialCard({ label, icon, name, sub, body, href, index }) {
     </Reveal>
   )
 }
+)

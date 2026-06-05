@@ -1,4 +1,3 @@
-import React from 'react'
 import { Navbar } from './components/Navbar'
 import { Cursor } from './components/Cursor'
 import { Divider } from './components/layout'

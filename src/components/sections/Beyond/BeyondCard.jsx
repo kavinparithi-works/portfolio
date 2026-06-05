@@ -1,4 +1,4 @@
-import React from 'react'
+import { memo } from 'react'
 import { Reveal } from '../../layout'
 import { Icon } from '../../icons/Icon'
 
@@ -6,7 +6,7 @@ import { Icon } from '../../icons/Icon'
  * A single "Beyond the Data" interest card. Inverts to dark on hover, matching
  * the Work / Contributions cards. The icon is black and turns orange on hover.
  */
-export function BeyondCard({ icon, title, body, index }) {
+export const BeyondCard = memo(function BeyondCard({ icon, title, body, index }) {
   return (
     <Reveal
       delay={index}
@@ -24,3 +24,4 @@ export function BeyondCard({ icon, title, body, index }) {
     </Reveal>
   )
 }
+)

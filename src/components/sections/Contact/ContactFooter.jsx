@@ -1,4 +1,3 @@
-import React from 'react'
 import { Reveal } from '../../layout'
 import { useRotatingWord } from '../../../hooks/useRotatingWord'
 

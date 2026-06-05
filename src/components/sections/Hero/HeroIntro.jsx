@@ -1,4 +1,4 @@
-import React from 'react'
+import { Fragment } from 'react'
 import { Reveal } from '../../layout'
 import { site, heroCopy } from '../../../data/site'
 import { TaglineFlourish } from './TaglineFlourish'
@@ -29,11 +29,11 @@ export function HeroIntro() {
         {heroCopy.stacks.map((stack, i) => {
           const isLast = i === heroCopy.stacks.length - 1
           return (
-            <React.Fragment key={stack}>
+            <Fragment key={stack}>
               {isLast && '& '}
               <span className="font-bold text-orange">{stack}</span>
               {!isLast && ', '}
-            </React.Fragment>
+            </Fragment>
           )
         })}
         . {heroCopy.focus}

@@ -1,4 +1,3 @@
-import React from 'react'
 import { Container, Section, Reveal } from '../../layout'
 import { contributions } from '../../../data/contributions'
 import { ContributionCard } from './ContributionCard'

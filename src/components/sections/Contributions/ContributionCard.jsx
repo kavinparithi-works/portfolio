@@ -1,4 +1,4 @@
-import React from 'react'
+import { memo } from 'react'
 import { cn } from '../../../lib/cn'
 import { Reveal } from '../../layout'
 
@@ -6,7 +6,7 @@ import { Reveal } from '../../layout'
  * One "Way I Contribute" card. The `first` variant is the dark feature card;
  * `other` is the light bordered card. Inverts on hover.
  */
-export function ContributionCard({ num, title, body, tag, variant, index }) {
+export const ContributionCard = memo(function ContributionCard({ num, title, body, tag, variant, index }) {
   const isFirst = variant === 'first'
 
   return (
@@ -58,3 +58,4 @@ export function ContributionCard({ num, title, body, tag, variant, index }) {
     </Reveal>
   )
 }
+)

@@ -1,4 +1,3 @@
-import React from 'react'
 import { Reveal } from '../../layout'
 import { Icon } from '../../icons/Icon'
 import { site, contactCopy } from '../../../data/site'

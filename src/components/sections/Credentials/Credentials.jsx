@@ -1,4 +1,3 @@
-import React from 'react'
 import { Container, Section, Reveal } from '../../layout'
 import { credentials } from '../../../data/credentials'
 import { CredentialCard } from './CredentialCard'

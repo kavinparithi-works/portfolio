@@ -1,4 +1,3 @@
-import React from 'react'
 import { Container, Section } from '../../layout'
 import { HeroHeadline } from './HeroHeadline'
 import { HeroPhoto } from './HeroPhoto'

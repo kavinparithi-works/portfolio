@@ -1,4 +1,3 @@
-import React from 'react'
 import { Container, Section, Reveal } from '../../layout'
 import { projects } from '../../../data/projects'
 import { ProjectItem } from './ProjectItem'

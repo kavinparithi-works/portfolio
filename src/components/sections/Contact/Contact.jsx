@@ -1,4 +1,3 @@
-import React from 'react'
 import { Section, Reveal } from '../../layout'
 import { ContactInfo } from './ContactInfo'
 import { ContactFooter } from './ContactFooter'

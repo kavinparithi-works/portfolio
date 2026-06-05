@@ -1,4 +1,3 @@
-import React from 'react'
 
 /**
  * The "I Design, Develop & Debug." tagline with playful hover surprises:

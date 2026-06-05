@@ -1,4 +1,3 @@
-import React from 'react'
 import { Container, Section, Reveal } from '../../layout'
 import { beyond } from '../../../data/beyond'
 import { BeyondCard } from './BeyondCard'

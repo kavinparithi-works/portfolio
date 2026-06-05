@@ -1,4 +1,4 @@
-import React from 'react'
+import { memo } from 'react'
 import { Reveal } from '../../layout'
 import { Icon } from '../../icons/Icon'
 
@@ -6,7 +6,7 @@ import { Icon } from '../../icons/Icon'
  * A single "Selected Works" card: sector + icon header, title, description,
  * tech tags, and status. Inverts to dark on hover.
  */
-export function ProjectItem({ sector, title, desc, tags, icon, status, index }) {
+export const ProjectItem = memo(function ProjectItem({ sector, title, desc, tags, icon, status, index }) {
   return (
     <Reveal
       delay={index}
@@ -46,3 +46,4 @@ export function ProjectItem({ sector, title, desc, tags, icon, status, index }) 
     </Reveal>
   )
 }
+)

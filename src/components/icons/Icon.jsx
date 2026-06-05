@@ -1,4 +1,3 @@
-import React from 'react'
 
 /**
  * Inline line-icons that take their colour from `currentColor`, so they can be
