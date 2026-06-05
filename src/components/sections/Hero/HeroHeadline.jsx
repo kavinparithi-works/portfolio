@@ -17,11 +17,11 @@ export function HeroHeadline() {
     <Reveal className="relative mb-10">
       <h3 data-cursor="magnify" className="hero-hl font-barlow font-black uppercase text-ink">
         <div>
-          I BUILD <span className="italic text-orange">PIPELINES.</span>
+          I BUILD <span className="text-orange">PIPELINES.</span>
         </div>
         <div>I'M MORE INTERESTED</div>
         <div>
-          IN THE <span className="italic text-orange">{word}</span>
+          IN THE <span className="text-orange">{word}</span>
         </div>
       </h3>
     </Reveal>

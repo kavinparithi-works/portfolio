@@ -26,7 +26,7 @@ export function Contact() {
           className="mb-[72px] font-barlow text-contact font-black uppercase text-white"
         >
           NOW. BRING ME<br />THE HARD
-          <span className="block italic text-orange"> {word}</span>
+          <span className="block text-orange"> {word}</span>
         </Reveal>
 
         <ContactInfo />
