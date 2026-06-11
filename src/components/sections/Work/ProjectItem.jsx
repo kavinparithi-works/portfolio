@@ -40,8 +40,19 @@ export const ProjectItem = memo(function ProjectItem({ sector, title, desc, tags
         ))}
       </div>
 
-      <span className="text-[10px] font-semibold uppercase tracking-[1.2px] text-muted transition-colors duration-[250ms] group-hover:text-white/50">
-        {status}
+      <span className="text-[10px] font-bold uppercase tracking-[1.2px] transition-colors duration-[250ms]">
+        {Array.isArray(status) ? (
+          status.map((part, i) => (
+            <span key={i}>
+              {i > 0 && <span className="text-muted group-hover:text-white/50">  ·  </span>}
+              <span className={part.color === 'orange' ? 'text-orange' : 'text-muted group-hover:text-white/50'}>
+                {part.text}
+              </span>
+            </span>
+          ))
+        ) : (
+          <span className="text-muted group-hover:text-white/50">{status}</span>
+        )}
       </span>
     </Reveal>
   )
