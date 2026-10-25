@@ -106,7 +106,7 @@ export function HeroPhoto({ className = '', style }) {
         href={credential.href}
         target="_blank"
         rel="noreferrer"
-        className="group absolute -right-3 bottom-3 flex h-[88px] w-[88px] items-center justify-center rounded-full bg-bg text-orange-deep shadow-[0_6px_20px_-8px_rgba(0,0,0,.35)] ring-1 ring-rule transition-transform duration-300 hover:scale-105 md:-right-6 md:bottom-6 md:h-[104px] md:w-[104px]"
+        className="group absolute right-3 bottom-3 flex h-[88px] w-[88px] items-center justify-center rounded-full bg-bg text-orange-deep shadow-[0_6px_20px_-8px_rgba(0,0,0,.35)] ring-1 ring-rule transition-transform duration-300 hover:scale-105 md:-right-6 md:bottom-6 md:h-[104px] md:w-[104px]"
       >
         <svg viewBox="0 0 100 100" className="absolute inset-0 h-full w-full motion-ok:animate-[spin_22s_linear_infinite]" aria-hidden="true">
           <defs>
