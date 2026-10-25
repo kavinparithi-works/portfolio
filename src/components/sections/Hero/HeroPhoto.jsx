@@ -97,6 +97,10 @@ export function HeroPhoto({ className = '', style }) {
           className="pointer-events-none absolute inset-0 h-full w-full object-contain object-center"
         />
       </button>
+      <p className="mt-2 text-center text-[11px] leading-relaxed text-muted">
+        <span className="hidden fine:inline">Hover on me</span>
+        <span className="fine:hidden">Tap me</span>
+      </p>
     </div>
   )
 }
