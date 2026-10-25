@@ -28,9 +28,9 @@ export function Contact() {
   return (
     <Section
       id="contact"
-      className="flex min-h-[calc(100svh+0.25rem)] scroll-mt-7 flex-col border-t-2 border-teal/50 bg-dark pt-16 text-white md:min-h-[calc(100svh+2.25rem)] md:-scroll-mt-9 md:pt-32"
+      className="flex scroll-mt-7 flex-col border-t-2 border-teal/50 bg-dark pt-16 text-white md:min-h-[calc(100svh+2.25rem)] md:-scroll-mt-9 md:pt-32"
     >
-      <Container className="flex-1">
+      <Container className="pb-10 md:flex-1 md:pb-0">
         <Reveal as="p" className="eyebrow mb-6 flex items-center gap-3 text-white/55">
           <span aria-hidden="true" className="inline-block h-px w-6 bg-current opacity-70" />
           Say hello

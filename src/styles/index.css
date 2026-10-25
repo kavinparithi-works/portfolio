@@ -206,16 +206,16 @@
 
 /* A small download cue, without moving the button or its click target. */
 @keyframes downloadCue {
-  0%, 18%, 35%, 100% {
+  0%, 33.333333%, 100% {
     transform: translateY(0);
   }
-  12%, 26% {
+  16.666667% {
     transform: translateY(3px);
   }
 }
 @media (prefers-reduced-motion: no-preference) {
   .download-cue {
-    animation: downloadCue 2.4s ease-in-out infinite;
+    animation: downloadCue 3s ease-in-out infinite;
   }
 }
 

@@ -103,7 +103,12 @@ const paths = {
       <path d="m2 7 10 6 10-6" />
     </>
   ),
-  download: <path d="M12 4v12M6 11l6 6 6-6M5 20h14" />,
+  download: (
+    <>
+      <path d="M10 3h4v9h5l-7 7-7-7h5V3Z" fill="currentColor" stroke="none" />
+      <path d="M5 19v3h14v-3" />
+    </>
+  ),
   arrowUpRight: <path d="M7 17 17 7M8 7h9v9" />,
   arrowDownRight: <path d="M7 7l10 10M17 8v9H8" />,
   arrowDown: <path d="M12 5v14M6 13l6 6 6-6" />,
