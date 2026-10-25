@@ -10,7 +10,8 @@ const base = import.meta.env.BASE_URL
 const srcSet = (name) => `${base}assets/images/${name}-320.webp 320w, ${base}assets/images/${name}-480.webp 480w, ${base}assets/images/${name}-640.webp 640w`
 
 /**
- * Portrait pill with the illustrated version hiding underneath.
+ * Full portrait in a rounded rectangle on phones and a pill on wider screens,
+ * with the illustrated version hiding underneath.
  *  - Mouse: the illustration shows through a lens that follows the pointer;
  *    a click reveals it fully, another click goes back.
  *  - Touch: tapping toggles between photo and illustration from the tap point.
@@ -73,31 +74,31 @@ export function HeroPhoto({ className = '', style }) {
         aria-pressed={revealed}
         aria-label={revealed ? 'Show the photo' : 'Show the illustrated version'}
         style={{ isolation: 'isolate' }}
-        className="relative block aspect-square w-full overflow-hidden rounded-[22px] border border-ink bg-bg-deep focus-visible:outline-offset-4 md:aspect-[4/5] md:rounded-[999px]"
+        className="relative block aspect-[4/5] w-full overflow-hidden rounded-[22px] border border-ink bg-bg-deep focus-visible:outline-offset-4 md:rounded-[999px]"
       >
         <img
           src={`${base}assets/images/kavin-480.webp`}
           srcSet={srcSet('kavin')}
-          sizes="(max-width: 767px) 240px, 260px"
+          sizes="(max-width: 1023px) 240px, (max-width: 1279px) 220px, 260px"
           alt={`${site.name}, smiling, in a black shirt and jacket`}
           width="480"
           height="600"
           fetchPriority="high"
           decoding="async"
-          className="h-full w-full object-cover object-[50%_22%] md:object-center"
+          className="h-full w-full object-contain object-center md:object-cover"
         />
         <img
           ref={cartoonRef}
           src={`${base}assets/images/kavin-cartoon-480.webp`}
           srcSet={srcSet('kavin-cartoon')}
-          sizes="(max-width: 767px) 240px, 260px"
+          sizes="(max-width: 1023px) 240px, (max-width: 1279px) 220px, 260px"
           alt=""
           width="480"
           height="600"
           loading="lazy"
           decoding="async"
           style={{ clipPath: 'circle(0px at 50% 50%)' }}
-          className="pointer-events-none absolute inset-0 h-full w-full object-cover object-[50%_22%] md:object-center"
+          className="pointer-events-none absolute inset-0 h-full w-full object-contain object-center md:object-cover"
         />
       </button>
 

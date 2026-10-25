@@ -1,6 +1,7 @@
-import { skillGroups, workingStyle } from '../../../data/skills'
+import { skillGroups } from '../../../data/skills'
 import { Container, Section, SectionHeading, Reveal } from '../../layout'
 import { Chip } from '../../ui/Chip'
+import { WorkingStyle } from './WorkingStyle'
 
 /**
  * "The toolbox." One drawer card per skill group, each with a small pull
@@ -73,22 +74,7 @@ export function Skills() {
           ))}
         </ul>
 
-        <Reveal className="mt-6 grid gap-8 rounded-card bg-dark p-8 text-white md:grid-cols-[220px_1fr] md:p-10">
-          <div>
-            <p className="eyebrow text-white/50">Working style</p>
-            <h3 className="display mt-3 text-[clamp(1.6rem,2.4vw,2rem)] leading-[1.02]">
-              How I<br />work<span className="text-orange-light">.</span>
-            </h3>
-          </div>
-          <ol role="list" className="grid gap-x-10 gap-y-5 sm:grid-cols-2">
-            {workingStyle.map((line, i) => (
-              <li key={line} className="flex gap-4 text-[14.5px] leading-[1.65] text-white/75">
-                <span className="font-display text-[18px] leading-[1.3] font-black text-orange-light">0{i + 1}</span>
-                {line}
-              </li>
-            ))}
-          </ol>
-        </Reveal>
+        <WorkingStyle className="mt-6" />
       </Container>
     </Section>
   )

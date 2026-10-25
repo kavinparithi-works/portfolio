@@ -39,13 +39,18 @@ The resume lives at `public/resume.pdf`. Portrait sources are in `assets-src/`;
 
 ## Toolbox section
 
-The skills "toolbox" band (`src/components/sections/Skills/Skills.jsx`,
-data in `src/data/skills.js`) is built but switched off for now. To show it
-again:
+The skills "toolbox" drawers (`src/components/sections/Skills/Skills.jsx`,
+data in `src/data/skills.js`) are built but switched off for now. Only the
+black "How I work" card is shown, after Experience. Its shared component is
+`src/components/sections/Skills/WorkingStyle.jsx`.
 
-1. In `src/App.jsx`, import `Skills` from `./components/sections` and replace
-   the `{/* <Skills /> */}` placeholder (and the `<Divider />` right after it)
-   with `<Skills />`.
+To show the full toolbox again:
+
+1. In `src/App.jsx`, import `Skills` from `./components/sections`. Replace the
+   standalone `<Container>` holding `<WorkingStyle />`, the commented
+   `{/* <Skills /> */}` placeholder and the `<Divider />` immediately after it
+   with `<Skills />`. Remove the now-unused `Container` and `WorkingStyle`
+   imports. The full toolbox already includes the working-style card.
 2. In `src/data/nav.js`, uncomment the `{ id: 'skills', label: 'Skills' }` entry
    so it appears in the navigation.
 

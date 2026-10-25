@@ -1,7 +1,7 @@
 import { Nav } from './components/Nav/Nav'
 import { Cursor } from './components/Cursor/Cursor'
-import { Divider } from './components/layout'
-import { Hero, Principles, Work, Experience, Beyond, Contact } from './components/sections'
+import { Container, Divider } from './components/layout'
+import { Hero, Principles, Work, Experience, WorkingStyle, Beyond, Contact } from './components/sections'
 // import { Skills } from './components/sections' // toolbox: parked, see README "Toolbox section"
 
 /**
@@ -21,6 +21,9 @@ export default function App() {
         <Work />
         <Divider />
         <Experience />
+        <Container className="pb-14 md:pb-28">
+          <WorkingStyle />
+        </Container>
         {/* <Skills /> */}
         <Divider />
         <Beyond />

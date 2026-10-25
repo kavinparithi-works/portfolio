@@ -2,49 +2,43 @@ import { site } from '../../../data/site'
 import { useLocalTime } from '../../../hooks/useLocalTime'
 import { Icon } from '../../icons/Icon'
 
-function Row({ icon, label, children, last = false, className = '' }) {
+function Row({ icon, label, children, className = '' }) {
   return (
-    <div className={`relative grid grid-cols-[16px_1fr] gap-x-4 py-4 ${last ? '' : 'border-b border-rule'} ${className}`}>
-      <dt className="contents">
-        <span className="mt-0.5 text-orange-deep">
-          <Icon name={icon} size={16} strokeWidth={1.8} />
-        </span>
-        <span className="eyebrow text-[0.66rem]">{label}</span>
+    <div className={`relative min-w-0 md:py-4 ${className}`}>
+      <dt className="flex items-center gap-2">
+        <span className="text-orange-deep"><Icon name={icon} size={13} strokeWidth={1.8} /></span>
+        <span className="eyebrow text-[9.5px]">{label}</span>
       </dt>
-      <dd className="col-start-2 mt-1 text-[14.5px] leading-snug text-ink">{children}</dd>
+      <dd className="mt-2 text-[13px] leading-[1.5] text-ink">{children}</dd>
     </div>
   )
 }
 
 /**
- * A small spec-sheet card: where, what, open to, and the live local time so
- * a visitor abroad knows when to expect a reply.
+ * Personal details inside the profile card. Phones get a compact two-column
+ * layout; the local clock stays on wider screens.
  */
 export function HeroMeta() {
   const time = useLocalTime(site.timeZone)
   return (
     <dl
-      className="card fade-up relative w-full max-w-[380px] overflow-hidden px-6 py-2 md:col-start-2 md:grid md:max-w-none md:grid-cols-2 md:gap-x-10 lg:col-start-auto lg:block lg:max-w-[380px]"
-      style={{ '--d': '640ms' }}
+      className="relative grid grid-cols-2 gap-x-5 gap-y-5 border-t border-rule bg-bg/55 p-6 md:block md:border-t-0 md:border-l md:px-6 md:py-3"
     >
-      <div aria-hidden="true" className="dotgrid pointer-events-none absolute top-0 right-0 h-40 w-40 opacity-80 [mask-image:radial-gradient(circle_at_top_right,#000,transparent_70%)]" />
-      <Row icon="pin" label="Based in">
-        {site.location}
+      <Row icon="pin" label="Based in" className="md:border-b md:border-rule">
+        <span className="md:hidden">{site.locationShort}</span>
+        <span className="hidden md:inline">{site.location}</span>
       </Row>
-      <Row icon="briefcase" label="Currently">
+      <Row icon="briefcase" label="Currently" className="md:border-b md:border-rule">
         {site.role} at {site.employer}
       </Row>
-      <Row icon="spark" label="Open to" className="max-md:border-b-0">
+      <Row icon="spark" label="Open to" className="col-span-2 border-t border-rule pt-4 md:border-t-0 md:border-b">
         <span className="flex items-start gap-2">
-          <span className="relative mt-[7px] flex h-2 w-2 shrink-0">
-            <span className="absolute inline-flex h-full w-full rounded-full bg-teal opacity-75 motion-ok:animate-ping" />
-            <span className="relative inline-flex h-2 w-2 rounded-full bg-teal" />
-          </span>
+          <span aria-hidden="true" className="mt-1.5 h-2 w-2 shrink-0 rounded-full bg-teal ring-[3px] ring-teal/15" />
           {site.availability}
         </span>
       </Row>
-      <Row icon="clock" label="Local time" last className="max-md:hidden">
-        <span className="font-mono text-[15px] tabular-nums">{time ?? '--:--'}</span> <span className="text-muted">IST · Chennai</span>
+      <Row icon="clock" label="Local time" className="max-md:hidden">
+        <span className="font-mono text-[14px] tabular-nums">{time ?? '--:--'}</span> <span className="text-muted">IST · Chennai</span>
       </Row>
     </dl>
   )

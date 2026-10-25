@@ -1,13 +1,11 @@
 import { Container, Section } from '../../layout'
 import { HeroHeadline } from './HeroHeadline'
 import { HeroPhoto } from './HeroPhoto'
-import { HeroIntro } from './HeroIntro'
-import { HeroMeta } from './HeroMeta'
+import { HeroProfile } from './HeroProfile'
 import { HeroActions } from './HeroActions'
 
 /**
- * Landing band: the oversized headline, a three-column row (portrait, intro,
- * spec sheet) and the calls to action.
+ * Landing band: the headline, portrait, combined profile card and actions.
  */
 export function Hero() {
   return (
@@ -19,16 +17,14 @@ export function Hero() {
       <Container className="relative">
         <HeroHeadline />
 
-        <div className="mt-10 grid grid-cols-1 items-start gap-x-10 gap-y-8 md:mt-16 md:grid-cols-[200px_1fr] lg:grid-cols-[260px_minmax(0,1fr)_minmax(280px,340px)] lg:gap-x-14">
-          <HeroPhoto className="fade-up mx-auto w-[240px] md:mx-0 md:w-full" style={{ '--d': '420ms' }} />
-          <HeroIntro />
-          <HeroMeta />
+        <div className="mt-10 grid grid-cols-1 items-center gap-y-8 md:mt-16 lg:grid-cols-[220px_minmax(0,1fr)] lg:gap-x-8 xl:grid-cols-[260px_minmax(0,1fr)] xl:gap-x-10">
+          <HeroPhoto className="fade-up mx-auto w-[240px] lg:mx-0 lg:w-full" style={{ '--d': '420ms' }} />
+          <HeroProfile />
         </div>
 
-        <div className="mt-8 md:mt-12">
+        <div className="hidden md:mt-12 md:block">
           <HeroActions />
         </div>
-
       </Container>
     </Section>
   )

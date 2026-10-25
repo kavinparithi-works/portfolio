@@ -11,8 +11,8 @@ const SECTION_IDS = navLinks.map((l) => l.id)
 
 /**
  * Fixed top bar. The "K" monogram doubles as a reading-progress ring and a
- * back-to-top control; section links underline as their section scrolls into
- * the reading line. Below `lg` the links collapse into a full-screen menu.
+ * back-to-top control; the active section link uses bold text. Phones keep
+ * Resume, Email and GitHub within reach. Below `lg` sections use a menu.
  */
 export function Nav() {
   const logoRef = useRef(null)
@@ -60,8 +60,8 @@ export function Nav() {
           menuOpen && 'border-transparent bg-transparent backdrop-blur-none'
         )}
       >
-        <nav aria-label="Primary" className="site flex h-16 items-center justify-between gap-4">
-          <div className={cn('flex min-w-0 items-center gap-3 transition-colors duration-300', menuOpen ? 'text-white' : 'text-ink')}>
+        <nav aria-label="Primary" className="site flex h-16 items-center justify-between gap-2 md:gap-4">
+          <div className={cn('flex min-w-0 items-center gap-2 transition-colors duration-300 md:gap-3', menuOpen ? 'text-white' : 'text-ink')}>
             <button
               ref={logoRef}
               type="button"
@@ -77,15 +77,17 @@ export function Nav() {
             </button>
             <a
               href="#top"
+              aria-label={`${site.name}, home`}
               data-cursor="ignore"
-              className="truncate font-display text-[17px] font-extrabold tracking-[0.03em] uppercase"
+              className="hidden truncate font-display text-[17px] font-extrabold tracking-[0.03em] uppercase min-[360px]:block"
               onClick={(e) => {
                 e.preventDefault()
                 toTop()
               }}
             >
               <span className="hidden sm:inline">{site.name}</span>
-              <span className="sm:hidden">{site.shortName}</span>
+              <span className="hidden min-[421px]:inline sm:hidden">{site.shortName}</span>
+              <span className="hidden min-[360px]:inline min-[421px]:hidden">{site.firstName}</span>
             </a>
           </div>
 
@@ -106,27 +108,41 @@ export function Nav() {
             ))}
           </ul>
 
-          <div className="flex items-center gap-2">
+          <div className="flex shrink-0 items-center gap-1.5 md:gap-2">
             <a
               href={`${import.meta.env.BASE_URL}resume.pdf`}
               download="Kavin-Parithi-Sivasamy-Resume.pdf"
+              aria-label="Download resume"
               className={cn(
-                'hidden items-center gap-2 rounded-full bg-orange px-4 py-2 text-[13px] font-semibold text-white shadow-[0_0_16px_rgba(200,72,42,.4)] transition-[background-color,transform,box-shadow] duration-300 hover:-translate-y-px hover:bg-ink md:inline-flex',
+                'inline-flex h-11 w-11 items-center justify-center gap-2 rounded-full bg-orange text-[13px] font-semibold text-white shadow-[0_0_16px_rgba(200,72,42,.4)] transition-[background-color,transform,box-shadow] duration-300 hover:-translate-y-px hover:bg-ink md:h-auto md:w-auto md:px-4 md:py-2',
                 menuOpen && 'invisible'
               )}
             >
-              Resume
-              <Icon name="download" size={14} strokeWidth={2.2} />
+              <span className="hidden md:inline">Resume</span>
+              <Icon name="download" size={16} strokeWidth={2.2} />
             </a>
             <a
               href={`mailto:${site.email}`}
+              aria-label="Email"
               className={cn(
-                'hidden items-center gap-2 rounded-full bg-dark px-4 py-2 text-[13px] font-semibold text-white transition-[background-color,transform] duration-300 hover:-translate-y-px hover:bg-[#2b2b2b] md:inline-flex',
+                'inline-flex h-11 w-11 items-center justify-center gap-2 rounded-full bg-dark text-[13px] font-semibold text-white transition-[background-color,transform] duration-300 hover:-translate-y-px hover:bg-[#2b2b2b] md:h-auto md:w-auto md:px-4 md:py-2',
                 menuOpen && 'invisible'
               )}
             >
-              <Icon name="mail" size={14} strokeWidth={2} />
-              Email
+              <Icon name="mail" size={16} strokeWidth={2} />
+              <span className="hidden md:inline">Email</span>
+            </a>
+            <a
+              href={site.github}
+              target="_blank"
+              rel="noreferrer"
+              aria-label="GitHub"
+              className={cn(
+                'flex h-11 w-11 items-center justify-center rounded-full bg-dark text-white transition-colors duration-200 hover:bg-[#2b2b2b] md:hidden',
+                menuOpen && 'invisible'
+              )}
+            >
+              <Icon name="github" size={18} />
             </a>
             <button
               type="button"
@@ -135,7 +151,7 @@ export function Nav() {
               aria-controls="mobile-menu"
               aria-label={menuOpen ? 'Close menu' : 'Open menu'}
               className={cn(
-                'relative flex h-10 w-10 items-center justify-center rounded-full transition-colors duration-300 lg:hidden',
+                'relative flex h-11 w-11 items-center justify-center rounded-full transition-colors duration-300 md:h-10 md:w-10 lg:hidden',
                 menuOpen ? 'bg-white text-ink' : 'bg-ink text-white'
               )}
             >
