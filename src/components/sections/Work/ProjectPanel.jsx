@@ -40,7 +40,7 @@ export function ProjectPanel({ project, onSelect, id, labelledBy }) {
       tabIndex={0}
       className="panel-enter card scroll-mt-24 overflow-hidden focus-visible:outline-offset-4"
     >
-      <div className="grid gap-5 p-5 md:grid-cols-[minmax(0,1fr)_240px] md:items-center md:gap-8 md:p-7">
+      <div className="grid gap-5 p-5 md:grid-cols-[minmax(0,1fr)_300px] md:items-center md:gap-8 md:p-7">
         <div className="min-w-0">
           <p className="eyebrow text-orange-deep">
             {project.index} · {project.sector}
@@ -51,10 +51,10 @@ export function ProjectPanel({ project, onSelect, id, labelledBy }) {
           <p className="mt-3 max-w-[68ch] text-[14px] leading-[1.65] text-body md:text-[15px]">{project.summaryShort}</p>
         </div>
 
-        <ul role="list" aria-label="Key results" className="grid grid-cols-2 gap-5 border-t border-rule pt-5 md:border-t-0 md:border-l md:py-2 md:pl-6">
+        <ul role="list" aria-label="Key results" className="grid grid-cols-2 gap-5 border-t border-rule pt-5 md:gap-x-6 md:border-t-0 md:border-l md:py-2 md:pl-6">
           {project.outcomes.slice(0, 2).map((outcome) => (
             <li key={outcome.label}>
-              <p className="font-display text-[30px] leading-none font-black text-ink tabular-nums md:text-[36px]">{outcome.value}</p>
+              <p className="font-display text-[30px] leading-none font-black whitespace-nowrap text-ink tabular-nums md:text-[36px]">{outcome.value}</p>
               <p className="mt-2 text-[12.5px] leading-snug text-muted">{outcome.label}</p>
             </li>
           ))}
