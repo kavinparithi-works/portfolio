@@ -11,8 +11,8 @@ const SECTION_IDS = navLinks.map((l) => l.id)
 
 /**
  * Fixed top bar. The "K" monogram doubles as a reading-progress ring and a
- * back-to-top control; the active section link uses bold text. Phones keep
- * Resume, Email and GitHub within reach. Below `lg` sections use a menu.
+ * back-to-top control; the active section link uses bold text. Resume, Email
+ * and LinkedIn stay within reach. Below `lg` sections use a menu.
  */
 export function Nav() {
   const logoRef = useRef(null)
@@ -133,16 +133,17 @@ export function Nav() {
               <span className="hidden md:inline">Email</span>
             </a>
             <a
-              href={site.github}
+              href={site.linkedin}
               target="_blank"
               rel="noreferrer"
-              aria-label="GitHub"
+              aria-label="LinkedIn"
               className={cn(
-                'flex h-11 w-11 items-center justify-center rounded-full bg-dark text-white transition-colors duration-200 hover:bg-[#2b2b2b] md:hidden',
+                'inline-flex h-11 w-11 items-center justify-center gap-2 rounded-full bg-dark text-[13px] font-semibold text-white transition-colors duration-200 hover:bg-[#2b2b2b] md:h-auto md:w-auto md:px-4 md:py-2',
                 menuOpen && 'invisible'
               )}
             >
-              <Icon name="github" size={18} />
+              <Icon name="linkedin" size={16} />
+              <span className="hidden md:inline">LinkedIn</span>
             </a>
             <button
               type="button"
