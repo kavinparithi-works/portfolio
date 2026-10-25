@@ -3,6 +3,7 @@ import { cn } from '../../lib/cn'
 import { site } from '../../data/site'
 import { navLinks } from '../../data/nav'
 import { Icon } from '../icons/Icon'
+import { ResumeIcon } from '../ui/ResumeIcon'
 
 /**
  * Full-screen navigation for small screens. Locks page scroll while open,
@@ -69,7 +70,7 @@ export function MobileMenu({ open, onClose, active }) {
             download="Kavin-Parithi-Sivasamy-Resume.pdf"
             className="inline-flex items-center gap-2 rounded-full bg-orange px-5 py-3 text-[14px] font-semibold text-white"
           >
-            Resume <Icon name="download" size={15} strokeWidth={2.2} className="download-cue" />
+            Resume <ResumeIcon size={15} />
           </a>
           <a
             href={`mailto:${site.email}`}

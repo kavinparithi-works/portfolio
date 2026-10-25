@@ -48,7 +48,11 @@ export function Contact() {
         <Reveal delay={160} className="mt-10 flex flex-wrap items-center justify-between gap-x-10 gap-y-6 md:mt-20">
           <div className="flex min-w-0 flex-wrap items-center gap-x-5 gap-y-4">
             <span className="min-w-0 font-display text-[clamp(1.5rem,3.6vw,2.75rem)] leading-none font-extrabold break-all text-white select-all">
-              {site.email}
+              {site.email.split(/(and|work)/).map((part, i) => (
+                part === 'and' || part === 'work'
+                  ? <span key={i} className="text-orange">{part}</span>
+                  : part
+              ))}
             </span>
             <a
               href={`mailto:${site.email}`}

@@ -5,6 +5,7 @@ import { navLinks } from '../../data/nav'
 import { useActiveSection } from '../../hooks/useActiveSection'
 import { useScrollProgress } from '../../hooks/useScrollProgress'
 import { Icon } from '../icons/Icon'
+import { ResumeIcon } from '../ui/ResumeIcon'
 import { MobileMenu } from './MobileMenu'
 
 const SECTION_IDS = navLinks.map((l) => l.id)
@@ -119,7 +120,7 @@ export function Nav() {
               )}
             >
               <span className="hidden md:inline">Resume</span>
-              <Icon name="download" size={16} strokeWidth={2.2} className="download-cue" />
+              <ResumeIcon />
             </a>
             <a
               href={`mailto:${site.email}`}
@@ -142,7 +143,8 @@ export function Nav() {
                 menuOpen && 'invisible'
               )}
             >
-              <Icon name="linkedin" size={16} />
+              <Icon name="linkedinSolid" size={18} className="md:hidden" />
+              <Icon name="linkedin" size={16} className="hidden md:block" />
               <span className="hidden md:inline">LinkedIn</span>
             </a>
             <button

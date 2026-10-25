@@ -219,6 +219,55 @@
   }
 }
 
+.resume-hand,
+.resume-hand .tap-rays {
+  opacity: 0;
+}
+@keyframes resumeHandTap {
+  0%, 49.999% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  25% {
+    opacity: 1;
+    transform: translateY(1.5px) scale(0.88);
+  }
+  50%, 100% {
+    opacity: 0;
+    transform: translateY(0) scale(1);
+  }
+}
+@keyframes resumeArrowDrop {
+  0%, 49.999% {
+    opacity: 0;
+    transform: translateY(0);
+  }
+  50%, 100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  75% {
+    opacity: 1;
+    transform: translateY(3px);
+  }
+}
+@keyframes resumeTapRays {
+  0%, 49.999%, 100% { opacity: 0; }
+  18%, 30% { opacity: 1; }
+}
+@media (prefers-reduced-motion: no-preference) and (width < 48rem) {
+  .resume-cue .resume-hand {
+    animation: resumeHandTap 2.4s ease-in-out infinite;
+    transform-origin: center 80%;
+  }
+  .resume-cue .resume-hand .tap-rays {
+    animation: resumeTapRays 2.4s ease-in-out infinite;
+  }
+  .resume-cue .download-cue {
+    animation: resumeArrowDrop 2.4s ease-in-out infinite;
+  }
+}
+
 /* ── Logo spin ────────────────────────────────────────────────────────────── */
 @keyframes logo-spin {
   from {

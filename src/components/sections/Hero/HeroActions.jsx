@@ -1,5 +1,6 @@
 import { Button } from '../../ui/Button'
 import { Icon } from '../../icons/Icon'
+import { ResumeIcon } from '../../ui/ResumeIcon'
 
 /**
  * The three calls to action plus a scroll hint on wide screens.
@@ -18,7 +19,7 @@ export function HeroActions() {
           href={`${import.meta.env.BASE_URL}resume.pdf`}
           download="Kavin-Parithi-Sivasamy-Resume.pdf"
           variant="orange"
-          icon={<Icon name="download" size={15} strokeWidth={2.4} className="download-cue" />}
+          icon={<ResumeIcon size={15} strokeWidth={2.4} />}
         >
           Resume
         </Button>

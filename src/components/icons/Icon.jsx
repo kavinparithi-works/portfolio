@@ -4,7 +4,7 @@
  */
 const ANIMATED = new Set([
   'mic', 'shield', 'flask', 'pen', 'bank', 'community', 'ticket', 'trophy', 'cap',
-  'instagram', 'linkedin', 'github',
+  'instagram', 'linkedin', 'github', 'handClick',
 ])
 
 const paths = {
@@ -93,6 +93,13 @@ const paths = {
       <path d="M7 10v7M7 7v.01M11 17v-4a2 2 0 0 1 4 0v4M11 10v7" />
     </>
   ),
+  linkedinSolid: (
+    <path
+      d="M5.2 3a2.2 2.2 0 1 0 0 4.4 2.2 2.2 0 0 0 0-4.4ZM3.4 9H7v12H3.4V9Zm6.4 0h3.5v1.6c.5-1 1.7-1.9 3.5-1.9 3.7 0 4.3 2.4 4.3 5.5V21h-3.6v-6c0-1.4 0-3.1-1.9-3.1s-2.2 1.5-2.2 3V21H9.8V9Z"
+      fill="currentColor"
+      stroke="none"
+    />
+  ),
   github: (
     <path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6 0 0 0-1.3-3.2 4.2 4.2 0 0 0-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3 0 0 0-6.2 0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2 0 0 0-.1 3.2A4.6 4.6 0 0 0 4 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21" />
   ),
@@ -107,6 +114,12 @@ const paths = {
     <>
       <path d="M10 3h4v9h5l-7 7-7-7h5V3Z" fill="currentColor" stroke="none" />
       <path d="M5 19v3h14v-3" />
+    </>
+  ),
+  handClick: (
+    <>
+      <path d="M9 13V6a2 2 0 0 1 4 0v5l1-.4a2 2 0 0 1 1.8.1l3.2 1.9a2 2 0 0 1 1 2l-.6 4.4a3 3 0 0 1-3 2.6H13a3 3 0 0 1-2.4-1.2L6 15a1.5 1.5 0 0 1 2.2-2L9 14Z" />
+      <path className="tap-rays" d="M4 7H2M5 3 3.5 1.5M16 3l1.5-1.5" />
     </>
   ),
   arrowUpRight: <path d="M7 17 17 7M8 7h9v9" />,
