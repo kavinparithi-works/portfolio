@@ -119,7 +119,7 @@ export function Nav() {
               )}
             >
               <span className="hidden md:inline">Resume</span>
-              <Icon name="download" size={16} strokeWidth={2.2} />
+              <Icon name="download" size={16} strokeWidth={2.2} className="download-cue" />
             </a>
             <a
               href={`mailto:${site.email}`}

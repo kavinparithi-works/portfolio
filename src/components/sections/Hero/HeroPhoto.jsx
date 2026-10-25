@@ -8,7 +8,7 @@ const base = import.meta.env.BASE_URL
 const srcSet = (name) => `${base}assets/images/${name}-320.webp 320w, ${base}assets/images/${name}-480.webp 480w, ${base}assets/images/${name}-640.webp 640w`
 
 /**
- * Full portrait with square corners and the illustrated version underneath.
+ * Full portrait with lightly rounded corners and the illustration underneath.
  *  - Mouse: the illustration shows through a lens that follows the pointer;
  *    a click reveals it fully, another click goes back.
  *  - Touch: tapping toggles between photo and illustration from the tap point.
@@ -70,7 +70,7 @@ export function HeroPhoto({ className = '', style }) {
         aria-pressed={revealed}
         aria-label={revealed ? 'Show the photo' : 'Show the illustrated version'}
         style={{ isolation: 'isolate' }}
-        className="relative block aspect-[4/5] w-full overflow-hidden rounded-none border border-ink bg-bg-deep focus-visible:outline-offset-4"
+        className="relative block aspect-[4/5] w-full overflow-hidden rounded-[10px] border border-ink bg-bg-deep focus-visible:outline-offset-4"
       >
         <img
           src={`${base}assets/images/kavin-480.webp`}

@@ -5,8 +5,8 @@
  * The client behind the chemical manufacturing work is intentionally unnamed.
  *
  * Fields:
- *   short     label for the compact tab row on small screens
- *   summaryShort  mobile overview; the full summary stays in the expanded study
+ *   short     label for the compact project tabs
+ *   summaryShort  overview on every screen; summary appears in the full study
  *   pipeline  ordered stages for the architecture diagram (adjacent stages
  *             are connected automatically)
  *   more      optional one-line extras shown under "Also in this phase"

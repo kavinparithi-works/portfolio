@@ -2,12 +2,11 @@ import { useEffect, useState } from 'react'
 import { useReducedMotion } from './useMediaQuery'
 
 /**
- * Cycles 0..count-1 on an interval and returns `{ index, previous }` so the
- * caller can animate the outgoing entry. Pauses while the tab is hidden and
- * stays on the first entry when the visitor prefers reduced motion.
+ * Cycles 0..count-1, pausing while the browser tab is hidden. Reduced motion
+ * keeps the first entry visible.
  */
-export function useRotatingIndex(count, interval = 2400) {
-  const [state, setState] = useState({ index: 0, previous: 0 })
+export function useRotatingIndex(count, interval = 1500) {
+  const [index, setIndex] = useState(0)
   const reduced = useReducedMotion()
 
   useEffect(() => {
@@ -15,7 +14,7 @@ export function useRotatingIndex(count, interval = 2400) {
     let id
     const start = () => {
       stop()
-      id = setInterval(() => setState(({ index }) => ({ index: (index + 1) % count, previous: index })), interval)
+      id = setInterval(() => setIndex((value) => (value + 1) % count), interval)
     }
     const stop = () => id && clearInterval(id)
     const onVisibility = () => (document.hidden ? stop() : start())
@@ -28,5 +27,5 @@ export function useRotatingIndex(count, interval = 2400) {
     }
   }, [count, interval, reduced])
 
-  return state
+  return reduced ? 0 : index % Math.max(1, count)
 }

@@ -18,7 +18,7 @@ export function HeroActions() {
           href={`${import.meta.env.BASE_URL}resume.pdf`}
           download="Kavin-Parithi-Sivasamy-Resume.pdf"
           variant="orange"
-          icon={<Icon name="download" size={15} strokeWidth={2.4} />}
+          icon={<Icon name="download" size={15} strokeWidth={2.4} className="download-cue" />}
         >
           Resume
         </Button>

@@ -69,7 +69,7 @@ export function MobileMenu({ open, onClose, active }) {
             download="Kavin-Parithi-Sivasamy-Resume.pdf"
             className="inline-flex items-center gap-2 rounded-full bg-orange px-5 py-3 text-[14px] font-semibold text-white"
           >
-            Resume <Icon name="download" size={15} strokeWidth={2.2} />
+            Resume <Icon name="download" size={15} strokeWidth={2.2} className="download-cue" />
           </a>
           <a
             href={`mailto:${site.email}`}

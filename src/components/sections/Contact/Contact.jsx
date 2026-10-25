@@ -35,7 +35,7 @@ export function Contact() {
           <span aria-hidden="true" className="inline-block h-px w-6 bg-current opacity-70" />
           Say hello
         </Reveal>
-        <Reveal as="h2" id="contact-title" data-cursor="magnify" delay={80} className="display text-contact text-white">
+        <h2 id="contact-title" data-cursor="magnify" className="display text-contact text-white">
           Now. Bring me
           <br />
           the hard
@@ -43,7 +43,7 @@ export function Contact() {
             <RollingWord words={contactCopy.rotating} className="text-orange" />
             <span className="sr-only">{contactCopy.rotating[0]}</span>
           </span>
-        </Reveal>
+        </h2>
 
         <Reveal delay={160} className="mt-10 flex flex-wrap items-center justify-between gap-x-10 gap-y-6 md:mt-20">
           <div className="flex min-w-0 flex-wrap items-center gap-x-5 gap-y-4">
@@ -57,7 +57,7 @@ export function Contact() {
             >
               <Icon name="arrowUpRight" size={18} strokeWidth={2.2} />
             </a>
-            <CopyButton text={site.email} />
+            <CopyButton text={site.email} className="max-md:hidden" />
           </div>
           <ul role="list" className="flex gap-2">
             {socials.map((s) => (
@@ -76,7 +76,7 @@ export function Contact() {
           </ul>
         </Reveal>
 
-        <Reveal delay={200} className="mt-10 grid grid-cols-1 gap-8 border-t border-white/10 py-10 md:mt-14 md:grid-cols-2 md:py-12 lg:grid-cols-3">
+        <Reveal delay={200} className="mt-14 hidden gap-8 border-t border-white/10 py-12 md:grid md:grid-cols-2 lg:grid-cols-3">
           <Info head="Contact me for">{contactCopy.contactFor}</Info>
           <Info head="Response time" className="max-md:hidden">{contactCopy.responseTime}</Info>
           <Info head="Where" className="max-md:hidden">

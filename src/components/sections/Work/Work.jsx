@@ -5,9 +5,8 @@ import { Container, Section, SectionHeading, Reveal } from '../../layout'
 import { ProjectPanel } from './ProjectPanel'
 
 /**
- * "Projects Shipped." Compact tabs in a two-column grid on phones, horizontal
- * pills on tablets and a vertical list on desktop. Arrow keys, Home and End
- * move between studies.
+ * "Projects Shipped." Short tabs above one compact project card. Every study
+ * starts collapsed. Arrow keys, Home and End move between studies.
  */
 export function Work() {
   const [activeId, setActiveId] = useState(projects[0].id)
@@ -44,6 +43,7 @@ export function Work() {
           id="work"
           eyebrow="From problem to production"
           title="Projects shipped"
+          className="mb-6! md:mb-8!"
           aside={
             <p className="font-mono text-[13px] text-muted">
               <span className="text-ink">{String(projects.length).padStart(2, '0')}</span> case studies · pick one
@@ -51,14 +51,14 @@ export function Work() {
           }
         />
 
-        <div className="grid grid-cols-1 gap-4 md:gap-6 lg:grid-cols-[280px_minmax(0,1fr)] lg:gap-10">
+        <div className="grid grid-cols-1 gap-4">
           <Reveal>
             <div
               role="tablist"
               aria-label="Case studies"
-              aria-orientation="vertical"
+              aria-orientation="horizontal"
               onKeyDown={onKeyDown}
-              className="grid grid-cols-2 gap-2 [scrollbar-width:none] md:-mx-[22px] md:flex md:overflow-x-auto md:px-[22px] md:pb-2 lg:sticky lg:top-24 lg:mx-0 lg:flex-col lg:gap-0 lg:overflow-visible lg:px-0 lg:pb-0 [&::-webkit-scrollbar]:hidden"
+              className="grid grid-cols-2 gap-2 md:grid-cols-4 md:gap-3"
             >
               {projects.map((p) => {
                 const selected = p.id === activeId
@@ -76,31 +76,26 @@ export function Work() {
                     tabIndex={selected ? 0 : -1}
                     onClick={() => select(p.id)}
                     className={cn(
-                      'group relative min-h-11 min-w-0 rounded-xl border px-3 py-2.5 text-left transition-colors duration-300 md:shrink-0 md:rounded-full md:px-4 lg:w-full lg:rounded-none lg:border-0 lg:border-l-2 lg:px-6 lg:py-5',
+                      'group relative min-h-11 min-w-0 rounded-[14px] border px-3 py-2.5 text-left transition-colors duration-300 md:px-4 md:py-3',
                       selected
-                        ? 'border-ink bg-ink text-white lg:bg-transparent lg:text-ink lg:border-l-orange'
-                        : 'border-rule text-body hover:border-ink hover:text-ink lg:border-l-rule lg:hover:border-l-ink'
+                        ? 'border-ink bg-ink text-white'
+                        : 'border-rule text-body hover:border-ink hover:text-ink'
                     )}
                   >
-                    <span className="flex items-baseline gap-2 md:gap-3 lg:block">
-                      <span className={cn('font-mono text-[11px] tracking-[0.1em]', selected ? 'text-orange-light lg:text-orange' : 'text-muted')}>{p.index}</span>
-                      <span className={cn('hidden font-mono text-[11px] tracking-[0.1em] uppercase lg:mt-1 lg:block', selected ? 'text-orange-deep' : 'text-muted')}>
-                        {p.sector}
-                      </span>
+                    <span className="flex items-baseline gap-2 md:gap-3">
+                      <span className={cn('font-mono text-[11px] tracking-[0.1em]', selected ? 'text-orange-light' : 'text-muted')}>{p.index}</span>
                       <span
                         className={cn(
-                          'font-display text-[15px] leading-tight font-extrabold tracking-[0.01em] uppercase md:whitespace-nowrap lg:mt-1.5 lg:block lg:text-[22px] lg:leading-[1.05] lg:whitespace-normal',
-                          selected ? 'text-white lg:text-ink' : 'text-body group-hover:text-ink'
+                          'font-display text-[15px] leading-tight font-extrabold tracking-[0.01em] uppercase md:text-[18px]',
+                          selected ? 'text-white' : 'text-body group-hover:text-ink'
                         )}
                       >
-                        <span className="lg:hidden">{p.short}</span>
-                        <span className="hidden lg:inline">{p.title}</span>
+                        {p.short}
                       </span>
                     </span>
                   </button>
                 )
               })}
-              <p className="hidden pt-5 pl-6 font-mono text-[11.5px] text-muted lg:block">Arrow keys move between studies</p>
             </div>
           </Reveal>
 

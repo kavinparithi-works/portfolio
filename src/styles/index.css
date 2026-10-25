@@ -71,7 +71,7 @@
   --breakpoint-xs: 30rem;
 
   --text-hero: clamp(2.4rem, 5.8vw, 5.25rem);
-  --text-hero--line-height: 0.94;
+  --text-hero--line-height: 1.04;
   --text-hero--letter-spacing: 0.005em;
   --text-display: clamp(2.2rem, 5vw, 4.5rem);
   --text-display--line-height: 0.92;
@@ -80,7 +80,7 @@
   --text-display-sm--line-height: 0.95;
   --text-display-sm--letter-spacing: -0.01em;
   --text-contact: clamp(2.6rem, 6.8vw, 6.25rem);
-  --text-contact--line-height: 0.9;
+  --text-contact--line-height: 1.04;
   --text-contact--letter-spacing: 0;
   --text-title: clamp(1.5rem, 2.6vw, 2.25rem);
   --text-title--line-height: 1.02;
@@ -180,23 +180,7 @@
   transform: none;
 }
 
-/* ── Hero line reveal (masked rise) ───────────────────────────────────────── */
-.mask {
-  overflow: hidden;
-  padding-bottom: 0.08em;
-  margin-bottom: -0.08em;
-}
-.mask > .mask-inner {
-  display: block;
-  transform: translateY(112%);
-  animation: rise 0.9s var(--ease-out-expo) forwards;
-  animation-delay: var(--d, 0ms);
-}
-@keyframes rise {
-  to {
-    transform: translateY(0);
-  }
-}
+/* Hero content entrance. The slogans themselves stay still. */
 .fade-up {
   opacity: 0;
   transform: translateY(14px);
@@ -213,35 +197,26 @@
 /* ── Rolling word (hero / contact) ────────────────────────────────────────── */
 .roll {
   display: inline-block;
-  position: relative;
   vertical-align: top;
   height: 1em;
   height: 1lh;
-  /* Width is set instantly on purpose: transitioning it would force a page
-     layout on every frame. The box is at the end of its line, so the snap is
-     invisible. Overflow stays visible so a word is never clipped mid-change. */
+  /* The word changes immediately; its line keeps a fixed height. */
   white-space: nowrap;
 }
-.roll-word {
-  position: absolute;
-  top: 0;
-  left: 0;
-  display: block;
-  width: max-content;
-  opacity: 0;
-  transform: translateY(28%);
-  transition:
-    opacity 0.45s var(--ease-soft),
-    transform 0.7s var(--ease-out-expo);
-  will-change: opacity, transform;
+
+/* A small download cue, without moving the button or its click target. */
+@keyframes downloadCue {
+  0%, 18%, 35%, 100% {
+    transform: translateY(0);
+  }
+  12%, 26% {
+    transform: translateY(3px);
+  }
 }
-.roll-word[data-state='active'] {
-  opacity: 1;
-  transform: none;
-}
-.roll-word[data-state='leaving'] {
-  opacity: 0;
-  transform: translateY(-28%);
+@media (prefers-reduced-motion: no-preference) {
+  .download-cue {
+    animation: downloadCue 2.4s ease-in-out infinite;
+  }
 }
 
 /* ── Logo spin ────────────────────────────────────────────────────────────── */

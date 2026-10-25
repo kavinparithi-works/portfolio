@@ -8,16 +8,19 @@ describe('<RollingWord />', () => {
   beforeEach(() => vi.useFakeTimers())
   afterEach(() => vi.useRealTimers())
 
-  it('renders every word, hidden from assistive tech, and advances on the interval', () => {
-    const { container } = render(<RollingWord words={['data.', 'problems.']} interval={1000} />)
+  it('shows one word at a time and replaces it every 1.5 seconds', () => {
+    const { container } = render(<RollingWord words={['data.', 'problems.']} />)
     const roll = container.querySelector('.roll')
     expect(roll).toHaveAttribute('aria-hidden', 'true')
-    expect(container.querySelectorAll('.roll-word')).toHaveLength(2)
-    expect(roll).toHaveAttribute('data-index', '0')
-    act(() => vi.advanceTimersByTime(1000))
-    expect(roll).toHaveAttribute('data-index', '1')
-    act(() => vi.advanceTimersByTime(1000))
-    expect(roll).toHaveAttribute('data-index', '0')
+    expect(roll).toHaveTextContent('data.')
+    expect(screen.queryByText('problems.')).not.toBeInTheDocument()
+    act(() => vi.advanceTimersByTime(1499))
+    expect(roll).toHaveTextContent('data.')
+    act(() => vi.advanceTimersByTime(1))
+    expect(roll).toHaveTextContent('problems.')
+    expect(screen.queryByText('data.')).not.toBeInTheDocument()
+    act(() => vi.advanceTimersByTime(1500))
+    expect(roll).toHaveTextContent('data.')
   })
 
   it('stays on the first word when the visitor prefers reduced motion', () => {

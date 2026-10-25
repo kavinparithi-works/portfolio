@@ -25,13 +25,16 @@ any JavaScript runs.
 Everything a visitor reads lives in `src/data/`:
 
 - `site.js`: name, links, hero copy, availability, contact copy
-- `projects.js`: the case studies (full `summary` and mobile `summaryShort`, problem / build / result, outcomes, stack, diagram stages, optional extras)
+- `projects.js`: the case studies (full `summary` and compact `summaryShort`, problem / build / result, outcomes, stack, diagram stages, optional extras)
 - `experience.js`: the employer card
 - `skills.js`: skill groups and working style
 - `credentials.js`, `beyond.js`, `principles.js`, `nav.js`
 
 The architecture diagram in each case study is generated from the `pipeline`
 array (stages and their nodes), so a new project only needs data, no drawing.
+Projects start with a short summary, the first two outcomes and first three
+tools on every screen. "Full case study" opens the remaining content; switching
+projects returns to the compact view.
 
 The resume lives at `public/resume.pdf`. Portrait sources are in `assets-src/`;
 `python scripts/optimize-images.py` regenerates the WebP crops in
