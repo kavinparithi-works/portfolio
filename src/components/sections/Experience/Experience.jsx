@@ -3,7 +3,6 @@ import { experience } from '../../../data/experience'
 import { Container, Section, SectionHeading, Reveal } from '../../layout'
 import { Chip } from '../../ui/Chip'
 import { Icon } from '../../icons/Icon'
-import { Credentials } from '../Credentials/Credentials'
 import { tenureSince } from '../../../lib/tenure'
 
 const BUILD_TENURE = tenureSince(experience.joinedISO)
@@ -11,14 +10,14 @@ const noop = () => () => {}
 
 /**
  * "The road so far." One card: the employer, where, since when, and the
- * current title. Credentials sit under it in the same band.
+ * current title. The independent "On record" section follows this band.
  */
 export function Experience() {
   // Pre-rendered with the build-time tenure; the client recomputes it on load.
   const tenure = useSyncExternalStore(noop, () => tenureSince(experience.joinedISO), () => BUILD_TENURE)
 
   return (
-    <Section id="experience" className="scroll-mt-9 py-14 md:-scroll-mt-5 md:py-28">
+    <Section id="experience" className="scroll-mt-9 pt-14 md:-scroll-mt-5 md:pt-28">
       <Container>
         <SectionHeading id="experience" eyebrow="Where I have been" title="The road so far" />
 
@@ -51,8 +50,6 @@ export function Experience() {
             </div>
           </article>
         </Reveal>
-
-        <Credentials />
       </Container>
     </Section>
   )

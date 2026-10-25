@@ -41,7 +41,7 @@ The resume lives at `public/resume.pdf`. Portrait sources are in `assets-src/`;
 
 The skills "toolbox" drawers (`src/components/sections/Skills/Skills.jsx`,
 data in `src/data/skills.js`) are built but switched off for now. Only the
-black "How I work" card is shown, after Experience. Its shared component is
+black "How I work" card is shown, after "On record". Its shared component is
 `src/components/sections/Skills/WorkingStyle.jsx`.
 
 To show the full toolbox again:
@@ -55,6 +55,17 @@ To show the full toolbox again:
    so it appears in the navigation.
 
 Then `npm run check` and push.
+
+## The road so far
+
+The employer card is commented out. Its component and data remain in
+`src/components/sections/Experience/Experience.jsx` and `src/data/experience.js`.
+The "On record" certification and education cards are independent and still
+visible, followed by the black "How I work" card.
+
+To restore the employer card, uncomment the `Experience` import and
+`<Experience />` placeholder in `src/App.jsx`, then uncomment its navigation
+entry in `src/data/nav.js`. Run `npm run check` and push.
 
 ## Deployment
 
