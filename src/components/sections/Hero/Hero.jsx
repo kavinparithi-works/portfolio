@@ -11,7 +11,7 @@ import { HeroActions } from './HeroActions'
  */
 export function Hero() {
   return (
-    <Section id="top" labelled={false} className="overflow-x-clip pt-24 md:pt-28">
+    <Section id="top" labelled={false} className="overflow-x-clip pt-20 md:pt-[84px]">
       <div
         aria-hidden="true"
         className="dotgrid pointer-events-none absolute inset-x-0 top-0 h-[85vh] opacity-80 [mask-image:radial-gradient(ellipse_75%_60%_at_80%_0%,#000_10%,transparent_70%)]"

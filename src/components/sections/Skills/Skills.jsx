@@ -3,10 +3,14 @@ import { Container, Section, SectionHeading, Reveal } from '../../layout'
 import { Chip } from '../../ui/Chip'
 
 /**
- * "The toolbox." Skills grouped as on the resume. Tools used on every
- * engagement are filled in; the rest are outlined.
+ * "The toolbox." One drawer card per skill group, each with a small pull
+ * handle; cards invert to dark on hover like the rest of the site. Tools used
+ * on every engagement are filled in. A dark card at the end holds the four
+ * working-style lines.
  */
 export function Skills() {
+  const total = skillGroups.reduce((n, g) => n + g.items.length, 0)
+
   return (
     <Section id="skills" className="scroll-mt-3 bg-bg-deep py-20 md:-scroll-mt-5 md:py-28">
       <Container>
@@ -15,39 +19,71 @@ export function Skills() {
           eyebrow="What I work with"
           title="The toolbox"
           aside={
-            <p className="flex items-center gap-2 font-mono text-[12.5px] text-muted">
-              <span aria-hidden="true" className="inline-block h-3 w-3 rounded-full bg-ink" />
-              filled = used on every engagement
+            <p className="flex items-center gap-3 font-mono text-[12.5px] text-muted">
+              <span>
+                <span className="text-ink">{skillGroups.length}</span> drawers · <span className="text-ink">{total}</span> tools
+              </span>
+              <span aria-hidden="true" className="inline-block h-3 w-px bg-rule" />
+              <span className="flex items-center gap-2">
+                <span aria-hidden="true" className="inline-block h-3 w-3 rounded-full bg-ink" />
+                used on every engagement
+              </span>
             </p>
           }
         />
 
-        <ul role="list" className="grid grid-cols-1 gap-x-10 gap-y-10 md:grid-cols-2 lg:grid-cols-3">
+        <ul role="list" className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
           {skillGroups.map((group, gi) => (
-            <Reveal as="li" key={group.label} delay={(gi % 3) * 80} className="border-t border-ink/15 pt-5">
-              <h3 className="eyebrow flex items-baseline gap-3 text-ink">
-                <span className="font-display text-[15px] font-black text-orange">{String(gi + 1).padStart(2, '0')}</span>
-                {group.label}
-              </h3>
-              <ul role="list" className="mt-4 flex flex-wrap gap-2">
-                {group.items.map((item) => (
-                  <Chip as="li" key={item} tone={group.core.includes(item) ? 'solid' : 'ink'} className="bg-card/60">
-                    {item}
-                  </Chip>
-                ))}
-              </ul>
+            <Reveal as="li" key={group.label} delay={(gi % 3) * 70}>
+              <article className="group card relative flex h-full flex-col px-6 pt-7 pb-6 transition-[background-color,border-color,transform,box-shadow] duration-300 ease-out hover:-translate-y-1 hover:border-dark hover:bg-dark hover:shadow-[0_24px_40px_-28px_rgba(0,0,0,.5)]">
+                <span
+                  aria-hidden="true"
+                  className="absolute top-3 left-1/2 h-1 w-9 -translate-x-1/2 rounded-full bg-rule transition-colors duration-300 group-hover:bg-orange-light"
+                />
+                <div className="flex items-baseline justify-between gap-4">
+                  <h3 className="eyebrow flex items-baseline gap-3 text-ink transition-colors duration-300 group-hover:text-white">
+                    <span className="font-display text-[15px] font-black text-orange transition-colors duration-300 group-hover:text-orange-light">
+                      {String(gi + 1).padStart(2, '0')}
+                    </span>
+                    {group.label}
+                  </h3>
+                  <span className="font-mono text-[11px] text-muted transition-colors duration-300 group-hover:text-white/50">{group.items.length}</span>
+                </div>
+                <ul role="list" className="mt-5 flex flex-wrap gap-2">
+                  {group.items.map((item) => {
+                    const core = group.core.includes(item)
+                    return (
+                      <Chip
+                        as="li"
+                        key={item}
+                        tone={core ? 'solid' : 'ink'}
+                        className={
+                          core
+                            ? 'group-hover:border-white group-hover:bg-white group-hover:text-ink'
+                            : 'group-hover:border-white/25 group-hover:text-white/80'
+                        }
+                      >
+                        {item}
+                      </Chip>
+                    )
+                  })}
+                </ul>
+              </article>
             </Reveal>
           ))}
         </ul>
 
-        <Reveal className="mt-16 grid gap-6 rounded-card border border-ink/15 p-7 md:mt-20 md:grid-cols-[220px_1fr] md:p-9">
-          <h3 className="display text-[clamp(1.6rem,2.4vw,2rem)] leading-[1.02] text-ink">
-            How I<br />work<span className="text-orange">.</span>
-          </h3>
+        <Reveal className="mt-6 grid gap-8 rounded-card bg-dark p-8 text-white md:grid-cols-[220px_1fr] md:p-10">
+          <div>
+            <p className="eyebrow text-white/50">Working style</p>
+            <h3 className="display mt-3 text-[clamp(1.6rem,2.4vw,2rem)] leading-[1.02]">
+              How I<br />work<span className="text-orange-light">.</span>
+            </h3>
+          </div>
           <ol role="list" className="grid gap-x-10 gap-y-5 sm:grid-cols-2">
             {workingStyle.map((line, i) => (
-              <li key={line} className="flex gap-4 text-[14.5px] leading-[1.65] text-body">
-                <span className="font-display text-[18px] leading-[1.3] font-black text-orange">0{i + 1}</span>
+              <li key={line} className="flex gap-4 text-[14.5px] leading-[1.65] text-white/75">
+                <span className="font-display text-[18px] leading-[1.3] font-black text-orange-light">0{i + 1}</span>
                 {line}
               </li>
             ))}
