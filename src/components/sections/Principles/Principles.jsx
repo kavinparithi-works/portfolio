@@ -12,7 +12,7 @@ export function Principles() {
   const [hovered, setHovered] = useState(null)
 
   return (
-    <Section id="principles" className="py-20 md:py-28">
+    <Section id="principles" className="scroll-mt-3 py-20 md:-scroll-mt-5 md:py-28">
       <Container>
         <SectionHeading
           id="principles"

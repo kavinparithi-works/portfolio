@@ -1,33 +1,35 @@
 import { useEffect, useRef, useState } from 'react'
 
-/** Inset, in px, of the control-shaped cursor inside the control it covers. */
-const SNAP_INSET = 3
-
 /** Elements the cursor morphs onto. Mark anything else with data-cursor="snap". */
 const INTERACTIVE_SELECTOR =
-  'a, button, [role="button"], [role="tab"], input, textarea, select, label, [data-cursor="snap"]'
+  'a, button, [role="button"], [role="tab"], input, textarea, select, label, summary, [data-cursor="snap"]'
 
-function parseRadius(value) {
-  const r = parseFloat(value)
-  return Number.isFinite(r) ? r : 8
+/**
+ * Controls the cursor will wrap: anything pill-sized (buttons, links, chips)
+ * or a round badge. Larger controls (tabs, cards, wide rows) get the plain
+ * hover circle instead of a giant blob.
+ */
+function canSnap(rect) {
+  const round = Math.abs(rect.width - rect.height) < 2
+  return rect.width <= 400 && (rect.height <= 72 || (round && rect.height <= 120))
 }
 
 /**
- * Drives the custom cursor. Position is written straight to the node every
- * frame (no React re-render on mousemove); state only changes when the mode
- * changes:
- *   - `interactive`  over a control (cursor morphs to the control's shape)
+ * Drives the custom cursor. Position (and, while snapped, size) is written
+ * straight to the node every frame, so pointer motion never re-renders
+ * React. State only changes when the mode changes:
+ *   - `interactive`  over a control (hover circle, or snapped to it)
+ *   - `snapped`      wrapping the control as a pill that follows it exactly
  *   - `magnify`      inside a [data-cursor="magnify"] headline (large lens)
- *   - `snap`         measured size/radius of the hovered control
  *   - `visible`      pointer is on the page
  * `ease` is the spring factor; pass 1 to follow the pointer exactly.
  */
 export function useCursor({ ease = 0.18, enabled = true } = {}) {
   const dotRef = useRef(null)
   const [interactive, setInteractive] = useState(false)
+  const [snapped, setSnapped] = useState(false)
   const [visible, setVisible] = useState(false)
   const [magnify, setMagnify] = useState(false)
-  const [snap, setSnap] = useState(null)
 
   useEffect(() => {
     if (!enabled) return undefined
@@ -42,17 +44,17 @@ export function useCursor({ ease = 0.18, enabled = true } = {}) {
     let scale = 1
     let frame
 
-    const onMove = (e) => {
-      target.x = e.clientX
-      target.y = e.clientY
-      if (!hasAppeared) {
-        hasAppeared = true
-        current.x = e.clientX
-        current.y = e.clientY
-        setVisible(true)
-      }
-      const el = e.target instanceof Element ? e.target : null
-      if (!el) return
+    const clearSnapSize = () => {
+      const node = dotRef.current
+      if (!node) return
+      node.style.width = ''
+      node.style.height = ''
+      node.style.borderRadius = ''
+    }
+
+    // Decide what the cursor should do for the element under the pointer.
+    const evaluate = (el) => {
+      if (!(el instanceof Element)) return
       const ignored = el.closest('[data-cursor="ignore"]') !== null
       const control = ignored ? null : el.closest(INTERACTIVE_SELECTOR)
       const magnifyZone = !ignored && control === null ? el.closest('[data-cursor="magnify"]') : null
@@ -64,46 +66,58 @@ export function useCursor({ ease = 0.18, enabled = true } = {}) {
       setInteractive(control !== null)
       setMagnify(magnifyZone !== null)
 
-      if (control) {
-        const rect = control.getBoundingClientRect()
-        const radius = parseRadius(getComputedStyle(control).borderRadius)
-        setSnap({
-          w: Math.max(rect.width - SNAP_INSET * 2, 8),
-          h: Math.max(rect.height - SNAP_INSET * 2, 8),
-          radius: Math.max(radius - SNAP_INSET, 4),
-        })
-        snapEl = control
-      } else {
-        snapEl = null
-        setSnap(null)
+      const nextSnap = control && canSnap(control.getBoundingClientRect()) ? control : null
+      if (!nextSnap && snapEl) clearSnapSize()
+      snapEl = nextSnap
+      setSnapped(snapEl !== null)
+    }
+
+    const onMove = (e) => {
+      target.x = e.clientX
+      target.y = e.clientY
+      if (!hasAppeared) {
+        hasAppeared = true
+        current.x = e.clientX
+        current.y = e.clientY
+        setVisible(true)
       }
+      evaluate(e.target)
     }
 
     const onDown = () => (isPressed = true)
     const onUp = () => (isPressed = false)
     const onLeave = () => setVisible(false)
     const onEnter = () => setVisible(true)
-    const invalidateSnap = () => {
-      if (lastControl || lastMagnifyZone) {
-        lastControl = null
-        lastMagnifyZone = null
-        snapEl = null
-        setSnap(null)
-        setInteractive(false)
-        setMagnify(false)
-      }
+    // The page moved under a resting pointer (wheel scroll, resize): re-check
+    // what is now beneath it instead of dropping the fill until the next move.
+    let recheck = 0
+    const onScrollOrResize = () => {
+      if (!hasAppeared || recheck) return
+      recheck = requestAnimationFrame(() => {
+        recheck = 0
+        evaluate(document.elementFromPoint(target.x, target.y))
+      })
     }
 
     const render = () => {
+      const node = dotRef.current
       let goal = target
       if (snapEl) {
+        // Follow the control's live box so hover transforms (lift, magnetic
+        // pull) never leave the fill misaligned.
         const rect = snapEl.getBoundingClientRect()
         goal = { x: rect.left + rect.width / 2, y: rect.top + rect.height / 2 }
+        if (node) {
+          node.style.width = `${rect.width}px`
+          node.style.height = `${rect.height}px`
+          node.style.borderRadius = `${Math.min(rect.width, rect.height) / 2}px`
+        }
       }
-      current.x += (goal.x - current.x) * ease
-      current.y += (goal.y - current.y) * ease
+      // Snapping settles faster than free movement so the fill lands with the shape.
+      const k = snapEl ? Math.min(1, ease * 1.8) : ease
+      current.x += (goal.x - current.x) * k
+      current.y += (goal.y - current.y) * k
       scale += ((isPressed ? 0.9 : 1) - scale) * 0.25
-      const node = dotRef.current
       if (node) {
         node.style.transform = `translate3d(${current.x}px, ${current.y}px, 0) translate(-50%, -50%) scale(${scale})`
       }
@@ -114,8 +128,8 @@ export function useCursor({ ease = 0.18, enabled = true } = {}) {
     window.addEventListener('mousemove', onMove, { passive: true })
     window.addEventListener('mousedown', onDown)
     window.addEventListener('mouseup', onUp)
-    window.addEventListener('scroll', invalidateSnap, { passive: true })
-    window.addEventListener('resize', invalidateSnap)
+    window.addEventListener('scroll', onScrollOrResize, { passive: true })
+    window.addEventListener('resize', onScrollOrResize)
     root.addEventListener('mouseleave', onLeave)
     root.addEventListener('mouseenter', onEnter)
     frame = requestAnimationFrame(render)
@@ -124,13 +138,14 @@ export function useCursor({ ease = 0.18, enabled = true } = {}) {
       window.removeEventListener('mousemove', onMove)
       window.removeEventListener('mousedown', onDown)
       window.removeEventListener('mouseup', onUp)
-      window.removeEventListener('scroll', invalidateSnap)
-      window.removeEventListener('resize', invalidateSnap)
+      window.removeEventListener('scroll', onScrollOrResize)
+      window.removeEventListener('resize', onScrollOrResize)
+      if (recheck) cancelAnimationFrame(recheck)
       root.removeEventListener('mouseleave', onLeave)
       root.removeEventListener('mouseenter', onEnter)
       cancelAnimationFrame(frame)
     }
   }, [ease, enabled])
 
-  return { dotRef, interactive, visible, magnify, snap }
+  return { dotRef, interactive, snapped, visible, magnify }
 }

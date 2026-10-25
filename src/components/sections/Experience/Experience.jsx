@@ -20,7 +20,7 @@ export function Experience() {
   )
 
   return (
-    <Section id="experience" className="py-20 md:py-28">
+    <Section id="experience" className="scroll-mt-3 py-20 md:-scroll-mt-5 md:py-28">
       <Container>
         <SectionHeading
           id="experience"

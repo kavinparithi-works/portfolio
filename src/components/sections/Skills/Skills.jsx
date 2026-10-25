@@ -8,7 +8,7 @@ import { Chip } from '../../ui/Chip'
  */
 export function Skills() {
   return (
-    <Section id="skills" className="bg-bg-deep py-20 md:py-28">
+    <Section id="skills" className="scroll-mt-3 bg-bg-deep py-20 md:-scroll-mt-5 md:py-28">
       <Container>
         <SectionHeading
           id="skills"

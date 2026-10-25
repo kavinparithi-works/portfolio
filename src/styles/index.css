@@ -70,16 +70,16 @@
 
   --breakpoint-xs: 30rem;
 
-  --text-hero: clamp(2.5rem, 7.4vw, 7rem);
+  --text-hero: clamp(2.4rem, 5.8vw, 5.25rem);
   --text-hero--line-height: 0.94;
   --text-hero--letter-spacing: 0.005em;
-  --text-display: clamp(2.5rem, 6.4vw, 6rem);
+  --text-display: clamp(2.2rem, 5vw, 4.5rem);
   --text-display--line-height: 0.92;
   --text-display--letter-spacing: -0.01em;
-  --text-display-sm: clamp(2rem, 4.6vw, 4rem);
+  --text-display-sm: clamp(1.85rem, 3.8vw, 3.25rem);
   --text-display-sm--line-height: 0.95;
   --text-display-sm--letter-spacing: -0.01em;
-  --text-contact: clamp(3rem, 9.5vw, 9rem);
+  --text-contact: clamp(2.6rem, 6.8vw, 6.25rem);
   --text-contact--line-height: 0.9;
   --text-contact--letter-spacing: 0;
   --text-title: clamp(1.5rem, 2.6vw, 2.25rem);
@@ -94,7 +94,6 @@
 @layer base {
   html {
     scroll-behavior: smooth;
-    scroll-padding-top: 5.5rem;
     -webkit-text-size-adjust: 100%;
   }
   body {

@@ -22,7 +22,6 @@ export const site = {
 }
 
 export const heroCopy = {
-  eyebrow: 'Data Engineer · Databricks Certified Professional · Chennai',
   lines: ['I build', 'pipelines.'],
   rotating: ['data.', 'Databricks.', 'problems.', 'solutions.'],
   intro:
@@ -43,7 +42,6 @@ export const contactCopy = {
   rotating: ['problem.', 'question.', 'challenge.', 'puzzle.'],
   contactFor: 'Data Engineering roles · Databricks projects · Lakehouse architectures',
   responseTime: 'Every serious inquiry gets a reply. Most responses within 24 hours.',
-  quoteRotating: ['learning', 'thriving', 'working'],
   tamil: 'யாதுமாய் அழிந்து, யார் நானென மீண்டெழு !',
   tamilAccent: ['நானென', 'மீண்டெழு'],
 }

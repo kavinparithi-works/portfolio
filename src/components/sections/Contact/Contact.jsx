@@ -26,8 +26,11 @@ function Info({ head, children }) {
  */
 export function Contact() {
   return (
-    <Section id="contact" className="border-t-2 border-teal/50 bg-dark pt-24 text-white md:pt-32">
-      <Container>
+    <Section
+      id="contact"
+      className="flex min-h-[calc(100svh+0.25rem)] -scroll-mt-1 flex-col border-t-2 border-teal/50 bg-dark pt-24 text-white md:min-h-[calc(100svh+2.25rem)] md:-scroll-mt-9 md:pt-32"
+    >
+      <Container className="flex-1">
         <Reveal as="p" className="eyebrow mb-6 flex items-center gap-3 text-white/55">
           <span aria-hidden="true" className="inline-block h-px w-6 bg-current opacity-70" />
           Say hello
@@ -43,15 +46,16 @@ export function Contact() {
         </Reveal>
 
         <Reveal delay={160} className="mt-14 flex flex-wrap items-center justify-between gap-x-10 gap-y-6 md:mt-20">
-          <div className="flex min-w-0 flex-wrap items-center gap-x-6 gap-y-4">
+          <div className="flex min-w-0 flex-wrap items-center gap-x-5 gap-y-4">
+            <span className="min-w-0 font-display text-[clamp(1.5rem,3.6vw,2.75rem)] leading-none font-extrabold break-all text-white select-all">
+              {site.email}
+            </span>
             <a
               href={`mailto:${site.email}`}
-              className="group/mail inline-flex min-w-0 items-center gap-3 font-display text-[clamp(1.5rem,3.6vw,2.75rem)] leading-none font-extrabold break-all text-white transition-colors duration-300 hover:text-orange-light"
+              aria-label={`Email ${site.firstName}`}
+              className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-white/25 text-white transition-[background-color,border-color,color] duration-300 hover:border-orange-light hover:bg-orange-light hover:text-ink"
             >
-              <span className="min-w-0">{site.email}</span>
-              <span className="hidden h-10 w-10 shrink-0 items-center justify-center rounded-full border border-white/25 transition-[background-color,border-color,color] duration-300 group-hover/mail:border-orange-light group-hover/mail:bg-orange-light group-hover/mail:text-ink sm:flex">
-                <Icon name="arrowUpRight" size={18} strokeWidth={2.2} />
-              </span>
+              <Icon name="arrowUpRight" size={18} strokeWidth={2.2} />
             </a>
             <CopyButton text={site.email} />
           </div>

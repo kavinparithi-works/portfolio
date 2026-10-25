@@ -8,7 +8,7 @@ import { Icon } from '../../icons/Icon'
  */
 export function Beyond() {
   return (
-    <Section id="beyond" className="py-20 md:py-28">
+    <Section id="beyond" className="scroll-mt-3 py-20 md:-scroll-mt-5 md:py-28">
       <Container>
         <SectionHeading
           id="beyond"
