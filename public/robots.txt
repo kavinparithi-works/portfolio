@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://kavinparithi-works.github.io/portfolio/sitemap.xml

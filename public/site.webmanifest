@@ -1,0 +1,13 @@
+{
+  "name": "Kavin Parithi Sivasamy",
+  "short_name": "Kavin",
+  "description": "Data Engineer. Databricks, Azure, Lakehouse platforms.",
+  "start_url": "/portfolio/",
+  "display": "browser",
+  "background_color": "#EDEAE4",
+  "theme_color": "#EDEAE4",
+  "icons": [
+    { "src": "/portfolio/favicon.svg", "sizes": "any", "type": "image/svg+xml" },
+    { "src": "/portfolio/apple-touch-icon.png", "sizes": "180x180", "type": "image/png" }
+  ]
+}

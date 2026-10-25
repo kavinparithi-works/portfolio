@@ -1,0 +1,7 @@
+export { Hero } from './Hero/Hero'
+export { Principles } from './Principles/Principles'
+export { Work } from './Work/Work'
+export { Experience } from './Experience/Experience'
+export { Skills } from './Skills/Skills'
+export { Beyond } from './Beyond/Beyond'
+export { Contact } from './Contact/Contact'
