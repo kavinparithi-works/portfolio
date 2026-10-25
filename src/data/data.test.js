@@ -49,8 +49,10 @@ describe('content data', () => {
     }
   })
 
-  it('marks exactly one current role', () => {
-    expect(experience.roles.filter((r) => r.current)).toHaveLength(1)
+  it('has a valid joining date for the employer card', () => {
+    expect(experience.company).toBeTruthy()
+    expect(new Date(experience.joinedISO).toString()).not.toBe('Invalid Date')
+    expect(experience.joined).toMatch(/^[A-Z][a-z]{2} \d{4}$/)
   })
 
   it('links to the Databricks credential', () => {

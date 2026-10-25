@@ -1,80 +1,56 @@
-import { useCallback, useRef } from 'react'
-import { cn } from '../../../lib/cn'
+import { useSyncExternalStore } from 'react'
 import { experience } from '../../../data/experience'
-import { useScrollProgress } from '../../../hooks/useScrollProgress'
 import { Container, Section, SectionHeading, Reveal } from '../../layout'
 import { Chip } from '../../ui/Chip'
+import { Icon } from '../../icons/Icon'
 import { Credentials } from '../Credentials/Credentials'
+import { tenureSince } from '../../../lib/tenure'
+
+const BUILD_TENURE = tenureSince(experience.joinedISO)
+const noop = () => () => {}
 
 /**
- * "The road so far." One employer, three roles, drawn as a timeline whose
- * rail fills as you scroll. Credentials sit under it in the same band.
+ * "The road so far." One card: the employer, where, since when, and the
+ * current title. Credentials sit under it in the same band.
  */
 export function Experience() {
-  const railRef = useRef(null)
-  const fillRef = useRef(null)
-
-  useScrollProgress(
-    useCallback((p) => fillRef.current?.style.setProperty('--fill', p.toFixed(3)), []),
-    { ref: railRef, end: 0.55 }
-  )
+  // Pre-rendered with the build-time tenure; the client recomputes it on load.
+  const tenure = useSyncExternalStore(noop, () => tenureSince(experience.joinedISO), () => BUILD_TENURE)
 
   return (
     <Section id="experience" className="scroll-mt-3 py-20 md:-scroll-mt-5 md:py-28">
       <Container>
-        <SectionHeading
-          id="experience"
-          eyebrow="Where I have been"
-          title="The road so far"
-          aside={
-            <p className="font-mono text-[13px] text-muted">
-              {experience.company} · {experience.location} · {experience.span}
-            </p>
-          }
-        />
+        <SectionHeading id="experience" eyebrow="Where I have been" title="The road so far" />
 
-        <div className="grid grid-cols-1 gap-12 lg:grid-cols-[minmax(240px,340px)_minmax(0,1fr)] lg:gap-16">
-          <Reveal className="lg:sticky lg:top-28 lg:self-start">
-            <p className="font-display text-[clamp(3.5rem,6vw,5.5rem)] leading-none font-black text-ink">
-              {experience.company}
-              <span className="text-orange">.</span>
-            </p>
-            <p className="eyebrow mt-3">{experience.location}</p>
-            <p className="mt-6 max-w-[38ch] text-[15px] leading-[1.7] text-body">{experience.intro}</p>
-          </Reveal>
-
-          <ol ref={railRef} role="list" className="relative">
-            <div aria-hidden="true" className="absolute top-2 bottom-2 left-[7px] w-px bg-rule">
-              <div ref={fillRef} className="tl-fill h-full w-full bg-orange" style={{ '--fill': 0 }} />
+        <Reveal>
+          <article className="card relative grid grid-cols-1 gap-10 overflow-hidden p-8 md:grid-cols-[minmax(0,1fr)_auto] md:items-end md:p-12">
+            <div aria-hidden="true" className="dotgrid pointer-events-none absolute inset-y-0 right-0 w-1/2 opacity-70 [mask-image:linear-gradient(to_left,#000,transparent)]" />
+            <div className="relative">
+              <p className="eyebrow flex items-center gap-2">
+                <Icon name="briefcase" size={14} strokeWidth={1.8} />
+                Currently at
+              </p>
+              <p className="mt-4 font-display text-[clamp(4.5rem,11vw,9rem)] leading-[0.85] font-black text-ink">
+                {experience.company}
+                <span className="text-orange">.</span>
+              </p>
+              <p className="mt-5 text-[15px] text-body">
+                <span className="font-semibold text-ink">{experience.role}</span> · {experience.location}
+              </p>
+              <p className="mt-2 max-w-[48ch] text-[14.5px] leading-[1.65] text-body">{experience.note}</p>
             </div>
-            {experience.roles.map((role, i) => (
-              <Reveal as="li" key={role.title} delay={i * 80} className="relative pb-12 pl-10 last:pb-0 md:pl-14">
-                <span
-                  aria-hidden="true"
-                  className={cn(
-                    'tl-node absolute top-1 left-0 h-[15px] w-[15px] rounded-full border-2 bg-bg transition-colors duration-500',
-                    role.current ? 'border-orange' : 'border-rule'
-                  )}
-                >
-                  {role.current && <span className="absolute inset-0 rounded-full bg-orange/40 motion-ok:animate-ping" />}
-                </span>
-                <div className="flex flex-wrap items-center gap-3">
-                  <p className="eyebrow">{role.period}</p>
-                  {role.current && <Chip tone="solid" className="py-0.5 text-[10px]">Now</Chip>}
-                </div>
-                <h3 className="display mt-2 text-[clamp(1.6rem,2.6vw,2.1rem)] leading-[1.02] font-extrabold text-ink">{role.title}</h3>
-                <p className="mt-3 max-w-[62ch] text-[14.5px] leading-[1.7] text-body">{role.summary}</p>
-                <ul role="list" className="mt-4 flex flex-wrap gap-2">
-                  {role.highlights.map((h) => (
-                    <Chip as="li" key={h} tone="ink">
-                      {h}
-                    </Chip>
-                  ))}
-                </ul>
-              </Reveal>
-            ))}
-          </ol>
-        </div>
+
+            <div className="relative flex flex-col items-start gap-3 md:items-end md:text-right">
+              <Chip tone="solid" className="py-0.5 text-[10px]">
+                Now
+              </Chip>
+              <p className="font-display text-[clamp(1.75rem,3.2vw,2.75rem)] leading-none font-extrabold text-ink uppercase">
+                {experience.joined} <span className="text-orange">to</span> present
+              </p>
+              <p className="font-mono text-[12.5px] text-muted">{tenure} and counting</p>
+            </div>
+          </article>
+        </Reveal>
 
         <Credentials />
       </Container>

@@ -323,17 +323,6 @@
   animation: fadeUp 0.55s var(--ease-out-expo) both;
 }
 
-/* ── Timeline ─────────────────────────────────────────────────────────────── */
-.tl-fill {
-  transform-origin: top;
-  transform: scaleY(var(--fill, 0));
-  transition: transform 0.2s linear;
-}
-.rv.in .tl-node {
-  border-color: var(--color-orange);
-  background: var(--color-orange);
-}
-
 /* ── Icon hover animations (ported from v1, each hints at its meaning) ───── */
 @keyframes icon-shake {
   0%,

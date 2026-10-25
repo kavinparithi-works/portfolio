@@ -13,10 +13,10 @@ export function Credentials() {
         <div>
           <Reveal as="p" className="eyebrow mb-3 flex items-center gap-3">
             <span aria-hidden="true" className="inline-block h-px w-6 bg-current opacity-70" />
-            Proof of the work
+            Certification and education
           </Reveal>
           <Reveal as="h3" delay={80} className="display text-display-sm text-ink">
-            Credentials<span className="text-orange">.</span>
+            On record<span className="text-orange">.</span>
           </Reveal>
         </div>
       </div>
@@ -39,7 +39,7 @@ export function Credentials() {
                 href={c.href}
                 target="_blank"
                 rel="noreferrer"
-                className="mt-7 inline-flex w-fit items-center gap-2 rounded-full border-[1.5px] border-ink px-5 py-2 text-[12.5px] font-semibold text-ink transition-colors duration-300 group-hover:border-white group-hover:text-white hover:bg-ink hover:text-white group-hover:hover:bg-white group-hover:hover:text-ink"
+                className="mt-7 inline-flex w-fit items-center gap-2 rounded-full border-[1.5px] border-ink px-5 py-2 text-[12.5px] font-semibold text-ink transition-colors duration-300 group-hover:border-white group-hover:text-white hover:bg-ink hover:text-white"
               >
                 {c.cta}
                 <Icon name="arrowUpRight" size={14} strokeWidth={2.2} />
