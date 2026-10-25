@@ -30,14 +30,6 @@ export const heroCopy = {
   focus: 'Focused on building reliable, high-performance, analytics-ready business assets.',
 }
 
-/** Proof points, taken from the resume PDF and the Phase 3 brief. */
-export const stats = [
-  { value: 3, label: 'Industries served', sub: 'finance, insurance, chemical manufacturing' },
-  { value: 200, suffix: '+', label: 'Tables migrated', sub: 'zero data loss, every metric matched' },
-  { value: 50000, suffix: '+', label: 'Daily order records on DLT', sub: 'real-time tracking and replenishment' },
-  { value: 166, label: 'Notebooks moved to the v2 standard', sub: 'of 456 in scope, logic byte-identical' },
-]
-
 export const contactCopy = {
   rotating: ['problem.', 'question.', 'challenge.', 'puzzle.'],
   contactFor: 'Data Engineering roles · Databricks projects · Lakehouse architectures',

@@ -4,7 +4,7 @@ import { navLinks } from './nav'
 import { skillGroups } from './skills'
 import { experience } from './experience'
 import { credentials } from './credentials'
-import { site, stats, heroCopy, contactCopy } from './site'
+import { site, heroCopy, contactCopy } from './site'
 
 const DASHES = /[\u2013\u2014]/
 
@@ -17,7 +17,7 @@ function walkStrings(value, visit, path = '') {
 describe('content data', () => {
   it('contains no em or en dashes anywhere in the copy', () => {
     const offenders = []
-    walkStrings({ projects, skillGroups, experience, credentials, site, stats, heroCopy, contactCopy }, (s, path) => {
+    walkStrings({ projects, skillGroups, experience, credentials, site, heroCopy, contactCopy }, (s, path) => {
       if (DASHES.test(s)) offenders.push(path)
     })
     expect(offenders).toEqual([])

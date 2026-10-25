@@ -96,8 +96,8 @@ export function Nav() {
                   href={`#${link.id}`}
                   aria-current={active === link.id ? 'true' : undefined}
                   className={cn(
-                    'nav-link relative block px-3 py-2 text-[13.5px] transition-colors duration-200',
-                    active === link.id ? 'text-ink' : 'text-body hover:text-ink'
+                    'block px-3 py-2 text-[13.5px] transition-colors duration-200',
+                    active === link.id ? 'font-semibold text-ink' : 'text-body hover:text-ink'
                   )}
                 >
                   {link.label}

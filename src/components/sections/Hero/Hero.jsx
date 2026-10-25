@@ -4,15 +4,14 @@ import { HeroPhoto } from './HeroPhoto'
 import { HeroIntro } from './HeroIntro'
 import { HeroMeta } from './HeroMeta'
 import { HeroActions } from './HeroActions'
-import { StatsStrip } from './StatsStrip'
 
 /**
  * Landing band: the oversized headline, a three-column row (portrait, intro,
- * spec sheet), the calls to action and the proof-point strip.
+ * spec sheet) and the calls to action.
  */
 export function Hero() {
   return (
-    <Section id="top" labelled={false} className="overflow-x-clip pt-28 md:pt-36">
+    <Section id="top" labelled={false} className="overflow-x-clip pt-24 md:pt-28">
       <div
         aria-hidden="true"
         className="dotgrid pointer-events-none absolute inset-x-0 top-0 h-[85vh] opacity-80 [mask-image:radial-gradient(ellipse_75%_60%_at_80%_0%,#000_10%,transparent_70%)]"
@@ -30,9 +29,6 @@ export function Hero() {
           <HeroActions />
         </div>
 
-        <div className="mt-14 md:mt-20">
-          <StatsStrip />
-        </div>
       </Container>
     </Section>
   )

@@ -69,6 +69,7 @@ export function Work() {
                       tabRefs.current[p.id] = el
                     }}
                     role="tab"
+                    data-cursor="box"
                     id={`tab-${p.id}`}
                     aria-selected={selected}
                     aria-controls={`panel-${p.id}`}

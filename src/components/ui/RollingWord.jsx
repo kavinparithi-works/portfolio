@@ -3,12 +3,16 @@ import { cn } from '../../lib/cn'
 import { useRotatingIndex } from '../../hooks/useRotatingIndex'
 
 /**
- * Cycles through `words` with a vertical roll. The box animates its width to
- * the active word so the line never jumps, and the whole thing is hidden from
- * assistive tech: render the first word in an `sr-only` span next to it.
+ * Cycles through `words`: the current word fades out while drifting up, the
+ * next fades in from just below. Nothing is clipped, so a word never looks
+ * cut off mid-change. The box takes the width of the active word, and the
+ * whole thing is hidden from assistive tech: render the first word in an
+ * `sr-only` span next to it.
  */
 export function RollingWord({ words, interval = 2400, className }) {
-  const index = useRotatingIndex(words.length, interval)
+  const { index, previous } = useRotatingIndex(words.length, interval)
+  const leaving = previous !== index ? previous : -1
+
   const wordRefs = useRef([])
   const [box, setBox] = useState({ width: null, height: null })
 
@@ -40,22 +44,18 @@ export function RollingWord({ words, interval = 2400, className }) {
         height: box.height ? `${box.height}px` : undefined,
       }}
     >
-      <span
-        className="roll-track"
-        style={{ transform: box.height ? `translateY(-${index * box.height}px)` : undefined }}
-      >
-        {words.map((word, i) => (
-          <span
-            key={word}
-            ref={(el) => {
-              wordRefs.current[i] = el
-            }}
-            className="roll-word"
-          >
-            {word}
-          </span>
-        ))}
-      </span>
+      {words.map((word, i) => (
+        <span
+          key={word}
+          ref={(el) => {
+            wordRefs.current[i] = el
+          }}
+          className="roll-word"
+          data-state={i === index ? 'active' : i === leaving ? 'leaving' : 'waiting'}
+        >
+          {word}
+        </span>
+      ))}
     </span>
   )
 }

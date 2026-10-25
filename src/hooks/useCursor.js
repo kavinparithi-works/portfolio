@@ -2,16 +2,21 @@ import { useEffect, useRef, useState } from 'react'
 
 /** Elements the cursor morphs onto. Mark anything else with data-cursor="snap". */
 const INTERACTIVE_SELECTOR =
-  'a, button, [role="button"], [role="tab"], input, textarea, select, label, summary, [data-cursor="snap"]'
+  'a, button, [role="button"], [role="tab"], input, textarea, select, label, summary, [data-cursor="snap"], [data-cursor="box"]'
+
+/** Corner radius of the fill on data-cursor="box" controls (rounded rectangle, not a pill). */
+const BOX_RADIUS = 14
 
 /**
- * Controls the cursor will wrap: anything pill-sized (buttons, links, chips)
- * or a round badge. Larger controls (tabs, cards, wide rows) get the plain
- * hover circle instead of a giant blob.
+ * Controls the cursor will wrap: anything pill-sized (buttons, links, chips),
+ * a round badge, or anything that opts in with data-cursor="box" (filled as a
+ * rounded rectangle). Other large controls get the plain hover circle.
  */
-function canSnap(rect) {
+function snapRadiusFor(control, rect) {
+  if (control.matches('[data-cursor="box"]')) return BOX_RADIUS
   const round = Math.abs(rect.width - rect.height) < 2
-  return rect.width <= 400 && (rect.height <= 72 || (round && rect.height <= 120))
+  if (rect.width <= 400 && (rect.height <= 72 || (round && rect.height <= 120))) return 'pill'
+  return null
 }
 
 /**
@@ -37,6 +42,7 @@ export function useCursor({ ease = 0.18, enabled = true } = {}) {
     const target = { x: window.innerWidth / 2, y: window.innerHeight / 2 }
     const current = { ...target }
     let snapEl = null
+    let snapRadius = null
     let lastControl = null
     let lastMagnifyZone = null
     let hasAppeared = false
@@ -66,9 +72,10 @@ export function useCursor({ ease = 0.18, enabled = true } = {}) {
       setInteractive(control !== null)
       setMagnify(magnifyZone !== null)
 
-      const nextSnap = control && canSnap(control.getBoundingClientRect()) ? control : null
-      if (!nextSnap && snapEl) clearSnapSize()
-      snapEl = nextSnap
+      const radius = control ? snapRadiusFor(control, control.getBoundingClientRect()) : null
+      if (!radius && snapEl) clearSnapSize()
+      snapEl = radius ? control : null
+      snapRadius = radius
       setSnapped(snapEl !== null)
     }
 
@@ -110,7 +117,7 @@ export function useCursor({ ease = 0.18, enabled = true } = {}) {
         if (node) {
           node.style.width = `${rect.width}px`
           node.style.height = `${rect.height}px`
-          node.style.borderRadius = `${Math.min(rect.width, rect.height) / 2}px`
+          node.style.borderRadius = snapRadius === 'pill' ? `${Math.min(rect.width, rect.height) / 2}px` : `${snapRadius}px`
         }
       }
       // Snapping settles faster than free movement so the fill lands with the shape.
