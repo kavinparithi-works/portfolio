@@ -67,7 +67,7 @@ export function MobileMenu({ open, onClose, active }) {
           <a
             href={`${import.meta.env.BASE_URL}resume.pdf`}
             download="Kavin-Parithi-Sivasamy-Resume.pdf"
-            className="inline-flex items-center gap-2 rounded-full bg-orange px-5 py-3 text-[14px] font-bold text-white"
+            className="inline-flex items-center gap-2 rounded-full bg-orange px-5 py-3 text-[14px] font-semibold text-white"
           >
             Resume <Icon name="download" size={15} strokeWidth={2.2} />
           </a>

@@ -5,7 +5,7 @@ import { useFinePointer, useReducedMotion } from '../../hooks/useMediaQuery'
 const variants = {
   dark: 'bg-dark text-white hover:bg-[#2b2b2b] hover:shadow-[0_10px_24px_-10px_rgba(0,0,0,.45)]',
   orange:
-    'bg-orange text-white font-bold shadow-[0_0_18px_rgba(200,72,42,.45)] hover:bg-dark hover:shadow-[0_0_28px_rgba(200,72,42,.65)]',
+    'bg-orange text-white font-semibold shadow-[0_0_18px_rgba(200,72,42,.45)] hover:bg-dark hover:shadow-[0_0_28px_rgba(200,72,42,.65)]',
   ghost: 'border-[1.5px] border-ink text-ink hover:bg-ink hover:text-white',
   light: 'bg-white text-ink hover:bg-bg',
   outlineLight: 'border-[1.5px] border-white/30 text-white hover:border-white hover:bg-white hover:text-ink',

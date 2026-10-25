@@ -5,7 +5,7 @@
  */
 export function TaglineFlourish({ className = '' }) {
   return (
-    <p className={`tagline inline-block cursor-default text-[15px] font-bold text-orange-deep select-none ${className}`}>
+    <p className={`tagline inline-block cursor-default text-[15px] font-semibold text-orange-deep select-none ${className}`}>
       I{' '}
       <span className="tw-design relative">
         Design

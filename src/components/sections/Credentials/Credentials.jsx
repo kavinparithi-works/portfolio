@@ -39,7 +39,7 @@ export function Credentials() {
                 href={c.href}
                 target="_blank"
                 rel="noreferrer"
-                className="mt-7 inline-flex w-fit items-center gap-2 rounded-full border-[1.5px] border-ink px-5 py-2 text-[12.5px] font-bold text-ink transition-colors duration-300 group-hover:border-white group-hover:text-white hover:bg-ink hover:text-white group-hover:hover:bg-white group-hover:hover:text-ink"
+                className="mt-7 inline-flex w-fit items-center gap-2 rounded-full border-[1.5px] border-ink px-5 py-2 text-[12.5px] font-semibold text-ink transition-colors duration-300 group-hover:border-white group-hover:text-white hover:bg-ink hover:text-white group-hover:hover:bg-white group-hover:hover:text-ink"
               >
                 {c.cta}
                 <Icon name="arrowUpRight" size={14} strokeWidth={2.2} />

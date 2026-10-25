@@ -111,7 +111,7 @@ export function Nav() {
               href={`${import.meta.env.BASE_URL}resume.pdf`}
               download="Kavin-Parithi-Sivasamy-Resume.pdf"
               className={cn(
-                'hidden items-center gap-2 rounded-full bg-orange px-4 py-2 text-[13px] font-bold text-white shadow-[0_0_16px_rgba(200,72,42,.4)] transition-[background-color,transform,box-shadow] duration-300 hover:-translate-y-px hover:bg-ink md:inline-flex',
+                'hidden items-center gap-2 rounded-full bg-orange px-4 py-2 text-[13px] font-semibold text-white shadow-[0_0_16px_rgba(200,72,42,.4)] transition-[background-color,transform,box-shadow] duration-300 hover:-translate-y-px hover:bg-ink md:inline-flex',
                 menuOpen && 'invisible'
               )}
             >

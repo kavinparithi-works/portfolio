@@ -2,7 +2,6 @@
 
 /* Self-hosted Tamil face (OFL), used in the footer only. */
 @import '@fontsource/noto-sans-tamil/tamil-400.css';
-@import '@fontsource/noto-sans-tamil/tamil-600.css';
 
 /* Self-hosted display face (OFL, from @fontsource/barlow-condensed). It lives
    in public/fonts with stable names so index.html can preload it, and uses
