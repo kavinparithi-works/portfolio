@@ -1,11 +1,12 @@
 import { Nav } from './components/Nav/Nav'
 import { Cursor } from './components/Cursor/Cursor'
 import { Divider } from './components/layout'
-import { Hero, Principles, Work, Experience, Skills, Beyond, Contact } from './components/sections'
+import { Hero, Principles, Work, Experience, Beyond, Contact } from './components/sections'
+// import { Skills } from './components/sections' // toolbox: parked, see README "Toolbox section"
 
 /**
  * Page composition. Each band is an isolated section; hairlines separate
- * the cream bands, the Skills band is a deeper cream, and Contact is dark.
+ * the cream bands and Contact is dark. The toolbox (Skills) is parked for now.
  */
 export default function App() {
   return (
@@ -20,7 +21,8 @@ export default function App() {
         <Work />
         <Divider />
         <Experience />
-        <Skills />
+        {/* <Skills /> */}
+        <Divider />
         <Beyond />
         <Contact />
       </main>

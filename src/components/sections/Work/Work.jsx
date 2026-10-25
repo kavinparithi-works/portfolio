@@ -38,7 +38,7 @@ export function Work() {
   }
 
   return (
-    <Section id="work" className="scroll-mt-3 py-20 md:-scroll-mt-5 md:py-28">
+    <Section id="work" className="scroll-mt-9 py-14 md:-scroll-mt-5 md:py-28">
       <Container>
         <SectionHeading
           id="work"
@@ -107,6 +107,7 @@ export function Work() {
           <Reveal delay={120} className="min-w-0">
             <div ref={panelRef} className="scroll-mt-24">
               <ProjectPanel
+                key={active.id}
                 project={active}
                 id={`panel-${active.id}`}
                 labelledBy={`tab-${active.id}`}

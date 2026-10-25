@@ -11,9 +11,9 @@ const socials = [
   { name: 'Instagram', href: site.instagram, icon: 'instagram' },
 ]
 
-function Info({ head, children }) {
+function Info({ head, children, className = '' }) {
   return (
-    <div>
+    <div className={className}>
       <p className="eyebrow text-white/50">{head}</p>
       <p className="mt-2.5 text-[14.5px] leading-[1.65] text-white/75">{children}</p>
     </div>
@@ -28,7 +28,7 @@ export function Contact() {
   return (
     <Section
       id="contact"
-      className="flex min-h-[calc(100svh+0.25rem)] -scroll-mt-1 flex-col border-t-2 border-teal/50 bg-dark pt-24 text-white md:min-h-[calc(100svh+2.25rem)] md:-scroll-mt-9 md:pt-32"
+      className="flex min-h-[calc(100svh+0.25rem)] scroll-mt-7 flex-col border-t-2 border-teal/50 bg-dark pt-16 text-white md:min-h-[calc(100svh+2.25rem)] md:-scroll-mt-9 md:pt-32"
     >
       <Container className="flex-1">
         <Reveal as="p" className="eyebrow mb-6 flex items-center gap-3 text-white/55">
@@ -45,7 +45,7 @@ export function Contact() {
           </span>
         </Reveal>
 
-        <Reveal delay={160} className="mt-14 flex flex-wrap items-center justify-between gap-x-10 gap-y-6 md:mt-20">
+        <Reveal delay={160} className="mt-10 flex flex-wrap items-center justify-between gap-x-10 gap-y-6 md:mt-20">
           <div className="flex min-w-0 flex-wrap items-center gap-x-5 gap-y-4">
             <span className="min-w-0 font-display text-[clamp(1.5rem,3.6vw,2.75rem)] leading-none font-extrabold break-all text-white select-all">
               {site.email}
@@ -76,10 +76,10 @@ export function Contact() {
           </ul>
         </Reveal>
 
-        <Reveal delay={200} className="mt-14 grid grid-cols-1 gap-8 border-t border-white/10 py-12 sm:grid-cols-2 lg:grid-cols-3">
+        <Reveal delay={200} className="mt-10 grid grid-cols-1 gap-8 border-t border-white/10 py-10 md:mt-14 md:grid-cols-2 md:py-12 lg:grid-cols-3">
           <Info head="Contact me for">{contactCopy.contactFor}</Info>
-          <Info head="Response time">{contactCopy.responseTime}</Info>
-          <Info head="Where">
+          <Info head="Response time" className="max-md:hidden">{contactCopy.responseTime}</Info>
+          <Info head="Where" className="max-md:hidden">
             {site.location}
             <br />
             <a href={`mailto:${site.email}`} className="border-b border-white/25 text-white/90 transition-colors duration-200 hover:border-white/80">

@@ -8,7 +8,7 @@ import { Reveal } from './Reveal'
  */
 export function SectionHeading({ id, eyebrow, title, aside, size = 'display', dark = false, className }) {
   return (
-    <div className={cn('mb-12 flex flex-wrap items-end justify-between gap-x-10 gap-y-5 md:mb-16', className)}>
+    <div className={cn('mb-8 flex flex-wrap items-end justify-between gap-x-10 gap-y-4 md:mb-16', className)}>
       <div className="min-w-0">
         {eyebrow && (
           <Reveal as="p" className={cn('eyebrow mb-4 flex items-center gap-3', dark && 'text-white/55')}>

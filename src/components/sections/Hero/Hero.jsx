@@ -11,7 +11,7 @@ import { HeroActions } from './HeroActions'
  */
 export function Hero() {
   return (
-    <Section id="top" labelled={false} className="overflow-x-clip pt-20 md:pt-[84px]">
+    <Section id="top" labelled={false} className="overflow-x-clip pt-20 pb-14 md:pt-[84px] md:pb-20">
       <div
         aria-hidden="true"
         className="dotgrid pointer-events-none absolute inset-x-0 top-0 h-[85vh] opacity-80 [mask-image:radial-gradient(ellipse_75%_60%_at_80%_0%,#000_10%,transparent_70%)]"
@@ -19,13 +19,13 @@ export function Hero() {
       <Container className="relative">
         <HeroHeadline />
 
-        <div className="mt-12 grid grid-cols-1 items-start gap-x-10 gap-y-10 md:mt-16 md:grid-cols-[200px_1fr] lg:grid-cols-[260px_minmax(0,1fr)_minmax(280px,340px)] lg:gap-x-14">
-          <HeroPhoto className="fade-up w-[200px] md:w-full" style={{ '--d': '420ms' }} />
+        <div className="mt-10 grid grid-cols-1 items-start gap-x-10 gap-y-8 md:mt-16 md:grid-cols-[200px_1fr] lg:grid-cols-[260px_minmax(0,1fr)_minmax(280px,340px)] lg:gap-x-14">
+          <HeroPhoto className="fade-up mx-auto w-[240px] md:mx-0 md:w-full" style={{ '--d': '420ms' }} />
           <HeroIntro />
           <HeroMeta />
         </div>
 
-        <div className="mt-10 md:mt-12">
+        <div className="mt-8 md:mt-12">
           <HeroActions />
         </div>
 

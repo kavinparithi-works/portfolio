@@ -37,6 +37,20 @@ The resume lives at `public/resume.pdf`. Portrait sources are in `assets-src/`;
 `python scripts/optimize-images.py` regenerates the WebP crops in
 `public/assets/images/` (needs Pillow).
 
+## Toolbox section
+
+The skills "toolbox" band (`src/components/sections/Skills/Skills.jsx`,
+data in `src/data/skills.js`) is built but switched off for now. To show it
+again:
+
+1. In `src/App.jsx`, import `Skills` from `./components/sections` and replace
+   the `{/* <Skills /> */}` placeholder (and the `<Divider />` right after it)
+   with `<Skills />`.
+2. In `src/data/nav.js`, uncomment the `{ id: 'skills', label: 'Skills' }` entry
+   so it appears in the navigation.
+
+Then `npm run check` and push.
+
 ## Deployment
 
 Pushes to `main` run `.github/workflows/deploy.yml`: lint, test, build, then

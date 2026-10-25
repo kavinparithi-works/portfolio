@@ -8,8 +8,8 @@ import { TaglineFlourish } from './TaglineFlourish'
 export function HeroIntro() {
   return (
     <div className="fade-up max-w-[560px]" style={{ '--d': '520ms' }}>
-      <p className="text-[15.5px] leading-[1.65] text-body md:text-[16.5px]">{heroCopy.intro}</p>
-      <p className="mt-4 text-[15.5px] leading-[1.65] text-body md:text-[16.5px]">
+      <p className="text-[14.5px] leading-[1.65] text-body md:text-[16.5px]">{heroCopy.intro}</p>
+      <p className="mt-3 text-[14.5px] leading-[1.65] text-body md:mt-4 md:text-[16.5px]">
         Specialized in{' '}
         {heroCopy.stacks.map((stack, i) => {
           const isLast = i === heroCopy.stacks.length - 1

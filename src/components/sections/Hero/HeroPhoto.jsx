@@ -73,31 +73,31 @@ export function HeroPhoto({ className = '', style }) {
         aria-pressed={revealed}
         aria-label={revealed ? 'Show the photo' : 'Show the illustrated version'}
         style={{ isolation: 'isolate' }}
-        className="relative block aspect-[4/5] w-full overflow-hidden rounded-[999px] border border-ink bg-bg-deep focus-visible:outline-offset-4"
+        className="relative block aspect-square w-full overflow-hidden rounded-[22px] border border-ink bg-bg-deep focus-visible:outline-offset-4 md:aspect-[4/5] md:rounded-[999px]"
       >
         <img
           src={`${base}assets/images/kavin-480.webp`}
           srcSet={srcSet('kavin')}
-          sizes="(max-width: 767px) 200px, 260px"
+          sizes="(max-width: 767px) 240px, 260px"
           alt={`${site.name}, smiling, in a black shirt and jacket`}
           width="480"
           height="600"
           fetchPriority="high"
           decoding="async"
-          className="h-full w-full object-cover"
+          className="h-full w-full object-cover object-[50%_22%] md:object-center"
         />
         <img
           ref={cartoonRef}
           src={`${base}assets/images/kavin-cartoon-480.webp`}
           srcSet={srcSet('kavin-cartoon')}
-          sizes="(max-width: 767px) 200px, 260px"
+          sizes="(max-width: 767px) 240px, 260px"
           alt=""
           width="480"
           height="600"
           loading="lazy"
           decoding="async"
           style={{ clipPath: 'circle(0px at 50% 50%)' }}
-          className="pointer-events-none absolute inset-0 h-full w-full object-cover"
+          className="pointer-events-none absolute inset-0 h-full w-full object-cover object-[50%_22%] md:object-center"
         />
       </button>
 
