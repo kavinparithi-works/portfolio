@@ -47,7 +47,7 @@ update the canonical and Open Graph URLs in `index.html`, `public/robots.txt`,
 
 ## Fonts
 
-Barlow Condensed (OFL) is self-hosted from `public/fonts/`. Noto Sans Tamil
+Barlow Condensed (OFL) is self-hosted: weight 900 is inlined into the stylesheet at build time, weight 800 is preloaded from `public/fonts/`. Noto Sans Tamil
 (OFL) comes from `@fontsource/noto-sans-tamil`. Google Sans and Google Sans
 Code load from Google Fonts without blocking first paint; a metric-matched
 local fallback keeps the text from shifting when they arrive.

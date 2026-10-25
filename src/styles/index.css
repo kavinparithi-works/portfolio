@@ -3,10 +3,11 @@
 /* Self-hosted Tamil face (OFL), used in the footer only. */
 @import '@fontsource/noto-sans-tamil/tamil-400.css';
 
-/* Self-hosted display face (OFL, from @fontsource/barlow-condensed). It lives
-   in public/fonts with stable names so index.html can preload it, and uses
-   font-display: block: the headline waits a moment for the real font rather
-   than painting in a fallback and shifting the page when it swaps. */
+/* Self-hosted display face (OFL, from @fontsource/barlow-condensed).
+   Weight 900 sets every headline, so it is inlined into this stylesheet at
+   build time (see vite.config.js): the first layout already has the real
+   metrics and nothing shifts when fonts arrive. Weight 800 is preloaded from
+   public/fonts and uses font-display: block. */
 @font-face {
   font-family: 'Barlow Condensed';
   font-style: normal;
@@ -20,7 +21,7 @@
   font-style: normal;
   font-weight: 900;
   font-display: block;
-  src: url('/fonts/barlow-condensed-900.woff2') format('woff2');
+  src: url('../assets/fonts/barlow-condensed-900.woff2') format('woff2');
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
 

@@ -9,6 +9,8 @@ export default defineConfig({
   plugins: [react(), tailwindcss()],
   build: {
     target: 'es2022',
+    // Inline the headline font so the first layout uses its real metrics.
+    assetsInlineLimit: (filePath) => (filePath.endsWith('barlow-condensed-900.woff2') ? true : undefined),
     rollupOptions: {
       output: {
         manualChunks(id) {
