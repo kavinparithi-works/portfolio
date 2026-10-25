@@ -204,6 +204,16 @@
   white-space: nowrap;
 }
 
+@keyframes portraitHint {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-2px); }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .portrait-hint {
+    animation: portraitHint 2.4s ease-in-out infinite;
+  }
+}
+
 /* A small download cue, without moving the button or its click target. */
 @keyframes downloadCue {
   0%, 33.333333%, 100% {
