@@ -48,6 +48,17 @@ describe('<App />', () => {
     expect(document.body.style.overflow).toBe('')
   })
 
+  it('returns home and closes the mobile menu from the logo', async () => {
+    const user = userEvent.setup()
+    render(<App />)
+    await user.click(screen.getByRole('button', { name: 'Open menu' }))
+    window.scrollTo.mockClear()
+    await user.click(screen.getByRole('button', { name: 'Back to top' }))
+    expect(window.scrollTo).toHaveBeenCalledWith({ top: 0, behavior: 'smooth' })
+    expect(screen.getByRole('button', { name: 'Open menu' })).toHaveAttribute('aria-expanded', 'false')
+    expect(document.body.style.overflow).toBe('')
+  })
+
   it('has a skip link to the main content', () => {
     render(<App />)
     expect(screen.getByRole('link', { name: 'Skip to content' })).toHaveAttribute('href', '#main')

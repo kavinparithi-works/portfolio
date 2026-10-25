@@ -1,9 +1,10 @@
-import { useCallback, useEffect, useRef, useState } from 'react'
+import { useCallback, useRef, useState } from 'react'
 import { cn } from '../../lib/cn'
 import { site } from '../../data/site'
 import { navLinks } from '../../data/nav'
 import { useActiveSection } from '../../hooks/useActiveSection'
 import { useScrollProgress } from '../../hooks/useScrollProgress'
+import { useReducedMotion } from '../../hooks/useMediaQuery'
 import { Icon } from '../icons/Icon'
 import { ResumeIcon } from '../ui/ResumeIcon'
 import { MobileMenu } from './MobileMenu'
@@ -11,7 +12,7 @@ import { MobileMenu } from './MobileMenu'
 const SECTION_IDS = navLinks.map((l) => l.id)
 
 /**
- * Fixed top bar. The "K" monogram doubles as a reading-progress ring and a
+ * Fixed top bar. K and Home alternate inside the reading-progress ring and
  * back-to-top control; the active section link uses bold text. Resume, Email
  * and LinkedIn stay within reach. Below `lg` sections use a menu.
  */
@@ -20,6 +21,7 @@ export function Nav() {
   const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
   const active = useActiveSection(SECTION_IDS)
+  const reduced = useReducedMotion()
 
   useScrollProgress(
     useCallback((p) => {
@@ -28,22 +30,9 @@ export function Nav() {
     }, [])
   )
 
-  const spinLogo = () => {
-    const el = logoRef.current
-    if (!el) return
-    el.classList.remove('logo-spin')
-    void el.offsetWidth
-    el.classList.add('logo-spin')
-  }
-
-  useEffect(() => {
-    const id = setTimeout(spinLogo, 300)
-    return () => clearTimeout(id)
-  }, [])
-
   const toTop = () => {
-    spinLogo()
-    window.scrollTo({ top: 0, behavior: 'smooth' })
+    setMenuOpen(false)
+    window.scrollTo({ top: 0, behavior: reduced ? 'auto' : 'smooth' })
   }
 
   return (
@@ -73,7 +62,10 @@ export function Nav() {
                 menuOpen ? 'bg-white text-ink' : 'bg-ink text-white'
               )}
             >
-              <span aria-hidden="true">{site.initial}</span>
+              <span aria-hidden="true" className="home-logo pointer-events-none grid h-full w-full place-items-center">
+                <span className="home-logo-initial col-start-1 row-start-1">{site.initial}</span>
+                <Icon name="home" size={18} strokeWidth={2.2} className="home-logo-house col-start-1 row-start-1" />
+              </span>
               <span className="sr-only">Back to top</span>
             </button>
             <a

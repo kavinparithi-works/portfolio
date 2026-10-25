@@ -268,17 +268,39 @@
   }
 }
 
-/* ── Logo spin ────────────────────────────────────────────────────────────── */
-@keyframes logo-spin {
-  from {
+/* Two-second holds, with a 1.5-second turn between K and Home. */
+.home-logo-house {
+  opacity: 0;
+}
+@keyframes homeLogoTurn {
+  0%, 28.5714286% {
     transform: rotate(0deg);
   }
-  to {
+  50%, 78.5714286% {
     transform: rotate(360deg);
   }
+  100% {
+    transform: rotate(720deg);
+  }
 }
-.logo-spin {
-  animation: logo-spin 0.6s var(--ease-soft);
+@keyframes homeLogoInitial {
+  0%, 89.2857143%, 100% { opacity: 1; }
+  39.2857143% { opacity: 0; }
+}
+@keyframes homeLogoHouse {
+  0%, 89.2857143%, 100% { opacity: 0; }
+  39.2857143% { opacity: 1; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .home-logo {
+    animation: homeLogoTurn 7s ease-in-out infinite;
+  }
+  .home-logo-initial {
+    animation: homeLogoInitial 7s steps(1, end) infinite;
+  }
+  .home-logo-house {
+    animation: homeLogoHouse 7s steps(1, end) infinite;
+  }
 }
 
 /* Progress ring around the logo: --p is 0..100 and set from scroll. */
