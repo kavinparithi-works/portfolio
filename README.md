@@ -25,7 +25,7 @@ any JavaScript runs.
 Everything a visitor reads lives in `src/data/`:
 
 - `site.js`: name, links, hero copy, availability, contact copy
-- `projects.js`: the case studies (summary, problem / build / result, outcomes, stack, diagram stages, optional extras)
+- `projects.js`: the case studies (full `summary` and mobile `summaryShort`, problem / build / result, outcomes, stack, diagram stages, optional extras)
 - `experience.js`: the employer card
 - `skills.js`: skill groups and working style
 - `credentials.js`, `beyond.js`, `principles.js`, `nav.js`

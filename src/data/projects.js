@@ -6,6 +6,7 @@
  *
  * Fields:
  *   short     label for the compact tab row on small screens
+ *   summaryShort  mobile overview; the full summary stays in the expanded study
  *   pipeline  ordered stages for the architecture diagram (adjacent stages
  *             are connected automatically)
  *   more      optional one-line extras shown under "Also in this phase"
@@ -23,6 +24,8 @@ export const projects = [
     icon: 'layers',
     summary:
       "Phase 3 of the same chemical manufacturing platform, working inside the client's enterprise data and analytics team. Azure Databricks with Unity Catalog across Dev, QA and Prod. SAP ECC arrives through Datasphere CDC into Delta Live Tables, alongside around 13 other sources. 60+ Asset Bundles and about 456 notebooks feed roughly 40 Power BI reports, Genie spaces and AI/BI dashboards.",
+    summaryShort:
+      'Removed shared control-table calls from Databricks notebooks, preserving their SQL, schemas and hash values.',
     story: {
       problem:
         'Every Gold and Platinum notebook read its target table and merge keys from one shared control table at run time, then wrote its status back. With 10+ report jobs running at once the table became a point of contention, and no notebook could be understood on its own.',
@@ -79,6 +82,8 @@ export const projects = [
     icon: 'flask',
     summary:
       'SAP ECC through Datasphere into Databricks Volumes. Gold and Platinum layers for procurement, plant ops, supply chain, and compliance. DLT for real-time orders, predictive replenishment, row-level SQL alerts, dedicated DQ pipelines, and DAB deployments across environments.',
+    summaryShort:
+      'Built a Databricks lakehouse from SAP ECC, with real-time orders, data-quality checks and releases across three environments.',
     story: {
       problem:
         "A chemical manufacturer's operational data sat in SAP ECC: procurement, plant operations, supply chain, compliance. The business needed it in a Lakehouse where analytics, alerts and real-time order tracking could run on top of it.",
@@ -113,6 +118,8 @@ export const projects = [
     icon: 'bank',
     summary:
       "Migrated an entire finance company's data infrastructure from SSIS, SSRS, SSMS, JAMS, and PowerShell into a single unified Databricks environment. Every business metric delivered accurately. Zero data loss. Zero compromise.",
+    summaryShort:
+      'Moved a legacy finance stack to Databricks, with validation and reconciliation to preserve every business metric.',
     story: {
       problem:
         'The finance data infrastructure ran on five separate tools: SSIS, SSRS, SSMS, JAMS and PowerShell. Each one owned a piece of the pipeline, and all of it had to move to Databricks without changing a single business metric.',
@@ -146,6 +153,8 @@ export const projects = [
     icon: 'shield',
     summary:
       'Databricks pipelines parsing raw unstructured JSON from Firestore and Elastic Search covering agent calls, campaigns, medical records, and insurance mappings. Transformed backend noise into structured analytics that identified top agents and drove subscription growth.',
+    summaryShort:
+      'Turned Firestore and Elasticsearch JSON into structured Databricks tables for agent and campaign analytics.',
     story: {
       problem:
         'Agent calls, campaigns, medical records and insurance mappings were stored as raw JSON in Firestore and Elasticsearch, in shapes that kept changing. Fine for the application, not usable for analytics.',
