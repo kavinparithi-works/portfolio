@@ -58,7 +58,7 @@ export function Work() {
               aria-label="Case studies"
               aria-orientation="horizontal"
               onKeyDown={onKeyDown}
-              className="grid grid-cols-2 gap-2 md:grid-cols-4 md:gap-3"
+              className="flex flex-wrap justify-center gap-2 md:gap-3"
             >
               {projects.map((p) => {
                 const selected = p.id === activeId
@@ -77,6 +77,7 @@ export function Work() {
                     onClick={() => select(p.id)}
                     className={cn(
                       'group relative min-h-11 min-w-0 rounded-[14px] border px-3 py-2.5 text-left transition-colors duration-300 md:px-4 md:py-3',
+                      'grow basis-[calc((100%_-_0.5rem)/2)] md:grow-0 md:basis-[calc((100%_-_1.5rem)/3)] xl:basis-[calc((100%_-_3rem)/5)]',
                       selected
                         ? 'border-ink bg-ink text-white'
                         : 'border-rule text-body hover:border-ink hover:text-ink'

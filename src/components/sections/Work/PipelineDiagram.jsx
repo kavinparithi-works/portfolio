@@ -4,11 +4,14 @@ import { layoutPipeline } from '../../../lib/pipelineLayout'
 
 const MEDALLION = { bronze: 'fill-[#E9D9CC]', silver: 'fill-[#E6E3DC]', gold: 'fill-[#F0D9A8]', platinum: 'fill-[#DDE3E6]' }
 
+/** A node named after a medallion layer ("Gold", "Silver via apply_changes") takes that layer's colour. */
+function medallionFill(label) {
+  const key = Object.keys(MEDALLION).find((layer) => new RegExp(`\\b${layer}\\b`, 'i').test(label))
+  return key ? MEDALLION[key] : null
+}
+
 function nodeFill(node, isLast) {
-  const key = node.label.toLowerCase()
-  if (MEDALLION[key]) return MEDALLION[key]
-  if (isLast) return 'fill-ink'
-  return 'fill-card'
+  return medallionFill(node.label) ?? (isLast ? 'fill-ink' : 'fill-card')
 }
 
 /**
@@ -61,7 +64,7 @@ export function PipelineDiagram({ stages, animate = true, className }) {
               {col.label}
             </text>
             {col.nodes.map((node, ni) => {
-              const dark = si === lastStage && !MEDALLION[node.label.toLowerCase()]
+              const dark = si === lastStage && !medallionFill(node.label)
               return (
                 <g key={node.id} className="pipe-node" style={{ '--d': `${120 + si * 220 + ni * 60}ms` }}>
                   <rect

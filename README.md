@@ -32,6 +32,10 @@ Everything a visitor reads lives in `src/data/`:
 
 The architecture diagram in each case study is generated from the `pipeline`
 array (stages and their nodes), so a new project only needs data, no drawing.
+A stage with `flow: 'chain'` (the medallion layers) runs top to bottom: data
+enters at its first node and leaves from its last. A node written as
+`{ label, from: 'Silver' }` is fed by the named node of the previous stage
+instead of being connected automatically.
 Projects start with a short summary, the first two outcomes and first three
 tools on every screen. "Full case study" opens the remaining content; switching
 projects returns to the compact view.
