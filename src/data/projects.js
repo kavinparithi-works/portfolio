@@ -1,10 +1,10 @@
 /**
  * "Projects Shipped" case studies, newest first. The chemical manufacturing
- * studies (phases 1 to 3) and JTM follow their engagement summaries; the
- * finance and insurance studies carry over from v1 of the portfolio, with
- * roles, outcomes and numbers from the resume PDF.
- * The client behind the chemical manufacturing work is intentionally unnamed,
- * and client-internal names (report, Genie space and programme names) are
+ * studies (phases 1 to 3) and the construction study follow their engagement
+ * summaries; the finance and insurance studies carry over from v1 of the
+ * portfolio, with roles, outcomes and numbers from the resume PDF.
+ * Clients are intentionally unnamed (only their sector is given), and
+ * client-internal names (report, Genie space and programme names) are
  * generalised to business areas.
  *
  * Fields:
@@ -71,16 +71,16 @@ export const projects = [
     related: { id: 'sap-lakehouse', label: 'Phases 1 & 2' },
   },
   {
-    id: 'jtm-constructions',
+    id: 'construction-lakehouse',
     index: '02',
-    sector: 'Construction · JTM Constructions',
-    short: 'JTM Constructions',
+    sector: 'Construction Sector',
+    short: 'Construction',
     title: 'Two Construction Systems to One Governed Lakehouse',
     role: 'Data Engineer',
     duration: 'Jun 2026 to Sep 2026',
     icon: 'home',
     summary:
-      'JTM ran its projects in Autodesk Construction Cloud and its accounting in Viewpoint Vista, and the two never talked to each other. A Databricks lakehouse now brings both into one governed model, so project, cost, contract, payment and change-order reporting comes from a single trusted source, refreshed every night.',
+      'A construction company ran its projects in Autodesk Construction Cloud and its accounting in Viewpoint Vista, and the two never talked to each other. A Databricks lakehouse now brings both into one governed model, so project, cost, contract, payment and change-order reporting comes from a single trusted source, refreshed every night.',
     summaryShort:
       'Brought Autodesk Construction Cloud and Viewpoint Vista into one governed Databricks lakehouse, with a 66-table star schema feeding Power BI and Genie.',
     story: {
