@@ -1,7 +1,8 @@
 /**
- * "Projects Shipped" case studies, newest first. Summary copy for the first
- * three engagements is carried over from v1 of the portfolio; roles, outcomes
- * and numbers come from the resume PDF and the Phase 3 engagement brief.
+ * "Projects Shipped" case studies, newest first. The chemical manufacturing
+ * studies (phases 1 to 3) follow the engagement summary; the finance and
+ * insurance studies carry over from v1 of the portfolio, with roles, outcomes
+ * and numbers from the resume PDF.
  * The client behind the chemical manufacturing work is intentionally unnamed.
  *
  * Fields:
@@ -10,6 +11,7 @@
  *   pipeline  ordered stages for the architecture diagram (adjacent stages
  *             are connected automatically)
  *   more      optional one-line extras shown under "Also in this phase"
+ *   moreLabel optional heading for the extras (defaults to "Also in this phase")
  *   related   optional pointer to another case study (rendered as a link)
  */
 export const projects = [
@@ -18,56 +20,48 @@ export const projects = [
     index: '01',
     sector: 'Chemical Manufacturing · Phase 3',
     short: 'Platform, phase 3',
-    title: 'Shared Control Table to Self-Describing Notebooks',
+    title: 'Lakehouse Platform to AI-Powered Analytics',
     role: 'Data Platform Engineer, staff augmentation',
     duration: 'Aug 2026 to Aug 2027 · in progress',
     icon: 'layers',
     summary:
-      "Phase 3 of the same chemical manufacturing platform, working inside the client's enterprise data and analytics team. Azure Databricks with Unity Catalog across Dev, QA and Prod. SAP ECC arrives through Datasphere CDC into Delta Live Tables, alongside around 13 other sources. 60+ Asset Bundles and about 456 notebooks feed roughly 40 Power BI reports, Genie spaces and AI/BI dashboards.",
+      "Phase 3 of the same chemical manufacturing platform, working inside the client's enterprise data and analytics team. The shift is from building to multiplying: AI-powered analytics on the lakehouse, enabling the client's own engineers and their other vendors to work to the platform's patterns, and continuous modernisation of the runtime, notebook utilities, CI/CD gates and alerting.",
     summaryShort:
-      'Removed shared control-table calls from Databricks notebooks, preserving their SQL, schemas and hash values.',
+      "Leading the Genie and Supervisor Agent implementation, enabling the client's engineers and vendors, and driving platform modernisation.",
     story: {
       problem:
-        'Every Gold and Platinum notebook read its target table and merge keys from one shared control table at run time, then wrote its status back. With 10+ report jobs running at once the table became a point of contention, and no notebook could be understood on its own.',
+        "With the lakehouse and report portfolio in place, the constraints moved to people and reach. Business users wanted answers without waiting on a report, the client's engineers and other vendors needed to build to the same patterns, permissions model and release process, and the platform needed a documented path from its current state to the target architecture.",
       approach:
-        'Wrote Batch_Utilities_v2 (about 2.4k lines): the same API as v1 with every control-table call removed, so each notebook declares its own target table and merge keys. Defined the v2 notebook standard (skipper, transform, audits, primary-key check, TableWriter, data-quality logging) and converted report bundles with no logic change. A custom logic_diff.py, an AST scan for v1 leftovers and row, key and hash comparisons in Dev prove each conversion is byte-identical.',
+        'Packaged Databricks Genie spaces for sales and operations planning (forecast accuracy, daily total orders, on-time-in-full delivery, slow-moving and obsolete inventory, quality notifications, non-optimal freight, product review) as Asset Bundles with environment-independent payloads and a dedicated deploy path through the existing Azure DevOps pipelines. Added a Supervisor Agent that routes business questions to the right space and answers in a consistent, auditable format.',
       result:
-        '166 of 456 notebooks converted so far, across 10+ report bundles from the pilot through to Prod, with identical SQL, schema and hash values. The remaining backlog is tracked per report and owner.',
+        "Business questions route to the right Genie space and come back in a consistent, auditable format. New work from the client's engineers and vendors stays aligned with the platform. The platform runs Databricks Runtime 18, notebooks are migrating to the new utility standard, CI/CD has production permission checks and a QA gate, alerts are standardised, and a prioritised gap register drives remediation.",
     },
     outcomes: [
-      { value: '166', label: 'of 456 notebooks converted' },
-      { value: '10+', label: 'report bundles migrated' },
-      { value: '~2.4k', label: 'lines in Batch_Utilities_v2' },
-      { value: '0', label: 'logic changes, byte-identical' },
+      { value: '7', label: 'S&OP use cases in Genie spaces' },
+      { value: '1', label: 'Supervisor Agent across all spaces' },
+      { value: 'DBR 18', label: 'runtime upgrade, platform-wide' },
+      { value: '2', label: 'hardened CI/CD gates' },
     ],
     more: [
       {
-        label: 'Platform standards',
-        text: 'Job clusters moved to Databricks Runtime 18.x, production alerting cleaned up, and the DAB, CI/CD, DLT, DQ and governance documentation rewritten. Deploy scripts hardened with per-version CLI caching and Terraform pinning, plus a scripted job-schedule inventory and throttling analysis.',
+        label: 'Staff augmentation and knowledge transfer',
+        text: "Day to day with the client's data engineers and their other vendors: architecture walkthroughs, code reviews, deployment runbooks and written reference material so new work stays aligned with the platform's patterns, permissions model and release process.",
       },
       {
-        label: 'Genie and AI/BI',
-        text: 'S&OP and inventory Genie spaces deployed through DAB with a dedicated deploy script, and a client-agnostic SOP for promoting Genie spaces across environments, contributed to the zeb Databricks guild.',
+        label: 'Modernisation',
+        text: 'Runtime upgrade to Databricks Runtime 18, migration of notebooks to the new utility standard, hardened CI/CD gates (production permission checks, QA gate), alert standardisation, and a documented architecture gap register with a prioritised remediation plan.',
       },
       {
-        label: 'POCs',
-        text: 'Three SAP Business Data Cloud to Databricks integration methods evaluated with a recommendation. Databricks Solution Builder explored for manufacturing use cases.',
-      },
-      {
-        label: 'Ops and root cause',
-        text: 'Daily run and DQ monitoring, selective DLT refreshes, SAP re-initialisation reviews. A production Unity Catalog LOCATION_OVERLAP failure was isolated to one query on one cluster spec by eliminating code, deploy, identity, runtime and table-state causes, then fixed with a one-task serverless change and packaged as a Databricks support case.',
-      },
-      {
-        label: 'AI-assisted engineering',
-        text: 'Two reusable agent skills for the codebase: a full architecture reference and the conversion procedure with the logic_diff checker, so every migration is done the same way and verified.',
+        label: 'Architecture communication',
+        text: 'The platform architecture, assurance and gap-register presentations used with client leadership.',
       },
     ],
-    tags: ['Unity Catalog', 'Delta Live Tables', 'Databricks Asset Bundles', 'Databricks CLI', 'Azure DevOps', 'Genie', 'PySpark', 'Python AST', 'Terraform', 'Power BI'],
+    tags: ['Genie', 'Agent Bricks', 'Databricks Asset Bundles', 'Azure DevOps', 'Unity Catalog', 'Delta Live Tables', 'Lakeflow Jobs', 'Databricks Runtime 18', 'PySpark', 'Power BI'],
     pipeline: [
-      { label: 'Sources', nodes: ['SAP ECC via Datasphere CDC', '13 other systems'] },
-      { label: 'Lakehouse', nodes: ['Delta Live Tables', 'Unity Catalog'] },
-      { label: 'v2 notebooks', nodes: ['Batch_Utilities_v2', 'Gold', 'Platinum'] },
-      { label: 'Delivered', nodes: ['~40 Power BI reports', 'Genie spaces', 'AI/BI dashboards'] },
+      { label: 'Sources', nodes: ['SAP ECC via Datasphere CDC', '12 other systems'] },
+      { label: 'Lakehouse', nodes: ['Delta Live Tables', 'Unity Catalog', 'Gold and Platinum'] },
+      { label: 'AI layer', nodes: ['Genie spaces', 'Supervisor Agent'] },
+      { label: 'Delivered', nodes: ['Auditable answers', 'Power BI reports', 'Enabled client team'] },
     ],
     related: { id: 'sap-lakehouse', label: 'Phases 1 & 2' },
   },
@@ -76,34 +70,69 @@ export const projects = [
     index: '02',
     sector: 'Chemical Manufacturing · Phases 1 & 2',
     short: 'SAP Lakehouse',
-    title: 'SAP ECC to Enterprise Lakehouse Platform',
+    title: 'SAP ECC to Lakehouse Platform and Report Portfolio',
     role: 'Data Engineer',
     duration: 'Phase 1: 4 months · Phase 2: 5 months',
     icon: 'flask',
     summary:
-      'SAP ECC through Datasphere into Databricks Volumes. Gold and Platinum layers for procurement, plant ops, supply chain, and compliance. DLT for real-time orders, predictive replenishment, row-level SQL alerts, dedicated DQ pipelines, and DAB deployments across environments.',
+      "Phases 1 and 2 of a chemical manufacturer's lakehouse on Azure Databricks. Phase 1 laid the foundation: the medallion architecture, SAP ECC change data capture through Datasphere into Delta Live Tables, Arkieva snapshots, a cross-layer data-quality framework and the first end-to-end report. Phase 2 scaled it from one report to a portfolio across operations, finance, procurement and sales and distribution, and standardised how every notebook is written.",
     summaryShort:
-      'Built a Databricks lakehouse from SAP ECC, with real-time orders, data-quality checks and releases across three environments.',
+      'Architected and built a medallion lakehouse on Azure Databricks from SAP ECC and 12 further sources, then scaled it from one report to a portfolio.',
     story: {
       problem:
-        "A chemical manufacturer's operational data sat in SAP ECC: procurement, plant operations, supply chain, compliance. The business needed it in a Lakehouse where analytics, alerts and real-time order tracking could run on top of it.",
+        "A chemical manufacturer's operational data sat in SAP ECC, the Arkieva planning system and a dozen other sources, and its existing Power BI reports needed a governed platform to move onto. The business needed one lakehouse where around 250 SAP tables arrive by change data capture, quality is proven at every layer, and reports are built and released the same way across Dev, QA and Prod.",
       approach:
-        'SAP ECC data comes in through Datasphere and lands in Databricks Volumes. Gold and Platinum layers cover seven business domains. Delta Live Tables handle real-time order tracking and predictive replenishment. Row-level SQL alerts and dedicated data-quality pipelines watch the outputs, and Databricks Asset Bundles push releases through three environments.',
+        'Defined the medallion design (raw landing in Unity Catalog Volumes, append-only Bronze, typed Silver, conformed Gold, report-shaped Platinum) with one catalog per layer per environment, service-principal identities, Key Vault secrets and Asset Bundles as the single deployment unit. Built SAP change data capture from Datasphere into Bronze with Auto Loader and into Silver with DLT apply_changes on 30-minute, 4-hour and 12-hour tiers, then delivered and migrated reports across operations, finance, procurement and sales and distribution on one shared utilities, logging and metadata standard.',
       result:
-        '50,000+ daily order records processed in near real-time, 83% fewer data-quality incidents, and release time cut by 30%.',
+        'Around 250 SAP tables and 12 further sources land on tiered schedules, so the business pays for freshness only where it needs it. Every Gold and Platinum table is quality-checked on every run, shared dimensions are built once a day and reused by every report, and Power BI reads pre-joined Platinum tables, cutting dataset refresh time and compute cost.',
     },
     outcomes: [
-      { value: '7', label: 'business domains' },
-      { value: '50,000+', label: 'daily order records' },
-      { value: '83%', label: 'fewer DQ incidents' },
-      { value: '30%', label: 'faster releases' },
+      { value: '~250', label: 'SAP tables via CDC' },
+      { value: '13', label: 'source systems' },
+      { value: '4', label: 'business areas reported' },
+      { value: '30 min', label: 'fastest SAP refresh tier' },
     ],
-    tags: ['SAP ECC', 'Datasphere', 'DLT', 'Medallion Architecture', 'SQL Alerts', 'DABs', 'Data Quality', 'CI/CD'],
+    moreLabel: 'Also in these phases',
+    more: [
+      {
+        label: 'Phase 1 · Reinit protection',
+        text: 'Automation detects when SAP re-initialises a table and triggers a targeted full refresh of Bronze and Silver, so no silent data gaps reach the reports.',
+      },
+      {
+        label: 'Phase 1 · Arkieva extraction',
+        text: '6-hourly snapshot ingestion for the supply-chain planning system, parquet into Bronze and Silver through DLT.',
+      },
+      {
+        label: 'Phase 1 · Data quality framework',
+        text: 'Nightly SAP reconciliation across raw files, Bronze and Silver (row counts, distinct keys, primary-key integrity, deletes accounted for), logged per table with failures posted to Microsoft Teams. Chosen over DLT expectations on cost and coverage.',
+      },
+      {
+        label: 'Phase 1 · Daily Total Order report',
+        text: 'The first end-to-end report on the platform, from source tables through Gold facts to Platinum and a Power BI refresh every four hours.',
+      },
+      {
+        label: 'Phase 2 · Shared utilities library',
+        text: 'The common Python module used by every notebook: a table writer with overwrite, merge and incremental-merge strategies and built-in safety rules (an empty input never wipes a table, incremental loads without a key are refused), audit columns with hashed business keys, skip-if-fresh for shared dimensions, data-quality logging, primary-key enforcement and the Power BI refresh trigger with token refresh, retry and polling.',
+      },
+      {
+        label: 'Phase 2 · Logging and metadata',
+        text: 'A metadata-driven control plane (one control table driving ingestion and loads) with structured logging around it; later led the move to self-describing notebooks that declare their own target and keys, removing shared-table contention.',
+      },
+      {
+        label: 'Phase 2 · Data quality in every load',
+        text: 'Row, null and duplicate counts plus success and failure records built into the standard notebook template, so every Gold and Platinum table is checked on every run.',
+      },
+      {
+        label: 'Phase 2 · Platinum layer',
+        text: 'Report-specific Platinum tables so Power BI reads pre-joined, report-shaped data instead of joining Silver and Gold itself, with each dataset refreshed only after its data has fully landed.',
+      },
+    ],
+    tags: ['SAP ECC', 'SAP Datasphere', 'Delta Live Tables', 'Auto Loader', 'Unity Catalog', 'Medallion Architecture', 'Databricks Asset Bundles', 'Azure Key Vault', 'Arkieva', 'Power BI REST API', 'Microsoft Teams webhooks'],
     pipeline: [
-      { label: 'Source', nodes: ['SAP ECC'] },
-      { label: 'Ingestion', nodes: ['SAP Datasphere', 'Databricks Volumes'] },
-      { label: 'Medallion', nodes: ['Bronze', 'Silver', 'Gold', 'Platinum'] },
-      { label: 'Delivered', nodes: ['Real-time orders (DLT)', 'Predictive replenishment', 'Row-level SQL alerts'] },
+      { label: 'Sources', nodes: ['SAP ECC via Datasphere CDC', 'Arkieva snapshots', 'Other sources'] },
+      { label: 'Ingestion', nodes: ['Auto Loader', 'DLT apply_changes'] },
+      { label: 'Medallion', nodes: ['Raw Volumes', 'Bronze', 'Silver', 'Gold', 'Platinum'] },
+      { label: 'Delivered', nodes: ['Nightly reconciliation', 'Teams alerts', 'Power BI reports'] },
     ],
     related: { id: 'platform-phase-3', label: 'Continued in Phase 3' },
   },

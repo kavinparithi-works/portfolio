@@ -110,7 +110,7 @@ export function ProjectPanel({ project, onSelect, id, labelledBy }) {
         {project.more?.length > 0 && (
           <details className="group/more mt-6 rounded-2xl border border-rule">
             <summary className="flex cursor-pointer list-none items-center justify-between gap-4 px-5 py-4 text-[14px] font-semibold text-ink [&::-webkit-details-marker]:hidden">
-              Also in this phase
+              {project.moreLabel ?? 'Also in this phase'}
               <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-rule transition-transform duration-300 group-open/more:rotate-180">
                 <Icon name="arrowDown" size={14} strokeWidth={2.2} />
               </span>
